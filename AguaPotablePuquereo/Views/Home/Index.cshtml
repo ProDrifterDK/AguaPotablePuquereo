@@ -1,6 +1,27 @@
 ﻿@{
-	ViewBag.Title = "Home Page";
+	ViewBag.Title = "Página Principal";
 }
-<div>
-	<p>Testing</p>
+<!-- Introducción -->
+<div id="intro">
+	<h4>¡Bienvenido a nuestro sitio!</h4>
+	<p> Aquí usted puede ver y pagar sus deudas. Para comenzar, ingrese su RUT abajo.</p>
+</div>
+<!-- Ingreso de RUT -->
+<div class="container row">
+	<!-- RUT: Desktop -->
+	<div id="blank-space" class="hide-on-small-only col s12 m4 l4">
+		&nbsp;
+	</div>
+	<div id="rut" class="card col s12 m4 l4">
+		<div class="input-field">
+			<input value" id="rut-input" type="text" class="validate">
+			<label class="active" for="rut-label">Ingrese su RUT</label>
+		</div>
+		<div class="card-action input-field">
+			<a id="ingresar-button" class="waves-effect waves-light btn">Ingresar</a>
+		</div>
+	</div>
+	<div id="blank-space" class="hide-on-small-only col s12 m4 l4">
+		&nbsp;
+	</div>
 </div>

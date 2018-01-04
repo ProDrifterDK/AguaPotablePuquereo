@@ -3,6 +3,7 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
+	text-align: center;
 }
 
 #main {
@@ -11,12 +12,12 @@ body {
 }
 
 /* Footer */
-.row {
-
-}
-
 #info {
 	text-align: left;
+}
+
+#info-mobile {
+	text-align: center;
 }
 
 #facebook-info-desktop {
@@ -26,3 +27,5 @@ body {
 #facebook-info-mobile {
 	text-align: center;
 }
+
+/* RUT */
