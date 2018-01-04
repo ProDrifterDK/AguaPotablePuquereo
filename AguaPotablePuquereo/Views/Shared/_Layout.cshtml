@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="~/Content/materialize.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+	<script src="~/scripts/jquery-1.10.2.min.js"></script>
+	<script src="~/Scripts/modernizr-2.6.2.js"></script>
+	<title>@ViewBag.Title - Agua Potable Puquereo</title>
+</head>
+<body>
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a class="brand-logo center">Agua Potable Puquereo</a>
+			</div>
+		</nav>
+	</header>
+	<div id="main">
+		@RenderBody()
+	</div>
+	<footer class="page-footer">
+		<div class="container">
+			<div class="row">
+				<div id="info" class="left hide-on-med-and-down">
+					<h5 class="white-text">Contacto</h5>
+					<p class="grey-text text-lighten-4">Dirección: Km. 27 Ruta Freire-Villarica, Freire.</p>
+					<p class="grey-text text-lighten-4">Email: puquereo@gmail.com</p>
+					<p class="grey-text text-lighten-4">Teléfono: +56 9 7455 5260</p>
+				</div>
+				<div class="center hide-on-large-only">
+					<h5 class="white-text">Contacto</h5>
+					<p class="grey-text text-lighten-4">Dirección: Km. 27 Ruta Freire-Villarica, Freire.</p>
+					<p class="grey-text text-lighten-4">Email: puquereo@gmail.com</p>
+					<p class="grey-text text-lighten-4">Teléfono: +56 9 7455 5260</p>
+				</div>
+				<div id="footer-right" class="col l6 s12">
+					<div id="facebook">
+						<h5 class="white-text">Facebook</h5>
+						<a target="_blank" id="facebook" href="https://www.facebook.com/Apr-Puquereo-277645909062927/">
+							<img src="~/Resources/Images/facebook.svg" width="32" />
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				© 2018 <a target="_blank" href="http://resyst.loteriagg.com/" style="text-decoration: none">Resyst ® Softwares™</a>. Todos los derechos reservados.
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

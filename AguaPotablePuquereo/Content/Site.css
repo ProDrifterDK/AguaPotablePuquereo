@@ -1,0 +1,23 @@
+﻿/* Materialize */
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+#main {
+	flex: 1 0 auto;
+	margin: 16px;
+}
+
+/* Footer */
+.row {
+	text-align: center;
+}
+
+#footer-empty-space {
+}
+
+#info {
+	text-align: left;
+}
