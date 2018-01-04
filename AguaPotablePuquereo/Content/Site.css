@@ -12,9 +12,17 @@ body {
 
 /* Footer */
 .row {
-	text-align: center;
+
 }
 
 #info {
 	text-align: left;
+}
+
+#facebook-info-desktop {
+	text-align: right;
+}
+
+#facebook-info-mobile {
+	text-align: center;
 }
