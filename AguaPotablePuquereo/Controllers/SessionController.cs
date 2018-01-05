@@ -13,5 +13,10 @@ namespace AguaPotablePuquereo.Controllers
         {
             return View();
         }
+
+        public ActionResult Deudas(string rut)
+        {
+            return View();
+        }
     }
 }
