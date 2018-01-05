@@ -3,10 +3,11 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="~/Scripts/jquery-3.2.1.js"></script>
+	<script src="~/Scripts/modernizr-2.6.2.js"></script>
+	<script src="~/Scripts/materialize.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="~/Content/materialize.min.css" rel="stylesheet" type="text/css" />
-	<script src="~/scripts/jquery-1.10.2.min.js"></script>
-	<script src="~/Scripts/modernizr-2.6.2.js"></script>
 	<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 	<title>@ViewBag.Title - Agua Potable Puquereo</title>
 </head>
@@ -22,9 +23,10 @@
 				</ul>
 				<!-- Título y links: Mobile -->
 				<a class="truncate brand-logo center hide-on-large-only">APR Puquereo</a>
-				<a href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
+				<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
 				<ul class="side-nav hide-on-large-only" id="mobile-demo">
-					<li><a href=@Url.Action("Index", "Home")>Inicio</a></li>				</ul>
+					<li><a href=@Url.Action("Index", "Home")>Salir</a></li>
+				</ul>
 			</div>
 		</nav>
 	</header>
@@ -77,5 +79,10 @@
 			</div>
 		</div>
 	</footer>
+	<script>
+		$(document).ready(function () {
+			$(".button-collapse").sideNav();
+		});
+	</script>
 </body>
 </html>
