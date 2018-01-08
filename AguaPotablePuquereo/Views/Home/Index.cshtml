@@ -4,23 +4,21 @@
 <!-- Introducción -->
 <div id="intro">
 	<h4>¡Bienvenido a nuestro sitio!</h4>
-	<p> Aquí usted puede ver y pagar sus deudas. Para comenzar, ingrese su RUT abajo y luego haga click en <i>Ingresar</i>.</p>
+	<p> Aquí usted puede ver y pagar sus deudas. Para comenzar, ingrese su RUT sin puntos y con guión o su N° de cuenta y luego haga click en <i>Ingresar</i>.</p>
 </div>
 <!-- Ingreso de RUT -->
 <div class="container row">
-	<div id="blank-space" class="hide-on-small-only col s12 m4 l4">
+	<div id="blank-space" class="hide-on-small-only col s12 m2 l4">
 		&nbsp;
 	</div>
-	<div class="card col s12 m4 l4">
-		<div class="input-field" onkeypress="return HacerEnter(event)">
+	<div class="card col s12 m8 l4">
+		<div class="input-field" onkeypress="return HacerEnter(event)" style="margin-top: 20px">
 			<input id="rut-input" type="text" class="validate">
-			<label class="active" for="rut-label">Ingrese su RUT</label>
-		</div>
-		<div class="card-action input-field">
+			<label class="active" for="rut-label">Ingrese su RUT o N° de cuenta</label>
 			<a id="ingresar-button" class="waves-effect waves-light btn" href="#" onclick="Deudas()">Ingresar</a>
 		</div>
 	</div>
-	<div id="blank-space" class="hide-on-small-only col s12 m4 l4">
+	<div id="blank-space" class="hide-on-small-only col s12 m2 l4">
 		&nbsp;
 	</div>
 </div>

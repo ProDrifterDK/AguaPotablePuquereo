@@ -11,6 +11,11 @@ body {
 	margin: 16px;
 }
 
+/* Index */
+#ingresar-button {
+	margin-bottom: 1.5em;
+}
+
 /* Footer */
 #info {
 	text-align: left;
