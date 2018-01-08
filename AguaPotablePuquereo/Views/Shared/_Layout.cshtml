@@ -19,7 +19,7 @@
 	}
 	<!-- Header -->
 	<header>
-		<nav class="top-nav">
+		<nav class="top-nav light-blue darken-4">
 			<div class="nav-wrapper">
 				@if (Request.Url.ToString().Contains("Deuda")) {
 					<!-- Título y links: Desktop -->
@@ -53,11 +53,11 @@
 		</nav>
 	</header>
 	<!-- Cuerpo -->
-	<div id="main">
+	<div id="main" class="z-depth-5 grey lighten-4">
 		@RenderBody()
 	</div>
 	<!-- Footer -->
-	<footer class="page-footer">
+	<footer class="page-footer blue darken-4">
 		<div class="container">
 			<div class="row">
 				<div id="info" class="left show-on-medium-and-up col s12 m4 l4">
