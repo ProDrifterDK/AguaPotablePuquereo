@@ -53,4 +53,8 @@ namespace AguaPotablePuquereo.Controllers
             }
         }
     }
+		public ActionResult Error() {
+			return View();
+		}
+	}
 }
