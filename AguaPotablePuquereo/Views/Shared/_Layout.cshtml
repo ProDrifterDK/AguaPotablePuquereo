@@ -16,13 +16,12 @@
 <body>
 	<!-- Asignación de usuario -->
 	@{
-		var user = (TBL_USUARIO) Session["UsuarioLogged"];
 	}
 	<!-- Header -->
 	<header>
 		<nav class="top-nav">
 			<div class="nav-wrapper">
-				@if (user != null) {
+				@if (Request.Url.ToString().Contains("Deuda")) {
 					<!-- Título y links: Desktop -->
 					<a class="brand-logo center hide-on-med-and-down">Agua Potable Puquereo</a>
 					<ul id="nav-mobile" class=" right hide-on-med-and-down">

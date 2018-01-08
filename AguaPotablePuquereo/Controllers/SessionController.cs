@@ -52,9 +52,10 @@ namespace AguaPotablePuquereo.Controllers
                 return JsonError("Ha habido un problema al cargar las deudas.");
             }
         }
+
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
-		public ActionResult Error() {
-			return View();
-		}
-	}
 }
