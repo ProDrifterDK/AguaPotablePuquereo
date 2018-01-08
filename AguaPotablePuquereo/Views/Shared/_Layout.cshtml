@@ -14,23 +14,42 @@
 	<title>@ViewBag.Title - Agua Potable Puquereo</title>
 </head>
 <body>
+	<!-- Asignación de usuario -->
+	@{
+		var user = (TBL_USUARIO) Session["UsuarioLogged"];
+	}
 	<!-- Header -->
 	<header>
 		<nav class="top-nav">
 			<div class="nav-wrapper">
-				<!-- Título y links: Desktop -->
-				<a class="brand-logo center hide-on-med-and-down">Agua Potable Puquereo</a>
-				<ul id="nav-mobile" class=" right hide-on-med-and-down">
-					<li><a href=@Url.Action("Index", "Home")>Inicio</a></li>
-					<li><a href=@Url.Action("About", "Home")>Acerca de Nosotros</a></li>
-				</ul>
-				<!-- Título y links: Mobile -->
-                <a class="truncate brand-logo center hide-on-large-only">APR Puquereo</a>
-                <a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
-                <ul  class="side-nav hide-on-large-only" id="mobile-demo">
-                    <li><a href=@Url.Action("Index", "Home")>Inicio</a></li>
-                    <li><a href=@Url.Action("About", "Home")>Acerca de Nosotros</a></li>
-                </ul>
+				@if (user != null) {
+					<!-- Título y links: Desktop -->
+					<a class="brand-logo center hide-on-med-and-down">Agua Potable Puquereo</a>
+					<ul id="nav-mobile" class=" right hide-on-med-and-down">
+						<li><a href=@Url.Action("Index", "Home")>Salir</a></li>
+					</ul>
+					<!-- Título y links: Mobile -->
+					<a class="truncate brand-logo center hide-on-large-only">APR Puquereo</a>
+					<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
+					<ul class="side-nav hide-on-large-only" id="mobile-demo">
+						<li><a href=@Url.Action("Index", "Home")>Salir</a></li>
+					</ul>
+				}
+				else {
+					<!-- Título y links: Desktop -->
+					<a class="brand-logo center hide-on-med-and-down">Agua Potable Puquereo</a>
+					<ul id="nav-mobile" class=" right hide-on-med-and-down">
+						<li><a href=@Url.Action("Index", "Home")>Inicio</a></li>
+						<li><a href=@Url.Action("About", "Home")>Acerca de Nosotros</a></li>
+					</ul>
+					<!-- Título y links: Mobile -->
+					<a class="truncate brand-logo center hide-on-large-only">APR Puquereo</a>
+					<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
+					<ul class="side-nav hide-on-large-only" id="mobile-demo">
+						<li><a href=@Url.Action("Index", "Home")>Inicio</a></li>
+						<li><a href=@Url.Action("About", "Home")>Acerca de Nosotros</a></li>
+					</ul>
+				}
 			</div>
 		</nav>
 	</header>
