@@ -21,12 +21,17 @@ body {
 	text-align: left;
 }
 
+
 #info-mobile {
 	text-align: center;
 }
 
 #facebook-info-desktop {
 	text-align: right;
+}
+
+#facebook-logo-desktop {
+    text-align: center;
 }
 
 #facebook-info-mobile {
