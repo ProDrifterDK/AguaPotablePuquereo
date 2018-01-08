@@ -28,9 +28,23 @@
 
 
 <script>
+    var rut = "";
     function Deudas() {
-        var rut = $('#rut-input').val();
+        rut = $('#rut-input').val();
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("JsonValidarRut")',
+            data: { rut: rut },
+            success: function (data) {
+                if (data.exito) {
+                    location.href = "@Url.Action("Deudas", "Session")?rut=" + rut;
+                } else {
+                    if (data.mensaje) {
+                        Materialize.toast(data.mensaje, 3000, 'red')
+                    }
+                }
+            }
+        })
 
-        location.href = "@Url.Action("Deudas", "Session")?rut=" + rut;
     }
 </script>

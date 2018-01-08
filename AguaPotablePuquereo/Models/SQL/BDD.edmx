@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BDD_PRUEBAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BDD_PRUEBAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TBL_CLIENTE">
           <Key>
             <PropertyRef Name="CLI_ID" />
@@ -22,12 +22,21 @@
           <Key>
             <PropertyRef Name="DEU_ID" />
           </Key>
-          <Property Name="DEU_ID" Type="int" Nullable="false" />
+          <Property Name="DEU_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MES_ID" Type="int" Nullable="false" />
           <Property Name="DEU_PERIODO_ANO" Type="int" Nullable="false" />
           <Property Name="DEU_PERIODO_VENCE" Type="date" Nullable="false" />
           <Property Name="DEU_DEUDA" Type="int" Nullable="false" />
           <Property Name="CLI_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="TBL_LOG">
+          <Key>
+            <PropertyRef Name="LOG_ID" />
+          </Key>
+          <Property Name="LOG_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOG_ERROR" Type="varchar(max)" Nullable="false" />
+          <Property Name="LOG_INNER" Type="varchar(max)" />
+          <Property Name="LOG_FECHA" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="TBL_MES">
           <Key>
@@ -63,6 +72,7 @@
         <EntityContainer Name="BDD_PRUEBAModelStoreContainer">
           <EntitySet Name="TBL_CLIENTE" EntityType="Self.TBL_CLIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_DEUDA" EntityType="Self.TBL_DEUDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_LOG" EntityType="Self.TBL_LOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_MES" EntityType="Self.TBL_MES" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_TBL_DEUDA_TBL_CLIENTE" Association="Self.FK_TBL_DEUDA_TBL_CLIENTE">
             <End Role="TBL_CLIENTE" EntitySet="TBL_CLIENTE" />
@@ -73,8 +83,7 @@
             <End Role="TBL_DEUDA" EntitySet="TBL_DEUDA" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BDD_PRUEBAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -90,20 +99,7 @@
           <Property Name="CLI_COMPLETO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="CLI_CREADO" Type="DateTime" Precision="3" />
           <Property Name="CLI_CUENTA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TBL_DEUDA" Relationship="Self.FK_TBL_DEUDA_TBL_CLIENTE" FromRole="TBL_CLIENTE" ToRole="TBL_DEUDA" />
-        </EntityType>
-        <EntityType Name="TBL_DEUDA">
-          <Key>
-            <PropertyRef Name="DEU_ID" />
-          </Key>
-          <Property Name="DEU_ID" Type="Int32" Nullable="false" />
-          <Property Name="MES_ID" Type="Int32" Nullable="false" />
-          <Property Name="DEU_PERIODO_ANO" Type="Int32" Nullable="false" />
-          <Property Name="DEU_PERIODO_VENCE" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DEU_DEUDA" Type="Int32" Nullable="false" />
-          <Property Name="CLI_ID" Type="Int32" />
-          <NavigationProperty Name="TBL_CLIENTE" Relationship="Self.FK_TBL_DEUDA_TBL_CLIENTE" FromRole="TBL_DEUDA" ToRole="TBL_CLIENTE" />
-          <NavigationProperty Name="TBL_MES" Relationship="Self.FK_TBL_DEUDA_TBL_MES" FromRole="TBL_DEUDA" ToRole="TBL_MES" />
+          <NavigationProperty Name="TBL_DEUDA" Relationship="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CLIENTE" FromRole="TBL_CLIENTE" ToRole="TBL_DEUDA" />
         </EntityType>
         <EntityType Name="TBL_MES">
           <Key>
@@ -111,11 +107,47 @@
           </Key>
           <Property Name="MES_ID" Type="Int32" Nullable="false" />
           <Property Name="MES_NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TBL_DEUDA" Relationship="Self.FK_TBL_DEUDA_TBL_MES" FromRole="TBL_MES" ToRole="TBL_DEUDA" />
+          <NavigationProperty Name="TBL_DEUDA" Relationship="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES" FromRole="TBL_MES" ToRole="TBL_DEUDA" />
+        </EntityType>
+        <EntityContainer Name="PuquerosBDD" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_CLIENTE" EntityType="Self.TBL_CLIENTE" />
+          <EntitySet Name="TBL_MES" EntityType="Self.TBL_MES" />
+          <EntitySet Name="TBL_LOG" EntityType="BDD_PRUEBAModel.TBL_LOG" />
+          <EntitySet Name="TBL_DEUDA" EntityType="BDD_PRUEBAModel.TBL_DEUDA" />
+          <AssociationSet Name="FK_TBL_DEUDA_TBL_CLIENTE" Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CLIENTE">
+            <End Role="TBL_CLIENTE" EntitySet="TBL_CLIENTE" />
+            <End Role="TBL_DEUDA" EntitySet="TBL_DEUDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_DEUDA_TBL_MES" Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES">
+            <End Role="TBL_MES" EntitySet="TBL_MES" />
+            <End Role="TBL_DEUDA" EntitySet="TBL_DEUDA" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="TBL_LOG">
+          <Key>
+            <PropertyRef Name="LOG_ID" />
+          </Key>
+          <Property Name="LOG_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOG_ERROR" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LOG_INNER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LOG_FECHA" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TBL_DEUDA">
+          <Key>
+            <PropertyRef Name="DEU_ID" />
+          </Key>
+          <Property Name="DEU_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MES_ID" Type="Int32" Nullable="false" />
+          <Property Name="DEU_PERIODO_ANO" Type="Int32" Nullable="false" />
+          <Property Name="DEU_PERIODO_VENCE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DEU_DEUDA" Type="Int32" Nullable="false" />
+          <Property Name="CLI_ID" Type="Int32" />
+          <NavigationProperty Name="TBL_CLIENTE" Relationship="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CLIENTE" FromRole="TBL_DEUDA" ToRole="TBL_CLIENTE" />
+          <NavigationProperty Name="TBL_MES" Relationship="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES" FromRole="TBL_DEUDA" ToRole="TBL_MES" />
         </EntityType>
         <Association Name="FK_TBL_DEUDA_TBL_CLIENTE">
-          <End Role="TBL_CLIENTE" Type="Self.TBL_CLIENTE" Multiplicity="0..1" />
-          <End Role="TBL_DEUDA" Type="Self.TBL_DEUDA" Multiplicity="*" />
+          <End Type="BDD_PRUEBAModel.TBL_CLIENTE" Role="TBL_CLIENTE" Multiplicity="0..1" />
+          <End Type="BDD_PRUEBAModel.TBL_DEUDA" Role="TBL_DEUDA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TBL_CLIENTE">
               <PropertyRef Name="CLI_ID" />
@@ -126,8 +158,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TBL_DEUDA_TBL_MES">
-          <End Role="TBL_MES" Type="Self.TBL_MES" Multiplicity="1" />
-          <End Role="TBL_DEUDA" Type="Self.TBL_DEUDA" Multiplicity="*" />
+          <End Type="BDD_PRUEBAModel.TBL_MES" Role="TBL_MES" Multiplicity="1" />
+          <End Type="BDD_PRUEBAModel.TBL_DEUDA" Role="TBL_DEUDA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TBL_MES">
               <PropertyRef Name="MES_ID" />
@@ -137,20 +169,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PuquerosBDD" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="TBL_CLIENTE" EntityType="Self.TBL_CLIENTE" />
-          <EntitySet Name="TBL_DEUDA" EntityType="Self.TBL_DEUDA" />
-          <EntitySet Name="TBL_MES" EntityType="Self.TBL_MES" />
-          <AssociationSet Name="FK_TBL_DEUDA_TBL_CLIENTE" Association="Self.FK_TBL_DEUDA_TBL_CLIENTE">
-            <End Role="TBL_CLIENTE" EntitySet="TBL_CLIENTE" />
-            <End Role="TBL_DEUDA" EntitySet="TBL_DEUDA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TBL_DEUDA_TBL_MES" Association="Self.FK_TBL_DEUDA_TBL_MES">
-            <End Role="TBL_MES" EntitySet="TBL_MES" />
-            <End Role="TBL_DEUDA" EntitySet="TBL_DEUDA" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -170,23 +189,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TBL_DEUDA">
-            <EntityTypeMapping TypeName="BDD_PRUEBAModel.TBL_DEUDA">
-              <MappingFragment StoreEntitySet="TBL_DEUDA">
-                <ScalarProperty Name="DEU_ID" ColumnName="DEU_ID" />
-                <ScalarProperty Name="MES_ID" ColumnName="MES_ID" />
-                <ScalarProperty Name="DEU_PERIODO_ANO" ColumnName="DEU_PERIODO_ANO" />
-                <ScalarProperty Name="DEU_PERIODO_VENCE" ColumnName="DEU_PERIODO_VENCE" />
-                <ScalarProperty Name="DEU_DEUDA" ColumnName="DEU_DEUDA" />
-                <ScalarProperty Name="CLI_ID" ColumnName="CLI_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TBL_MES">
             <EntityTypeMapping TypeName="BDD_PRUEBAModel.TBL_MES">
               <MappingFragment StoreEntitySet="TBL_MES">
                 <ScalarProperty Name="MES_ID" ColumnName="MES_ID" />
                 <ScalarProperty Name="MES_NOMBRE" ColumnName="MES_NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_LOG">
+            <EntityTypeMapping TypeName="BDD_PRUEBAModel.TBL_LOG">
+              <MappingFragment StoreEntitySet="TBL_LOG">
+                <ScalarProperty Name="LOG_FECHA" ColumnName="LOG_FECHA" />
+                <ScalarProperty Name="LOG_INNER" ColumnName="LOG_INNER" />
+                <ScalarProperty Name="LOG_ERROR" ColumnName="LOG_ERROR" />
+                <ScalarProperty Name="LOG_ID" ColumnName="LOG_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_DEUDA">
+            <EntityTypeMapping TypeName="BDD_PRUEBAModel.TBL_DEUDA">
+              <MappingFragment StoreEntitySet="TBL_DEUDA">
+                <ScalarProperty Name="CLI_ID" ColumnName="CLI_ID" />
+                <ScalarProperty Name="DEU_DEUDA" ColumnName="DEU_DEUDA" />
+                <ScalarProperty Name="DEU_PERIODO_VENCE" ColumnName="DEU_PERIODO_VENCE" />
+                <ScalarProperty Name="DEU_PERIODO_ANO" ColumnName="DEU_PERIODO_ANO" />
+                <ScalarProperty Name="MES_ID" ColumnName="MES_ID" />
+                <ScalarProperty Name="DEU_ID" ColumnName="DEU_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

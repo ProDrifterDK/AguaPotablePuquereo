@@ -26,7 +26,8 @@ namespace AguaPotablePuquereo.Models.SQL
         }
     
         public virtual DbSet<TBL_CLIENTE> TBL_CLIENTE { get; set; }
-        public virtual DbSet<TBL_DEUDA> TBL_DEUDA { get; set; }
         public virtual DbSet<TBL_MES> TBL_MES { get; set; }
+        public virtual DbSet<TBL_LOG> TBL_LOG { get; set; }
+        public virtual DbSet<TBL_DEUDA> TBL_DEUDA { get; set; }
     }
 }

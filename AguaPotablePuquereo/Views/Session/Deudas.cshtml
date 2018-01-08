@@ -1,13 +1,63 @@
-﻿@{
+﻿@model AguaPotablePuquereo.Models.Sitio.Cliente
+
+@{
     ViewBag.Title = "Deudas";
     Layout = "~/Views/Shared/_LoggedLayout.cshtml";
 }
 <!-- Header -->
 <div>
-    <h4>¡Bienvenido Fulanito González!</h4>
-    <h5>Seleccione las deudas que desea pagar:</h5>
+    <h4>¡Bienvenido @Model.Completo!</h4>
 </div>
 <!-- Contenido generado automáticamente -->
-<form action="#">
-    <a class="waves-effect waves-light btn">Generar boleta y Pagar</a>
-</form>
+
+<div class="container ">
+    <table id="tabla-deuda" class="centered bordered">
+        <thead>
+            <tr>
+                <th style="padding-right:8px"><input type="checkbox" id="test0"/><label for="test0"></label></th>
+                <th style="padding-right:8px">Periodo</th>
+                <th style="padding-right:8px">Monto</th>
+                <th style="padding-right:8px">Vence</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        CargarGrilla();
+    })
+
+    function CargarGrilla() {
+        $('#tabla-deuda').DataTable({
+            bFilter: false,
+            bInfo: false,
+            bPaginate: false,
+            ordering: false,
+            "columns": [
+                {
+                    'render': function (dat, type, full, meta) {
+                        return '<input type="checkbox" id="test' + full.Id + '" /><label for="test' + full.Id + '"></label>';
+                    }
+                },
+                { data: "Periodo" },
+                { data: "Monto" },
+                { data: "Vence" },
+            ],
+            "ajax": {
+                "url": "@Url.Action("JsonGetListaDeudas")?CliId=@Model.CliID",
+                "type": "POST",
+                "dataType": "json"
+            },
+        });
+    }
+
+    $('#test0').change(function () {
+        var checkboxes = $(this).closest('table').find(':checkbox');
+        if ($(this).is(':checked')) {
+            checkboxes.prop('checked', true);
+        } else {
+            checkboxes.prop('checked', false);
+        }
+    });
+</script>

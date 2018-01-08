@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace AguaPotablePuquereo.Controllers {
-	public class HomeController : Controller {
+	public class HomeController : Base.BaseController {
 		public ActionResult Index() {
 			return View();
 		}
