@@ -12,7 +12,7 @@
 		&nbsp;
 	</div>
 	<div class="card col s12 m4 l4">
-		<div class="input-field">
+		<div class="input-field" onkeypress="return HacerEnter(event)">
 			<input id="rut-input" type="text" class="validate">
 			<label class="active" for="rut-label">Ingrese su RUT</label>
 		</div>
@@ -45,5 +45,10 @@
             }
         })
 
-    }
+	}
+	function HacerEnter(e) {
+		if (e.keyCode == 13) {
+			Deudas();
+		}
+	}
 </script>
