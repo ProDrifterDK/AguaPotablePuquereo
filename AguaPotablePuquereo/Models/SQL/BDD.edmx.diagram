@@ -11,6 +11,7 @@
         <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_DEUDA" Width="1.5" PointX="3" PointY="2.75" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CLIENTE" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_USUARIO" Width="1.5" PointX="7.875" PointY="2.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

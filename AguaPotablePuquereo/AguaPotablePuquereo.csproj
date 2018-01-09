@@ -165,6 +165,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Administracion\AdministracionAreaRegistration.cs" />
+    <Compile Include="Areas\Administracion\Controllers\AdministradorController.cs" />
     <Compile Include="Areas\Administracion\Controllers\LoginController.cs" />
     <Compile Include="Base\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -198,6 +199,9 @@
       <DependentUpon>BDD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SQL\TBL_MES.cs">
+      <DependentUpon>BDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SQL\TBL_USUARIO.cs">
       <DependentUpon>BDD.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -237,6 +241,7 @@
     <Content Include="Areas\Administracion\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administracion\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administracion\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Administracion\Views\Administrador\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\SQL\BDD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -271,6 +276,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Resyst.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

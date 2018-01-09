@@ -15,11 +15,11 @@ namespace AguaPotablePuquereo.Base
             BDD = new PuquerosBDD();
         }
 
-        //protected TBL_USUARIO UsuarioLogged
-        //{
-        //    get { return Session["UsuarioLogged"] == null ? null : (TBL_USUARIO)Session["UsuarioLogged"]; }
-        //    set { Session["UsuarioLogged"] = value; }
-        //}
+        protected TBL_USUARIO UsuarioLogged
+        {
+            get { return Session["UsuarioLogged"] == null ? null : (TBL_USUARIO)Session["UsuarioLogged"]; }
+            set { Session["UsuarioLogged"] = value; }
+        }
 
         protected JsonResult JsonExito(string mensaje = "", object data = null)
         {

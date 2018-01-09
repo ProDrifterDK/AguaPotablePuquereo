@@ -1,8 +1,50 @@
-﻿
+﻿@{
+    Layout = null;
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
+        <script src="~/Scripts/modernizr-2.6.2.js"></script>
+        <script src="~/Scripts/materialize.js"></script>
+        <script src="~/Scripts/jquery.dataTables.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="~/Content/materialize.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+        <title>Login - Agua Potable Puquereo</title>
+}
 
-<div class="row">
-    <div class="col l4 m4 s4 x4 offset-l4">
-        <input class="input"/>
-        <input type="password" class="input"/>
+
+<div class="row" style="margin-left:0; margin-right:0; margin-top: 50px">
+    <div class="z-depth-3 col s12 m8 l4 offset-l4 offset-m2">
+        <form method="post" id="formulario">
+            <div class="input-field" style="margin-top: 20px">
+                <input id="nombre" type="text" class="validate" name="nombre">
+                <label class="active" for="nombre">Usuario</label>
+            </div>
+            <div class="input-field" style="margin-top: 20px">
+                <input id="contrasena" type="password" class="validate" name="contrasena">
+                <label class="active" for="contrasena">Contraseña</label>
+            </div>
+            <input type="submit" class="btn" value="Ingresar" />
+
+        </form>
     </div>
 </div>
+
+<script>
+    $('#formulario').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("Index")',
+            data: $('#formulario').serialize(),
+            success: function (data) {
+                if (data.exito) {
+                    location.href = "@Url.Action("Index","Administrador")";
+                } else {
+                    if (data.mensaje) {
+                        Materialize.toast(data.mensaje, 3000);
+                    }
+                }
+            }
+        })
+    })
+</script>

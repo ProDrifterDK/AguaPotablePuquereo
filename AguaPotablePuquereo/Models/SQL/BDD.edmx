@@ -45,6 +45,13 @@
           <Property Name="MES_ID" Type="int" Nullable="false" />
           <Property Name="MES_NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="TBL_USUARIO">
+          <Key>
+            <PropertyRef Name="USU_USUARIO" />
+          </Key>
+          <Property Name="USU_USUARIO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="USU_CONTRASEÑA" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <Association Name="FK_TBL_DEUDA_TBL_CLIENTE">
           <End Role="TBL_CLIENTE" Type="Self.TBL_CLIENTE" Multiplicity="0..1" />
           <End Role="TBL_DEUDA" Type="Self.TBL_DEUDA" Multiplicity="*" />
@@ -74,6 +81,7 @@
           <EntitySet Name="TBL_DEUDA" EntityType="Self.TBL_DEUDA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_LOG" EntityType="Self.TBL_LOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_MES" EntityType="Self.TBL_MES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_USUARIO" EntityType="Self.TBL_USUARIO" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_TBL_DEUDA_TBL_CLIENTE" Association="Self.FK_TBL_DEUDA_TBL_CLIENTE">
             <End Role="TBL_CLIENTE" EntitySet="TBL_CLIENTE" />
             <End Role="TBL_DEUDA" EntitySet="TBL_DEUDA" />
@@ -122,6 +130,7 @@
             <End Role="TBL_MES" EntitySet="TBL_MES" />
             <End Role="TBL_DEUDA" EntitySet="TBL_DEUDA" />
           </AssociationSet>
+          <EntitySet Name="TBL_USUARIO" EntityType="BDD_PRUEBAModel.TBL_USUARIO" />
           </EntityContainer>
         <EntityType Name="TBL_LOG">
           <Key>
@@ -169,6 +178,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TBL_USUARIO">
+          <Key>
+            <PropertyRef Name="USU_USUARIO" />
+          </Key>
+          <Property Name="USU_USUARIO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USU_CONTRASEÑA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -216,6 +232,14 @@
                 <ScalarProperty Name="DEU_PERIODO_ANO" ColumnName="DEU_PERIODO_ANO" />
                 <ScalarProperty Name="MES_ID" ColumnName="MES_ID" />
                 <ScalarProperty Name="DEU_ID" ColumnName="DEU_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_USUARIO">
+            <EntityTypeMapping TypeName="BDD_PRUEBAModel.TBL_USUARIO">
+              <MappingFragment StoreEntitySet="TBL_USUARIO">
+                <ScalarProperty Name="USU_CONTRASEÑA" ColumnName="USU_CONTRASEÑA" />
+                <ScalarProperty Name="USU_USUARIO" ColumnName="USU_USUARIO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
