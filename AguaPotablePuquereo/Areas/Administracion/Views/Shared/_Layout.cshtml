@@ -3,38 +3,39 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/materialize.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/Content/materialize.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+    <title>@ViewBag.Title - Administración</title>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <!-- Header -->
+    <header>
+        <nav class="top-nav light-blue darken-4">
+            <div class="nav-wrapper">
+					<!-- Título y links: Desktop -->
+                    <a class="brand-logo center hide-on-med-and-down">Agua Potable Puquereo</a>
+                    <ul id="nav-mobile" class=" right hide-on-med-and-down">
+                        <li><a href=@Url.Action("Logout", "Login")>Salir</a></li>
+                    </ul>
+					<!-- Título y links: Mobile -->
+                    <a class="truncate brand-logo center hide-on-large-only">APR Puquereo</a>
+                    <a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
+                    <ul class="side-nav hide-on-large-only" id="mobile-demo">
+                        <li><a href=@Url.Action("Logout", "Login")>Salir</a></li>
+                    </ul>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
+        </nav>
+    </header>
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

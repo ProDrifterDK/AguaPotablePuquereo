@@ -28,5 +28,12 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
                 return JsonError(ex.Message);
             }
         }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+
+            return RedirectToAction("Index");
+        }
     }
 }
