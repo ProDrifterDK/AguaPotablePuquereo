@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AguaPotablePuquereo.Areas.Administracion.Controllers
 {
-    public class LoginController : Base.BaseController
+    public class LoginController : Base.BaseAdministrar
     {
         // GET: Administracion/Login
         public ActionResult Index()

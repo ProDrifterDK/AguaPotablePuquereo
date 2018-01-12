@@ -1,5 +1,7 @@
 ﻿var Resyst = {};
 
+
+
 Resyst.Toast = function (data, tabla) {
     if (data.mensaje) {
         if (data.exito) {

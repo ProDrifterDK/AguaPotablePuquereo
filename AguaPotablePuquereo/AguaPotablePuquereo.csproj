@@ -165,8 +165,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Administracion\AdministracionAreaRegistration.cs" />
+    <Compile Include="Areas\Administracion\Base\BaseAdministrar.cs" />
     <Compile Include="Areas\Administracion\Controllers\AdministradorController.cs" />
     <Compile Include="Areas\Administracion\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Administracion\Models\ModelCliente.cs" />
     <Compile Include="Base\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
@@ -242,6 +244,8 @@
     <Content Include="Areas\Administracion\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administracion\Views\Login\Index.cshtml" />
     <Content Include="Areas\Administracion\Views\Administrador\Index.cshtml" />
+    <Content Include="Areas\Administracion\Views\Administrador\Cliente.cshtml" />
+    <Content Include="Areas\Administracion\Views\Administrador\MantencionCliente.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\SQL\BDD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -294,7 +298,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administracion\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

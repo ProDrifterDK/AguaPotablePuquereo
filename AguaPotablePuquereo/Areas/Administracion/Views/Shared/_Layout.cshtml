@@ -19,16 +19,20 @@
         <nav class="top-nav light-blue darken-4">
             <div class="nav-wrapper">
 					<!-- Título y links: Desktop -->
-                    <a class="brand-logo center hide-on-med-and-down">Agua Potable Puquereo</a>
-                    <ul id="nav-mobile" class=" right hide-on-med-and-down">
-                        <li><a href=@Url.Action("Logout", "Login")>Salir</a></li>
-                    </ul>
-					<!-- Título y links: Mobile -->
-                    <a class="truncate brand-logo center hide-on-large-only">APR Puquereo</a>
-                    <a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
-                    <ul class="side-nav hide-on-large-only" id="mobile-demo">
-                        <li><a href=@Url.Action("Logout", "Login")>Salir</a></li>
-                    </ul>
+                <a class="brand-logo center hide-on-med-and-down">Agua Potable Puquereo</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="@Url.Action("Cliente", "Administrador")">Clientes</a></li>
+                </ul>
+                <ul id="nav-mobile" class=" right hide-on-med-and-down">
+                    <li><a href=@Url.Action("Logout", "Login")>Salir</a></li>
+                </ul>
+                <!-- Título y links: Mobile -->
+                <a class="truncate brand-logo center hide-on-large-only">APR Puquereo</a>
+                <a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only sideNavOpen"><i class="material-icons">menu</i></a>
+                <ul class="side-nav hide-on-large-only" id="mobile-demo">
+                    <li><a href="@Url.Action("Cliente", "Administrar")">Clientes</a></li>
+                    <li><a href=@Url.Action("Logout", "Login")>Salir</a></li>
+                </ul>
             </div>
         </nav>
     </header>
@@ -37,5 +41,20 @@
         @RenderBody()
     </div>
 
+    <script>
+        $(document).ready(function () {
+            $(".sideNavOpen").sideNav();
+        });
+        Number.prototype.formatMoney = function (c, d, t) {
+            var n = this,
+                c = isNaN(c = Math.abs(c)) ? 2 : c,
+                d = d == undefined ? "." : d,
+                t = t == undefined ? "," : t,
+                s = n < 0 ? "-" : "",
+                i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+                j = (j = i.length) > 3 ? j % 3 : 0;
+            return '$' + s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+        };
+    </script>
 </body>
 </html>
