@@ -21,7 +21,6 @@ body {
 	text-align: left;
 }
 
-
 #info-mobile {
 	text-align: center;
 }
@@ -32,4 +31,10 @@ body {
 
 #facebook-info-mobile {
 	text-align: center;
+}
+
+/* Administración: Login */
+
+#ir-al-inicio {
+	margin-bottom: 1em;
 }
