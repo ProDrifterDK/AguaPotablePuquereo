@@ -1,26 +1,91 @@
 ﻿@model AguaPotablePuquereo.Areas.Administracion.Models.ModelCliente
 <h2>Mantencion Cliente</h2>
-
+@using (Html.BeginForm("MantencionCliente", "Administrador", FormMethod.Post, new { id="form"}))
+{
+    @Html.HiddenFor(o=> o.Id)
+    <div class="row">
+        <div class="col l4 m6 s12 input-field">
+            @Html.TextBoxFor(o => o.Nombre, new { @class = "validate", @type = "text" })
+            <label for="Nombre">Nombre</label>
+        </div>
+        <div class="col l4 m6 s12 input-field">
+            @Html.TextBoxFor(o => o.ApellidoP, new { @class = "validate", @type = "text" })
+            <label for="ApellidoP">Apellido Paterno</label>
+        </div>
+        <div class="col l4 m6 s12 input-field">
+            @Html.TextBoxFor(o => o.ApellidoM, new { @class = "validate", @type = "text" })
+            <label for="Nombre">Apellido Materno</label>
+        </div>
+        <div class="col l4 m6 s12 input-field">
+            @Html.TextBoxFor(o => o.Rut, new { @class = "validate", @type = "text" })
+            <label for="Nombre">Rut</label>
+        </div>
+        <div class="col l4 m6 s12 input-field">
+            @Html.TextBoxFor(o => o.Cuenta, new { @class = "validate", @type = "text" })
+            <label for="Nombre">Cuenta</label>
+        </div>
+        <div>
+            <button type="submit" class="btn orange lighten-2" ><i class="material-icons">mode_save</i></button>
+        </div>
+    </div>
+}
+<hr />
+<h4>Deudas<a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">mode_add_box</i></a></h4>
 <div class="row">
-    <div class="col l4 m6 s12 input-field">
-        @Html.TextBoxFor(o=> o.Nombre, new { @class="validate", @type="text"})
-        <label for="Nombre">Nombre</label>
-    </div>
-    <div class="col l4 m6 s12 input-field">
-        @Html.TextBoxFor(o => o.ApellidoP, new { @class = "validate", @type = "text" })
-        <label for="ApellidoP">Apellido Paterno</label>
-    </div>
-    <div class="col l4 m6 s12 input-field">
-        @Html.TextBoxFor(o => o.Nombre, new { @class = "validate", @type = "text" })
-        <label for="Nombre">Nombre</label>
-    </div>
-    <div class="col l4 m6 s12 input-field">
-        @Html.TextBoxFor(o => o.Nombre, new { @class = "validate", @type = "text" })
-        <label for="Nombre">Nombre</label>
-    </div>
-    <div class="col l4 m6 s12 input-field">
-        @Html.TextBoxFor(o => o.Nombre, new { @class = "validate", @type = "text" })
-        <label for="Nombre">Nombre</label>
+    <div class="col s12">
+        <table id="tabla-deuda" class="centered bordered">
+            <thead>
+                <tr>
+                    <th style="padding-right:8px"><input type="checkbox" id="test0" /><label for="test0"></label></th>
+                    <th style="padding-right:8px">Periodo</th>
+                    <th style="padding-right:8px">Monto</th>
+                    <th style="padding-right:8px">Vence</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>
+
+<script>
+    $('#form').submit(function (e) {
+        var rut = $('#Rut').val();
+        var d = Resyst.ValidarRut(rut);
+        if (!d) {
+            e.preventDefault();
+
+            Resyst.Error("Rut inválido");
+        }
+    })
+
+    $('#tabla-deuda').DataTable({
+        bFilter: false,
+        bInfo: false,
+        bPaginate: false,
+        ordering: false,
+        "columns": [
+            {
+                'render': function (dat, type, full, meta) {
+                    return '<input type="checkbox" id="test' + full.Id + '" /><label for="test' + full.Id + '"></label>';
+                }
+            },
+            { data: "Periodo" },
+            { data: "Monto" },
+            { data: "Vence" },
+        ],
+        "ajax": {
+            "url": "@Url.Action("JsonGetListaDeudas")?id=@Model.Id",
+            "type": "POST",
+            "dataType": "json"
+        },
+    });
+
+    $('#test0').change(function () {
+        var checkboxes = $(this).closest('table').find(':checkbox');
+        if ($(this).is(':checked')) {
+            checkboxes.prop('checked', true);
+        } else {
+            checkboxes.prop('checked', false);
+        }
+    });
+</script>
 

@@ -12,26 +12,21 @@ namespace AguaPotablePuquereo.Models.SQL
     using System;
     using System.Collections.Generic;
     
-    public partial class TBL_CLIENTE
+    public partial class TBL_PAGOS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TBL_CLIENTE()
+        public TBL_PAGOS()
         {
-            this.TBL_PAGOS = new HashSet<TBL_PAGOS>();
             this.TBL_DEUDA = new HashSet<TBL_DEUDA>();
         }
     
+        public int PAG_ID { get; set; }
+        public int PAG_MONTO { get; set; }
         public int CLI_ID { get; set; }
-        public string CLI_RUT { get; set; }
-        public string CLI_NOMBRE { get; set; }
-        public string CLI_APELLIDO_PATERNO { get; set; }
-        public string CLI_APELLIDO_MATERNO { get; set; }
-        public string CLI_COMPLETO { get; set; }
-        public Nullable<System.DateTime> CLI_CREADO { get; set; }
-        public int CLI_CUENTA { get; set; }
+        public System.DateTime PAG_FECHA { get; set; }
+        public bool PAG_VIGENCIA { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_PAGOS> TBL_PAGOS { get; set; }
+        public virtual TBL_CLIENTE TBL_CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_DEUDA> TBL_DEUDA { get; set; }
     }

@@ -203,6 +203,9 @@
     <Compile Include="Models\SQL\TBL_MES.cs">
       <DependentUpon>BDD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SQL\TBL_PAGOS.cs">
+      <DependentUpon>BDD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SQL\TBL_USUARIO.cs">
       <DependentUpon>BDD.tt</DependentUpon>
     </Compile>

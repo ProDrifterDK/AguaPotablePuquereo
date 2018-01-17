@@ -5,14 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b9d9f2b8df9042fba85bdb4d30e842b6" Name="Diagram1">
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_CLIENTE" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_MES" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_LOG" Width="1.5" PointX="5.625" PointY="2.375" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_DEUDA" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_CLIENTE" Width="1.5" PointX="0.75" PointY="3.125" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_LOG" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_MES" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_PAGOS" Width="1.5" PointX="3" PointY="3.375" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_USUARIO" Width="1.5" PointX="2.75" PointY="7.125" />
+        <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_PAGOS_TBL_CLIENTE" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_DEUDA" Width="1.5" PointX="5.25" PointY="1.875" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CLIENTE" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_USUARIO" Width="1.5" PointX="7.875" PointY="2.75" />
-        </Diagram>
+        <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_PAGOS" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

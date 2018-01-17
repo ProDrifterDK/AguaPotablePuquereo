@@ -1,7 +1,94 @@
-﻿
-@{
-    ViewBag.Title = "Administración";
-}
+﻿<h4>Pagos</h4>
+<div class="row">
+    <div class="col s12">
+        <table id="tablaPagos" style="border:1px solid #d0d0d0" class="table bordered striped">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Rut</th>
+                    <th>Cuenta</th>
+                    <th>Periodo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<h4>Clientes <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">mode_add_box</i></a></h4>
+<div class="row">
+    <div class="col s12">
+        <table id="tablaClientes" style="border:1px solid #d0d0d0" class="table bordered striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Rut</th>
+                    <th>Cuenta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
 
-<h2>Yey :D</h2>
+<script>
+    $('#tablaClientes').DataTable({
+        bFilter: false,
+        bInfo: false,
+        bPaginate: false,
+        ordering: false,
+        "columns": [
+            { data: "Nombre" },
+            { data: "Rut" },
+            { data: "Cuenta" },
+            {
+                'render': function (dat, type, full, meta) {
+                    return '<a href="javascript:void()" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">mode_edit</i></a>';
+                }
+            },
+        ],
+        "ajax": {
+            "url": "@Url.Action("GetListaCliente")",
+            "type": "POST",
+            "dataType": "json"
+        },
+    });
 
+
+    $('#tablaPagos').DataTable({
+        bFilter: false,
+        bInfo: false,
+        bPaginate: false,
+        ordering: false,
+        "columns": [
+            { data: "Nombre" },
+            { data: "Rut" },
+            { data: "Cuenta" },
+            { data: "Periodo" },
+            {
+                'render': function (dat, type, full, meta) {
+                    return '<a href="javascript:void()" onclick="Checkear(' + full.Id + ')"><i class="material-icons">mode_check</i></a>';
+                }
+            },
+        ],
+        "ajax": {
+            "url": "@Url.Action("GetListaDeudasPagadas")",
+            "type": "POST",
+            "dataType": "json"
+        },
+    });
+
+    function Checkear(id) {
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("AsignarVisto")',
+            data: { id: id },
+            success: function (data) {
+                Resyst.ToastRecargar(data, "tablaPagos");
+            }
+        })
+    }
+
+    function Mantncion(id) {
+        location.href = '@Url.Action("MantencionCliente")?id=' + id;
+    }
+</script>
