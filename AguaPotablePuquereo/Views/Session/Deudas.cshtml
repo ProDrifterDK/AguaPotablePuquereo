@@ -20,11 +20,23 @@
             </tr>
         </thead>
     </table>
+    <button class="btn" onclick="Pagar()">Pagar</button>
+
+    <p id="mensaje">
+
+    </p>
 </div>
+
+<form id="formWebPay" method="post">
+    <input id="token" type="hidden" name="token_ws" />
+</form>
 
 <script>
     $(document).ready(function () {
         CargarGrilla();
+        if ('@ViewBag.Mensaje' != '') {
+
+        }
     })
 
     function CargarGrilla() {
@@ -48,6 +60,10 @@
                 "type": "POST",
                 "dataType": "json"
             },
+            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                $(nRow).attr("id", "tr" + aData.Id);
+                return nRow;
+            },
         });
     }
 
@@ -59,4 +75,32 @@
             checkboxes.prop('checked', false);
         }
     });
+
+    function Pagar() {
+        var checked = [];
+        var inputs = $('#tabla-deuda tbody tr td input:checked');
+        inputs.each(function (i, data) {
+            var padre = $(data).parent().parent();
+            var id = $(padre).attr('id');
+            var num = id.replace(/^\D+/g, '');
+            checked.push(num);
+        });
+
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("GetToken")',
+            data: { Deudas: checked, rut: '@Model.Rut' },
+            success: function (data) {
+                if (data.exito) {
+                    $('#token').val(data.data.result.token);
+                    $('#formWebPay').attr('action', data.data.result.url);
+                    $('#formWebPay').submit();
+                } else {
+                    if (data.mensaje) {
+                        Resyst.Error(data.mensaje);
+                    }
+                }
+            },
+        })
+    }
 </script>

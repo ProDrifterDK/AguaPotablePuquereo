@@ -25,7 +25,7 @@ namespace Transbank.NET.sample.certificates
 
             /** Agregar datos de integración a Dictionary */
 
-            String certFolder = System.Web.HttpContext.Current.Server.MapPath(".");
+            String certFolder = System.Web.HttpContext.Current.Server.MapPath("..");
 
             /** Modo de Utilización */
             certificate.Add("environment", "INTEGRACION");
