@@ -17,11 +17,6 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
         }
 
 #region Clientes
-        public ActionResult Cliente()
-        {
-            return View();
-        }
-
         public ActionResult MantencionCliente(int id)
         {
             var modelo = BDD.TBL_CLIENTE.Where(o => o.CLI_ID == id).ToList().Select(o => new ModelCliente

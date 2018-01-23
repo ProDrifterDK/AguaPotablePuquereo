@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BDD_PRUEBAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBL_CARRO_COMPRA">
+          <Key>
+            <PropertyRef Name="CAR_ID" />
+          </Key>
+          <Property Name="CAR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CAR_TOKEN" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CAR_MONTO" Type="int" Nullable="false" />
+          <Property Name="CEST_ESTADO" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="TBL_CLIENTE">
           <Key>
             <PropertyRef Name="CLI_ID" />
@@ -30,6 +39,15 @@
           <Property Name="CLI_ID" Type="int" />
           <Property Name="PAG_ID" Type="int" />
           <Property Name="DEU_CHECK" Type="bit" Nullable="false" />
+          <Property Name="CAR_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="TBL_ESTADO_CARRO">
+          <Key>
+            <PropertyRef Name="CEST_ID" />
+          </Key>
+          <Property Name="CEST_ID" Type="int" Nullable="false" />
+          <Property Name="CEST_NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CEST_VIGENTE" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TBL_LOG">
           <Key>
@@ -64,6 +82,18 @@
           <Property Name="USU_USUARIO" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="USU_CONTRASEÑA" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO">
+          <End Role="TBL_ESTADO_CARRO" Type="Self.TBL_ESTADO_CARRO" Multiplicity="1" />
+          <End Role="TBL_CARRO_COMPRA" Type="Self.TBL_CARRO_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ESTADO_CARRO">
+              <PropertyRef Name="CEST_ID" />
+            </Principal>
+            <Dependent Role="TBL_CARRO_COMPRA">
+              <PropertyRef Name="CEST_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TBL_DEUDA_TBL_CLIENTE">
           <End Role="TBL_CLIENTE" Type="Self.TBL_CLIENTE" Multiplicity="0..1" />
           <End Role="TBL_DEUDA" Type="Self.TBL_DEUDA" Multiplicity="*" />
@@ -113,12 +143,18 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BDD_PRUEBAModelStoreContainer">
+          <EntitySet Name="TBL_CARRO_COMPRA" EntityType="Self.TBL_CARRO_COMPRA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_CLIENTE" EntityType="Self.TBL_CLIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_DEUDA" EntityType="Self.TBL_DEUDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ESTADO_CARRO" EntityType="Self.TBL_ESTADO_CARRO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_LOG" EntityType="Self.TBL_LOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_MES" EntityType="Self.TBL_MES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_PAGOS" EntityType="Self.TBL_PAGOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_USUARIO" EntityType="Self.TBL_USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO" Association="Self.FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO">
+            <End Role="TBL_ESTADO_CARRO" EntitySet="TBL_ESTADO_CARRO" />
+            <End Role="TBL_CARRO_COMPRA" EntitySet="TBL_CARRO_COMPRA" />
+          </AssociationSet>
           <AssociationSet Name="FK_TBL_DEUDA_TBL_CLIENTE" Association="Self.FK_TBL_DEUDA_TBL_CLIENTE">
             <End Role="TBL_CLIENTE" EntitySet="TBL_CLIENTE" />
             <End Role="TBL_DEUDA" EntitySet="TBL_DEUDA" />
@@ -141,19 +177,25 @@
     <edmx:ConceptualModels>
       <Schema Namespace="BDD_PRUEBAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="PuquerosBDD" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_CARRO_COMPRA" EntityType="BDD_PRUEBAModel.TBL_CARRO_COMPRA" />
           <EntitySet Name="TBL_CLIENTE" EntityType="BDD_PRUEBAModel.TBL_CLIENTE" />
+          <EntitySet Name="TBL_DEUDA" EntityType="BDD_PRUEBAModel.TBL_DEUDA" />
+          <EntitySet Name="TBL_ESTADO_CARRO" EntityType="BDD_PRUEBAModel.TBL_ESTADO_CARRO" />
           <EntitySet Name="TBL_LOG" EntityType="BDD_PRUEBAModel.TBL_LOG" />
           <EntitySet Name="TBL_MES" EntityType="BDD_PRUEBAModel.TBL_MES" />
           <EntitySet Name="TBL_PAGOS" EntityType="BDD_PRUEBAModel.TBL_PAGOS" />
           <EntitySet Name="TBL_USUARIO" EntityType="BDD_PRUEBAModel.TBL_USUARIO" />
-          <AssociationSet Name="FK_TBL_PAGOS_TBL_CLIENTE" Association="BDD_PRUEBAModel.FK_TBL_PAGOS_TBL_CLIENTE">
-            <End Role="TBL_CLIENTE" EntitySet="TBL_CLIENTE" />
-            <End Role="TBL_PAGOS" EntitySet="TBL_PAGOS" />
+          <AssociationSet Name="FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO" Association="BDD_PRUEBAModel.FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO">
+            <End Role="TBL_ESTADO_CARRO" EntitySet="TBL_ESTADO_CARRO" />
+            <End Role="TBL_CARRO_COMPRA" EntitySet="TBL_CARRO_COMPRA" />
           </AssociationSet>
-          <EntitySet Name="TBL_DEUDA" EntityType="BDD_PRUEBAModel.TBL_DEUDA" />
           <AssociationSet Name="FK_TBL_DEUDA_TBL_CLIENTE" Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CLIENTE">
             <End Role="TBL_CLIENTE" EntitySet="TBL_CLIENTE" />
             <End Role="TBL_DEUDA" EntitySet="TBL_DEUDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PAGOS_TBL_CLIENTE" Association="BDD_PRUEBAModel.FK_TBL_PAGOS_TBL_CLIENTE">
+            <End Role="TBL_CLIENTE" EntitySet="TBL_CLIENTE" />
+            <End Role="TBL_PAGOS" EntitySet="TBL_PAGOS" />
           </AssociationSet>
           <AssociationSet Name="FK_TBL_DEUDA_TBL_MES" Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES">
             <End Role="TBL_MES" EntitySet="TBL_MES" />
@@ -164,6 +206,16 @@
             <End Role="TBL_DEUDA" EntitySet="TBL_DEUDA" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="TBL_CARRO_COMPRA">
+          <Key>
+            <PropertyRef Name="CAR_ID" />
+          </Key>
+          <Property Name="CAR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CAR_TOKEN" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CAR_MONTO" Type="Int32" Nullable="false" />
+          <Property Name="CEST_ESTADO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBL_ESTADO_CARRO" Relationship="BDD_PRUEBAModel.FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO" FromRole="TBL_CARRO_COMPRA" ToRole="TBL_ESTADO_CARRO" />
+        </EntityType>
         <EntityType Name="TBL_CLIENTE">
           <Key>
             <PropertyRef Name="CLI_ID" />
@@ -176,8 +228,34 @@
           <Property Name="CLI_COMPLETO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="CLI_CREADO" Type="DateTime" Precision="3" />
           <Property Name="CLI_CUENTA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TBL_PAGOS" Relationship="BDD_PRUEBAModel.FK_TBL_PAGOS_TBL_CLIENTE" FromRole="TBL_CLIENTE" ToRole="TBL_PAGOS" />
           <NavigationProperty Name="TBL_DEUDA" Relationship="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CLIENTE" FromRole="TBL_CLIENTE" ToRole="TBL_DEUDA" />
+          <NavigationProperty Name="TBL_PAGOS" Relationship="BDD_PRUEBAModel.FK_TBL_PAGOS_TBL_CLIENTE" FromRole="TBL_CLIENTE" ToRole="TBL_PAGOS" />
+        </EntityType>
+        <EntityType Name="TBL_DEUDA">
+          <Key>
+            <PropertyRef Name="DEU_ID" />
+          </Key>
+          <Property Name="DEU_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MES_ID" Type="Int32" Nullable="false" />
+          <Property Name="DEU_PERIODO_ANO" Type="Int32" Nullable="false" />
+          <Property Name="DEU_PERIODO_VENCE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DEU_DEUDA" Type="Int32" Nullable="false" />
+          <Property Name="CLI_ID" Type="Int32" />
+          <Property Name="PAG_ID" Type="Int32" />
+          <Property Name="DEU_CHECK" Type="Boolean" Nullable="false" />
+          <Property Name="CAR_ID" Type="Int32" />
+          <NavigationProperty Name="TBL_CLIENTE" Relationship="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CLIENTE" FromRole="TBL_DEUDA" ToRole="TBL_CLIENTE" />
+          <NavigationProperty Name="TBL_MES" Relationship="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES" FromRole="TBL_DEUDA" ToRole="TBL_MES" />
+          <NavigationProperty Name="TBL_PAGOS" Relationship="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_PAGOS" FromRole="TBL_DEUDA" ToRole="TBL_PAGOS" />
+        </EntityType>
+        <EntityType Name="TBL_ESTADO_CARRO">
+          <Key>
+            <PropertyRef Name="CEST_ID" />
+          </Key>
+          <Property Name="CEST_ID" Type="Int32" Nullable="false" />
+          <Property Name="CEST_NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CEST_VIGENTE" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_CARRO_COMPRA" Relationship="BDD_PRUEBAModel.FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO" FromRole="TBL_ESTADO_CARRO" ToRole="TBL_CARRO_COMPRA" />
         </EntityType>
         <EntityType Name="TBL_LOG">
           <Key>
@@ -215,34 +293,18 @@
           <Property Name="USU_USUARIO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="USU_CONTRASEÑA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_TBL_PAGOS_TBL_CLIENTE">
-          <End Type="BDD_PRUEBAModel.TBL_CLIENTE" Role="TBL_CLIENTE" Multiplicity="1" />
-          <End Type="BDD_PRUEBAModel.TBL_PAGOS" Role="TBL_PAGOS" Multiplicity="*" />
+        <Association Name="FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO">
+          <End Type="BDD_PRUEBAModel.TBL_ESTADO_CARRO" Role="TBL_ESTADO_CARRO" Multiplicity="1" />
+          <End Type="BDD_PRUEBAModel.TBL_CARRO_COMPRA" Role="TBL_CARRO_COMPRA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TBL_CLIENTE">
-              <PropertyRef Name="CLI_ID" />
+            <Principal Role="TBL_ESTADO_CARRO">
+              <PropertyRef Name="CEST_ID" />
             </Principal>
-            <Dependent Role="TBL_PAGOS">
-              <PropertyRef Name="CLI_ID" />
+            <Dependent Role="TBL_CARRO_COMPRA">
+              <PropertyRef Name="CEST_ESTADO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="TBL_DEUDA">
-          <Key>
-            <PropertyRef Name="DEU_ID" />
-          </Key>
-          <Property Name="DEU_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MES_ID" Type="Int32" Nullable="false" />
-          <Property Name="DEU_PERIODO_ANO" Type="Int32" Nullable="false" />
-          <Property Name="DEU_PERIODO_VENCE" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DEU_DEUDA" Type="Int32" Nullable="false" />
-          <Property Name="CLI_ID" Type="Int32" />
-          <Property Name="PAG_ID" Type="Int32" />
-          <Property Name="DEU_CHECK" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TBL_CLIENTE" Relationship="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CLIENTE" FromRole="TBL_DEUDA" ToRole="TBL_CLIENTE" />
-          <NavigationProperty Name="TBL_MES" Relationship="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES" FromRole="TBL_DEUDA" ToRole="TBL_MES" />
-          <NavigationProperty Name="TBL_PAGOS" Relationship="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_PAGOS" FromRole="TBL_DEUDA" ToRole="TBL_PAGOS" />
-        </EntityType>
         <Association Name="FK_TBL_DEUDA_TBL_CLIENTE">
           <End Type="BDD_PRUEBAModel.TBL_CLIENTE" Role="TBL_CLIENTE" Multiplicity="0..1" />
           <End Type="BDD_PRUEBAModel.TBL_DEUDA" Role="TBL_DEUDA" Multiplicity="*" />
@@ -251,6 +313,18 @@
               <PropertyRef Name="CLI_ID" />
             </Principal>
             <Dependent Role="TBL_DEUDA">
+              <PropertyRef Name="CLI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PAGOS_TBL_CLIENTE">
+          <End Type="BDD_PRUEBAModel.TBL_CLIENTE" Role="TBL_CLIENTE" Multiplicity="1" />
+          <End Type="BDD_PRUEBAModel.TBL_PAGOS" Role="TBL_PAGOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CLIENTE">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="TBL_PAGOS">
               <PropertyRef Name="CLI_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -285,6 +359,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BDD_PRUEBAModelStoreContainer" CdmEntityContainer="PuquerosBDD">
+          <EntitySetMapping Name="TBL_CARRO_COMPRA">
+            <EntityTypeMapping TypeName="BDD_PRUEBAModel.TBL_CARRO_COMPRA">
+              <MappingFragment StoreEntitySet="TBL_CARRO_COMPRA">
+                <ScalarProperty Name="CEST_ESTADO" ColumnName="CEST_ESTADO" />
+                <ScalarProperty Name="CAR_MONTO" ColumnName="CAR_MONTO" />
+                <ScalarProperty Name="CAR_TOKEN" ColumnName="CAR_TOKEN" />
+                <ScalarProperty Name="CAR_ID" ColumnName="CAR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TBL_CLIENTE">
             <EntityTypeMapping TypeName="BDD_PRUEBAModel.TBL_CLIENTE">
               <MappingFragment StoreEntitySet="TBL_CLIENTE">
@@ -296,6 +380,30 @@
                 <ScalarProperty Name="CLI_NOMBRE" ColumnName="CLI_NOMBRE" />
                 <ScalarProperty Name="CLI_RUT" ColumnName="CLI_RUT" />
                 <ScalarProperty Name="CLI_ID" ColumnName="CLI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_DEUDA">
+            <EntityTypeMapping TypeName="BDD_PRUEBAModel.TBL_DEUDA">
+              <MappingFragment StoreEntitySet="TBL_DEUDA">
+                <ScalarProperty Name="CAR_ID" ColumnName="CAR_ID" />
+                <ScalarProperty Name="DEU_CHECK" ColumnName="DEU_CHECK" />
+                <ScalarProperty Name="PAG_ID" ColumnName="PAG_ID" />
+                <ScalarProperty Name="CLI_ID" ColumnName="CLI_ID" />
+                <ScalarProperty Name="DEU_DEUDA" ColumnName="DEU_DEUDA" />
+                <ScalarProperty Name="DEU_PERIODO_VENCE" ColumnName="DEU_PERIODO_VENCE" />
+                <ScalarProperty Name="DEU_PERIODO_ANO" ColumnName="DEU_PERIODO_ANO" />
+                <ScalarProperty Name="MES_ID" ColumnName="MES_ID" />
+                <ScalarProperty Name="DEU_ID" ColumnName="DEU_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ESTADO_CARRO">
+            <EntityTypeMapping TypeName="BDD_PRUEBAModel.TBL_ESTADO_CARRO">
+              <MappingFragment StoreEntitySet="TBL_ESTADO_CARRO">
+                <ScalarProperty Name="CEST_VIGENTE" ColumnName="CEST_VIGENTE" />
+                <ScalarProperty Name="CEST_NOMBRE" ColumnName="CEST_NOMBRE" />
+                <ScalarProperty Name="CEST_ID" ColumnName="CEST_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -333,20 +441,6 @@
               <MappingFragment StoreEntitySet="TBL_USUARIO">
                 <ScalarProperty Name="USU_CONTRASEÑA" ColumnName="USU_CONTRASEÑA" />
                 <ScalarProperty Name="USU_USUARIO" ColumnName="USU_USUARIO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBL_DEUDA">
-            <EntityTypeMapping TypeName="BDD_PRUEBAModel.TBL_DEUDA">
-              <MappingFragment StoreEntitySet="TBL_DEUDA">
-                <ScalarProperty Name="DEU_CHECK" ColumnName="DEU_CHECK" />
-                <ScalarProperty Name="PAG_ID" ColumnName="PAG_ID" />
-                <ScalarProperty Name="CLI_ID" ColumnName="CLI_ID" />
-                <ScalarProperty Name="DEU_DEUDA" ColumnName="DEU_DEUDA" />
-                <ScalarProperty Name="DEU_PERIODO_VENCE" ColumnName="DEU_PERIODO_VENCE" />
-                <ScalarProperty Name="DEU_PERIODO_ANO" ColumnName="DEU_PERIODO_ANO" />
-                <ScalarProperty Name="MES_ID" ColumnName="MES_ID" />
-                <ScalarProperty Name="DEU_ID" ColumnName="DEU_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

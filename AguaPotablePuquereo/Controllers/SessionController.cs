@@ -14,11 +14,6 @@ namespace AguaPotablePuquereo.Controllers
     {
         // GET: Session
         #region Vistas
-        public ActionResult VistaDeudas()
-        {
-            return View();
-        }
-
         public ActionResult Deudas(string rut, string action, string token)
         {
             Cliente cliente = BDD.TBL_CLIENTE.Where(o => o.CLI_RUT == rut || o.CLI_CUENTA.ToString() == rut).ToList().Select(o => new Cliente
