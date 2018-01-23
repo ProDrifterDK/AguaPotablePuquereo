@@ -61,6 +61,9 @@ namespace AguaPotablePuquereo.Controllers
             codes.Add("-7", "Excede l&iacute;mite diario por transacci&oacute;n");
             codes.Add("-8", "Rubro no autorizado");
 
+            if (action == "Deudas")
+                action = "result";
+
             switch (action)
             {
                 case "result":
