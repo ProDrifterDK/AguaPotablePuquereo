@@ -84,6 +84,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Services3, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Services3.3.0.0.0\lib\net20\Microsoft.Web.Services3.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -147,6 +150,9 @@
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
+    <Reference Include="Webpay.Transbank.Library">
+      <HintPath>..\Lib\Webpay.Transbank.Library.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Formatting">
@@ -170,6 +176,11 @@
     <Compile Include="Areas\Administracion\Controllers\LoginController.cs" />
     <Compile Include="Areas\Administracion\Models\ModelCliente.cs" />
     <Compile Include="Base\BaseController.cs" />
+    <Compile Include="certificates\cert-capture.cs" />
+    <Compile Include="certificates\cert-complete.cs" />
+    <Compile Include="certificates\cert-normal-mall.cs" />
+    <Compile Include="certificates\cert-normal.cs" />
+    <Compile Include="certificates\cert-oneclick.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Global.asax.cs">
@@ -249,6 +260,20 @@
     <Content Include="Areas\Administracion\Views\Administrador\Index.cshtml" />
     <Content Include="Areas\Administracion\Views\Administrador\Cliente.cshtml" />
     <Content Include="Areas\Administracion\Views\Administrador\MantencionCliente.cshtml" />
+    <Content Include="certificates\597020000541\597020000541.pfx" />
+    <Content Include="certificates\597020000541\tbk.pem" />
+    <Content Include="certificates\597020000542\597020000542.pfx" />
+    <Content Include="certificates\597020000542\tbk.pem" />
+    <Content Include="certificates\597020000545\597020000545.pfx" />
+    <Content Include="certificates\597020000545\tbk.pem" />
+    <Content Include="certificates\597020000546\597020000546.pfx" />
+    <Content Include="certificates\597020000546\tbk.pem" />
+    <Content Include="certificates\597020000547\597020000547.pfx" />
+    <Content Include="certificates\597020000547\tbk.pem" />
+    <Content Include="certificates\597020000548\597020000548.pfx" />
+    <Content Include="certificates\597020000548\tbk.pem" />
+    <Content Include="certificates\597020000584\597020000584.pfx" />
+    <Content Include="certificates\597020000584\tbk.pem" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\SQL\BDD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
