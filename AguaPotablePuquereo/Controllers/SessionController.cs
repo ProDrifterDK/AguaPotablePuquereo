@@ -14,7 +14,7 @@ namespace AguaPotablePuquereo.Controllers
     {
         // GET: Session
         #region Vistas
-        public ActionResult Deudas(string rut, string action, string token)
+        public ActionResult Deudas(string rut, string aaction, string token)
         {
             Cliente cliente = BDD.TBL_CLIENTE.Where(o => o.CLI_RUT == rut || o.CLI_CUENTA.ToString() == rut).ToList().Select(o => new Cliente
             {
@@ -61,10 +61,10 @@ namespace AguaPotablePuquereo.Controllers
             codes.Add("-7", "Excede l&iacute;mite diario por transacci&oacute;n");
             codes.Add("-8", "Rubro no autorizado");
 
-            if (action == "Deudas")
-                action = "result";
+            if (aaction == "Deudas")
+                aaction = "result";
 
-            switch (action)
+            switch (aaction)
             {
                 case "result":
                     /** Obtiene Información POST */
@@ -198,10 +198,10 @@ namespace AguaPotablePuquereo.Controllers
             string sessionId = random.Next(0, 1000).ToString();
 
             /** URL Final */
-            string urlReturn = "http://" + httpHost + "/Session/Deudas" + "?rut=" + rut + "&action=result";
+            string urlReturn = "http://" + httpHost + "/Session/Deudas" + "?rut=" + rut + "&aaction=result";
 
             /** URL Final */
-            string urlFinal = "http://" + httpHost + "/Session/Deudas" + "?rut=" + rut + "&action=end";
+            string urlFinal = "http://" + httpHost + "/Session/Deudas" + "?rut=" + rut + "&aaction=end";
 
             request.Add("amount", amount.ToString());
             request.Add("buyOrder", buyOrder.ToString());

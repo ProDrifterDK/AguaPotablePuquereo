@@ -18,6 +18,9 @@ namespace AguaPotablePuquereo.Models.SQL
         public string CAR_TOKEN { get; set; }
         public int CAR_MONTO { get; set; }
         public int CEST_ESTADO { get; set; }
+        public string CAR_CODIGO_AUTORIZACION { get; set; }
+        public string CAR_CODIGO_COMERCIO { get; set; }
+        public string CAR_ORDEN_COMPRA { get; set; }
     
         public virtual TBL_ESTADO_CARRO TBL_ESTADO_CARRO { get; set; }
     }
