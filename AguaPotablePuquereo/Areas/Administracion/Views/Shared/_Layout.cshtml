@@ -1,18 +1,18 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="~/Scripts/jquery-3.2.1.js"></script>
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    <script src="~/Scripts/materialize.js"></script>
-    <script src="~/Scripts/jquery.dataTables.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="~/Content/materialize.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="~/Scripts/Resyst.js"></script>
-    <title>@ViewBag.Title - Administración</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="~/Scripts/jquery-3.2.1.js"></script>
+	<script src="~/Scripts/modernizr-2.6.2.js"></script>
+	<script src="~/Scripts/materialize.js"></script>
+	<script src="~/Scripts/jquery.dataTables.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="~/Content/materialize.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+	<script src="~/Scripts/Resyst.js"></script>
+	<title>@ViewBag.Title - Administración</title>
 </head>
 <body>
 	<!-- Header -->
@@ -21,15 +21,36 @@
 			<div class="nav-wrapper">
 				<!-- Título y links: Desktop -->
 				<a class="brand-logo center hide-on-med-and-down">Agua Potable Puquereo</a>
-				<ul id="nav-mobile" class="left hide-on-med-and-down"></ul>
-				<ul id="nav-mobile" class=" right hide-on-med-and-down">
-					<li><a href=@Url.Action("Logout", "Login")>Salir</a></li>
+				<ul id="nav-mobile" class="blue accent-2 left hide-on-med-and-down">
+					@if (Request.Url.ToString().Contains("EditarAcercaDe")) {
+						<li><a href="@Url.Action("Index", "Administrador")">Inicio</a></li>
+					}
+					else if (Request.Url.ToString().Contains("MantencionCliente")) {
+
+					}
+					else {
+						<li><a href="@Url.Action("Index", "EditarAcercaDe")">Editar descripción de la página</a></li>
+
+					}
+				</ul>
+				<ul id="nav-mobile" class="red darken-1 right hide-on-med-and-down">
+					<li><a href="@Url.Action("Logout", "Login")">Salir</a></li>
 				</ul>
 				<!-- Título y links: Mobile -->
 				<a class="truncate brand-logo center hide-on-large-only">APR Puquereo</a>
 				<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only sideNavOpen"><i class="material-icons">menu</i></a>
 				<ul class="side-nav hide-on-large-only" id="mobile-demo">
-					<li><a href=@Url.Action("Logout", "Login") style="font-size: 18px">Salir</a></li>
+					@if (Request.Url.ToString().Contains("EditarAcercaDe")) {
+						<li><a style="font-size: 18px; color: #448aff" href="@Url.Action("Index", "Administrador")">Inicio</a></li>
+					}
+					else if (Request.Url.ToString().Contains("MantencionCliente")) {
+
+					}
+					else {
+						<li><a style="color: #448aff" href="@Url.Action("Index", "EditarAcercaDe")">Editar descripción de la página</a></li>
+
+					}
+					<li><a href="@Url.Action("Logout", "Login")" style="font-size: 18px; color: #e53935">Salir</a></li>
 				</ul>
 			</div>
 		</nav>
