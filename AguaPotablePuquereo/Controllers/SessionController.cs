@@ -51,14 +51,14 @@ namespace AguaPotablePuquereo.Controllers
             /** Crea Dictionary con codigos de resultado */
             Dictionary<string, string> codes = new Dictionary<string, string>();
 
-            codes.Add("0", "Transacci&oacute;n aprobada");
-            codes.Add("-1", "Rechazo de transacci&oacute;n");
-            codes.Add("-2", "Transacci&oacute;n debe reintentarse");
-            codes.Add("-3", "Error en transacci&oacute;n");
-            codes.Add("-4", "Rechazo de transacci&oacute;n");
+            codes.Add("0", "Transacción aprobada");
+            codes.Add("-1", "Rechazo de transacción");
+            codes.Add("-2", "Transacción debe reintentarse");
+            codes.Add("-3", "Error en transacción");
+            codes.Add("-4", "Rechazo de transacción");
             codes.Add("-5", "Rechazo por error de tasa");
-            codes.Add("-6", "Excede cupo m&aacute;ximo mensual");
-            codes.Add("-7", "Excede l&iacute;mite diario por transacci&oacute;n");
+            codes.Add("-6", "Excede cupo máximo mensual");
+            codes.Add("-7", "Excede límite diario por transacción");
             codes.Add("-8", "Rubro no autorizado");
 
             if (aaction == "Deudas")
@@ -151,14 +151,27 @@ namespace AguaPotablePuquereo.Controllers
                             BDD.TBL_DEUDA.Add(item);
                             BDD.Entry(item).State = System.Data.Entity.EntityState.Added;
                         }
+                        try
+                        {
+                            //var d = webpay.getNormalTransaction().acknowledgeTransaction(token);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger(ex);
+                            carro.CEST_ESTADO = 5;
+                            carro.CAS_ERROR = "Error al terminar el pago, itentelo de nuevo.";
+                            ViewBag.Mensaje = "Error al terminar el pago, itentelo de nuevo.";
+                            ViewBag.Error = true;
+
+                            return View(cliente);
+                        }
 
                         BDD.SaveChanges();
 
                         ViewBag.Error = false;
-                        ViewBag.Token = token;
-                        ViewBag.Url = "https://webpay3gint.transbank.cl/webpayserver/voucher.cgi";
 
-                        //var d = webpay.getNormalTransaction().acknowledgeTransaction(token);
+                        return Redirect(result.urlRedirection + "?token=" + token);
                     }
                     else
                     {
@@ -174,7 +187,6 @@ namespace AguaPotablePuquereo.Controllers
 
                         return View(cliente);
                     }
-
                     break;
                 case "end":
                     break;

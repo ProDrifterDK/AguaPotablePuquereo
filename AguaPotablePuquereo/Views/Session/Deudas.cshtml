@@ -25,7 +25,7 @@
 	<div id="pagar-button">
 		<button class="btn green accent-4" onclick="Pagar()">Pagar</button>
 	</div>
-    <p id="mensaje">
+    <p style="display:none" id="mensaje">
 
     </p>
 </div>
@@ -38,13 +38,20 @@
     $(document).ready(function () {
         CargarGrilla();
         if ('@ViewBag.Mensaje' != '') {
-            $('#mensaje').html('@ViewBag.Mensaje');
+            MostrarMensaje('@ViewBag.Mensaje');
         }
 
         if ('@ViewBag.Error' == 'False') {
             $('#formWebPay').submit();
         }
     })
+
+    function MostrarMensaje(mensaje) {
+        $('#mensaje').html('@ViewBag.Mensaje');
+        $('#mensaje').css('display', 'block');
+
+        $('#mensaje').addClass('red');
+    }
 
     function CargarGrilla() {
         $('#tabla-deuda').DataTable({
