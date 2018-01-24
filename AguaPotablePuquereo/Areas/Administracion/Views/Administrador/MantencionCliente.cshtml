@@ -1,5 +1,10 @@
 ﻿@model AguaPotablePuquereo.Areas.Administracion.Models.ModelCliente
-<h2>Mantencion Cliente</h2>
+
+@{
+	ViewBag.Title = "Mantención Cliente";
+}
+
+<h2>Mantención Cliente</h2>
 @using (Html.BeginForm("MantencionCliente", "Administrador", FormMethod.Post, new { id="form"}))
 {
     @Html.HiddenFor(o=> o.Id)
@@ -25,12 +30,12 @@
             <label for="Nombre">Cuenta</label>
         </div>
         <div>
-            <button type="submit" class="btn orange lighten-2" ><i class="material-icons">mode_save</i></button>
+            <button type="submit" class="btn green accent-4" >Guardar</button>
         </div>
     </div>
 }
 <hr />
-<h4>Deudas<a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">mode_add_box</i></a></h4>
+<h4>Deudas <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
 <div class="row">
     <div class="col s12">
         <table id="tabla-deuda" class="centered bordered">
