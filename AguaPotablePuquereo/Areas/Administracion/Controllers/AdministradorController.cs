@@ -78,7 +78,7 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
                     Nombre = o.CLI_COMPLETO,
                     Rut = o.CLI_RUT,
                     Cuenta = o.CLI_CUENTA,
-                    TotalDeuda = o.TBL_DEUDA.Select(p => p.DEU_DEUDA).Sum(),
+                    TotalDeuda = o.TBL_DEUDA.Where(p => p.PAG_ID == null).Select(p => p.DEU_DEUDA).Sum(),
                 }).ToList();
 
                 return JsonExito("", data);

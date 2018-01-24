@@ -78,20 +78,101 @@ namespace AguaPotablePuquereo.Controllers
 
                     transactionResultOutput result = webpay.getNormalTransaction().getTransactionResult(token);
 
-                    if (result.detailOutput[0].responseCode == 0)
-                    {
-                        ViewBag.Message = "Pago ACEPTADO por webpay (se deben guardar datos para mostrar voucher)";
-                        ViewBag.Error = false;
+                    var carro = BDD.TBL_CARRO_COMPRA.FirstOrDefault(o => o.CAR_TOKEN == token);
 
-                        ViewBag.AuthorizationCode = result.detailOutput[0].authorizationCode;
-                        ViewBag.CommerceCode = result.detailOutput[0].commerceCode;
-                        ViewBag.Amount = result.detailOutput[0].amount;
-                        ViewBag.BuyOrder = result.detailOutput[0].buyOrder;
+                    var listo = result.detailOutput[0].responseCode == 0;
+
+                    if (listo)
+                    {
+                        listo = carro.CAR_MONTO == result.detailOutput[0].amount;
+
+                        if (!listo)
+                        {
+                            carro.CEST_ESTADO = 5;
+                            carro.CAS_ERROR = "Pago RECHAZADO los montos difieren";
+                            ViewBag.Mensaje = "Pago RECHAZADO los montos difieren";
+                            ViewBag.Error = true;
+
+                            BDD.TBL_CARRO_COMPRA.Attach(carro);
+                            BDD.Entry(carro).State = System.Data.Entity.EntityState.Modified;
+
+                            BDD.SaveChanges();
+
+                            return View(cliente);
+                        }
+
+                        listo = carro.CAR_ORDEN_COMPRA == result.detailOutput[0].buyOrder;
+
+                        if (!listo)
+                        {
+                            carro.CEST_ESTADO = 5;
+                            carro.CAS_ERROR = "Pago RECHAZADO los orden de compra difieren";
+                            ViewBag.Mensaje = "Pago RECHAZADO los orden de compra difieren";
+                            ViewBag.Error = true;
+
+                            BDD.TBL_CARRO_COMPRA.Attach(carro);
+                            BDD.Entry(carro).State = System.Data.Entity.EntityState.Modified;
+
+                            BDD.SaveChanges();
+
+                            return View(cliente);
+                        }
+
+                        carro.CEST_ESTADO = 2;
+
+                        carro.CAR_CODIGO_AUTORIZACION = result.detailOutput[0].authorizationCode;
+                        carro.CAR_CODIGO_COMERCIO = result.detailOutput[0].commerceCode;
+
+
+                        BDD.TBL_CARRO_COMPRA.Attach(carro);
+                        BDD.Entry(carro).State = System.Data.Entity.EntityState.Modified;
+
+                        BDD.SaveChanges();
+
+                        var deudas = carro.TBL_DEUDA.ToList();
+
+                        var pago = new Models.SQL.TBL_PAGOS
+                        {
+                            CLI_ID = deudas[0]?.CLI_ID ?? 00,
+                            PAG_FECHA = DateTime.Now,
+                            PAG_MONTO = carro.CAR_MONTO ?? 0,
+                            PAG_VIGENCIA = true,
+                        };
+
+                        BDD.TBL_PAGOS.Add(pago);
+                        BDD.Entry(pago).State = System.Data.Entity.EntityState.Added;
+
+                        BDD.SaveChanges();
+
+                        foreach (var item in deudas)
+                        {
+                            item.PAG_ID = pago.PAG_ID;
+
+                            BDD.TBL_DEUDA.Add(item);
+                            BDD.Entry(item).State = System.Data.Entity.EntityState.Added;
+                        }
+
+                        BDD.SaveChanges();
+
+                        ViewBag.Error = false;
+                        ViewBag.Token = token;
+                        ViewBag.Url = "https://webpay3gint.transbank.cl/webpayserver/voucher.cgi";
+
+                        //var d = webpay.getNormalTransaction().acknowledgeTransaction(token);
                     }
                     else
                     {
-                        ViewBag.Message = "Pago RECHAZADO por webpay [Codigo]=> " + result.detailOutput[0].responseCode + " [Descripcion]=> " + codes[result.detailOutput[0].responseCode.ToString()];
+                        carro.CEST_ESTADO = 5;
+                        carro.CAS_ERROR = "Pago RECHAZADO por webpay [Codigo]=> " + result.detailOutput[0].responseCode + " [Descripcion]=> " + codes[result.detailOutput[0].responseCode.ToString()];
+                        ViewBag.Mensaje = "Pago RECHAZADO por webpay [Codigo]=> " + result.detailOutput[0].responseCode + " [Descripcion]=> " + codes[result.detailOutput[0].responseCode.ToString()];
                         ViewBag.Error = true;
+
+                        BDD.TBL_CARRO_COMPRA.Attach(carro);
+                        BDD.Entry(carro).State = System.Data.Entity.EntityState.Modified;
+
+                        BDD.SaveChanges();
+
+                        return View(cliente);
                     }
 
                     break;
@@ -114,7 +195,7 @@ namespace AguaPotablePuquereo.Controllers
         {
             try
             {
-                var data = BDD.TBL_DEUDA.Where(o => o.CLI_ID == CliId).ToList().Select(o => new
+                var data = BDD.TBL_DEUDA.Where(o => o.CLI_ID == CliId && o.PAG_ID == null).ToList().Select(o => new
                 {
                     Periodo = o.TBL_MES.MES_NOMBRE + " " +o.DEU_PERIODO_ANO,
                     Monto = o.DEU_DEUDA,
@@ -151,11 +232,33 @@ namespace AguaPotablePuquereo.Controllers
             }
             int deudaTotal = 0;
 
+            var carro = new Models.SQL.TBL_CARRO_COMPRA
+            {
+                CEST_ESTADO = 1,
+            };
+
+            BDD.TBL_CARRO_COMPRA.Add(carro);
+            BDD.Entry(carro).State = System.Data.Entity.EntityState.Added;
+
+            BDD.SaveChanges();
+
             foreach (var item in Deudas)
             {
                 var deuda = BDD.TBL_DEUDA.FirstOrDefault(o => o.DEU_ID == item);
+                deuda.CAR_ID = carro.CAR_ID;
+
+                BDD.TBL_DEUDA.Attach(deuda);
+                BDD.Entry(deuda).State = System.Data.Entity.EntityState.Modified;
+
                 deudaTotal += deuda.DEU_DEUDA;
             }
+
+            carro.CAR_MONTO = deudaTotal;
+
+            BDD.TBL_CARRO_COMPRA.Attach(carro);
+            BDD.Entry(carro).State = System.Data.Entity.EntityState.Modified;
+
+            BDD.SaveChanges();
 
             Configuration configuration = new Configuration();
             configuration.Environment = certificate["environment"];
@@ -192,10 +295,10 @@ namespace AguaPotablePuquereo.Controllers
             decimal amount = (decimal)deudaTotal;
 
             /** Orden de compra de la tienda */
-            buyOrder = random.Next(0, 1000).ToString();
+            buyOrder = carro.CAR_ID.ToString();
 
             /** (Opcional) Identificador de sesión, uso interno de comercio */
-            string sessionId = random.Next(0, 1000).ToString();
+            string sessionId = Session.SessionID;
 
             /** URL Final */
             string urlReturn = "http://" + httpHost + "/Session/Deudas" + "?rut=" + rut + "&aaction=result";
@@ -211,6 +314,17 @@ namespace AguaPotablePuquereo.Controllers
 
             /** Ejecutamos metodo initTransaction desde Libreria */
             wsInitTransactionOutput result = webpay.getNormalTransaction().initTransaction(amount, buyOrder, sessionId, urlReturn, urlFinal);
+
+            carro.CAR_TOKEN = result.token;
+            carro.CAR_ORDEN_COMPRA = buyOrder;
+            carro.CAR_SESSION_ID = sessionId;
+
+            BDD.TBL_CARRO_COMPRA.Attach(carro);
+            BDD.Entry(carro).State = System.Data.Entity.EntityState.Modified;
+
+            BDD.SaveChanges();
+
+            URLWEBPAY = result.url;
 
             if (result.token != null && result.token != "")
             {

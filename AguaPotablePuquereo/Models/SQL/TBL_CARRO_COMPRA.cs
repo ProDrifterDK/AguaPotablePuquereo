@@ -14,14 +14,24 @@ namespace AguaPotablePuquereo.Models.SQL
     
     public partial class TBL_CARRO_COMPRA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TBL_CARRO_COMPRA()
+        {
+            this.TBL_DEUDA = new HashSet<TBL_DEUDA>();
+        }
+    
         public int CAR_ID { get; set; }
         public string CAR_TOKEN { get; set; }
-        public int CAR_MONTO { get; set; }
+        public Nullable<int> CAR_MONTO { get; set; }
         public int CEST_ESTADO { get; set; }
         public string CAR_CODIGO_AUTORIZACION { get; set; }
         public string CAR_CODIGO_COMERCIO { get; set; }
         public string CAR_ORDEN_COMPRA { get; set; }
+        public string CAR_SESSION_ID { get; set; }
+        public string CAS_ERROR { get; set; }
     
         public virtual TBL_ESTADO_CARRO TBL_ESTADO_CARRO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_DEUDA> TBL_DEUDA { get; set; }
     }
 }

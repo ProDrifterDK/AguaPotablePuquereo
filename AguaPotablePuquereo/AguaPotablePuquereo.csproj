@@ -264,7 +264,6 @@
     <Content Include="Areas\Administracion\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administracion\Views\Login\Index.cshtml" />
     <Content Include="Areas\Administracion\Views\Administrador\Index.cshtml" />
-    <Content Include="Areas\Administracion\Views\Administrador\Cliente.cshtml" />
     <Content Include="Areas\Administracion\Views\Administrador\MantencionCliente.cshtml" />
     <Content Include="certificates\597020000541\597020000541.pfx" />
     <Content Include="certificates\597020000541\tbk.pem" />

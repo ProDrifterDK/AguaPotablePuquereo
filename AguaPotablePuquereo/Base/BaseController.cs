@@ -82,5 +82,7 @@ namespace AguaPotablePuquereo.Base
             }
             return validacion;
         }
+
+        public string URLWEBPAY = "";
     }
 }

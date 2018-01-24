@@ -26,8 +26,8 @@ namespace AguaPotablePuquereo.Models.SQL
         public System.DateTime PAG_FECHA { get; set; }
         public bool PAG_VIGENCIA { get; set; }
     
+        public virtual TBL_CLIENTE TBL_CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_DEUDA> TBL_DEUDA { get; set; }
-        public virtual TBL_CLIENTE TBL_CLIENTE { get; set; }
     }
 }

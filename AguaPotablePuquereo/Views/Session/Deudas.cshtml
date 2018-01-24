@@ -27,15 +27,19 @@
     </p>
 </div>
 
-<form id="formWebPay" method="post">
-    <input id="token" type="hidden" name="token_ws" />
+<form id="formWebPay" method="post" action="@ViewBag.Url">
+    <input id="token" type="hidden" name="token_ws" value="@ViewBag.Token" />
 </form>
 
 <script>
     $(document).ready(function () {
         CargarGrilla();
         if ('@ViewBag.Mensaje' != '') {
+            $('#mensaje').html('@ViewBag.Mensaje');
+        }
 
+        if ('@ViewBag.Error' == 'False') {
+            $('#formWebPay').submit();
         }
     })
 

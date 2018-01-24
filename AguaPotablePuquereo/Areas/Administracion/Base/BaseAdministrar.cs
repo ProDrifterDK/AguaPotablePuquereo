@@ -7,6 +7,5 @@ namespace AguaPotablePuquereo.Areas.Administracion.Base
 {
     public class BaseAdministrar : AguaPotablePuquereo.Base.BaseController
     {
-
     }
 }

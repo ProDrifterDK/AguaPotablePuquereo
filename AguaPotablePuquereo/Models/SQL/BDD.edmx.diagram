@@ -5,20 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b9d9f2b8df9042fba85bdb4d30e842b6" Name="Diagram1">
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_DEUDA" Width="1.5" PointX="5.25" PointY="4.625" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_ESTADO_CARRO" Width="1.5" PointX="2.75" PointY="1" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_LOG" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_MES" Width="1.5" PointX="3" PointY="4.5" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_PAGOS" Width="1.5" PointX="3" PointY="7.25" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_USUARIO" Width="1.5" PointX="7.75" PointY="3.75" />
-        <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES" />
-        <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_PAGOS" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_CARRO_COMPRA" Width="1.5" PointX="4.875" PointY="0.5" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_CLIENTE" Width="1.5" PointX="0.875" PointY="2.875" />
-        <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_CLIENTE" Width="1.5" PointX="0.75" PointY="3" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_DEUDA" Width="1.5" PointX="5.25" PointY="4.75" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_ESTADO_CARRO" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_LOG" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_MES" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_PAGOS" Width="1.5" PointX="3" PointY="7.5" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_USUARIO" Width="1.5" PointX="4.75" PointY="0.75" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CLIENTE" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_PAGOS_TBL_CLIENTE" />
-      </Diagram>
+        <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES" />
+        <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_PAGOS" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_CARRO_COMPRA" Width="1.5" PointX="3" PointY="11.125" />
+        <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO" />
+        <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CARRO_COMPRA" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

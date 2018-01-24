@@ -23,6 +23,7 @@
                     <th>Nombre</th>
                     <th>Rut</th>
                     <th>Cuenta</th>
+                    <th>Total Deudas</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -40,6 +41,7 @@
             { data: "Nombre" },
             { data: "Rut" },
             { data: "Cuenta" },
+            { data: "TotalDeuda" },
             {
                 'render': function (dat, type, full, meta) {
                     return '<a href="javascript:void()" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">mode_edit</i></a>';
