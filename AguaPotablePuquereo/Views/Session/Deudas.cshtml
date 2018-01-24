@@ -10,18 +10,21 @@
 <!-- Contenido generado automáticamente -->
 
 <div class="container ">
-    <table id="tabla-deuda" class="centered bordered">
-        <thead>
-            <tr>
-                <th style="padding-right:8px"><input type="checkbox" id="test0"/><label for="test0"></label></th>
-                <th style="padding-right:8px">Periodo</th>
-                <th style="padding-right:8px">Monto</th>
-                <th style="padding-right:8px">Vence</th>
-            </tr>
-        </thead>
-    </table>
-    <button class="btn" onclick="Pagar()">Pagar</button>
-
+	<div>
+		<table id="tabla-deuda" class="centered bordered">
+			<thead>
+				<tr>
+					<th style="padding-right:8px"><input type="checkbox" id="test0" /><label for="test0"></label></th>
+					<th style="padding-right:8px">Periodo</th>
+					<th style="padding-right:8px">Monto</th>
+					<th style="padding-right:8px">Vence</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div id="pagar-button">
+		<button class="btn" onclick="Pagar()">Pagar</button>
+	</div>
     <p id="mensaje">
 
     </p>
