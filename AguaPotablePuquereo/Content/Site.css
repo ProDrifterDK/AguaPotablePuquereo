@@ -34,7 +34,11 @@ body {
 }
 
 /* Administración: Login */
-
 #ir-al-inicio {
 	margin-bottom: 1em;
+}
+
+/* Administración: Vista de usuario */
+#pagar-button {
+	margin-top: 2em;
 }
