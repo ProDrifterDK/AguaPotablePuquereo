@@ -4,51 +4,76 @@
 	ViewBag.Title = "Mantención Cliente";
 }
 
-<h2>Mantención Cliente</h2>
-@using (Html.BeginForm("MantencionCliente", "Administrador", FormMethod.Post, new { id="form"}))
-{
-    @Html.HiddenFor(o=> o.Id)
-    <div class="row">
-        <div class="col l4 m6 s12 input-field">
-            @Html.TextBoxFor(o => o.Nombre, new { @class = "validate", @type = "text" })
-            <label for="Nombre">Nombre</label>
-        </div>
-        <div class="col l4 m6 s12 input-field">
-            @Html.TextBoxFor(o => o.ApellidoP, new { @class = "validate", @type = "text" })
-            <label for="ApellidoP">Apellido Paterno</label>
-        </div>
-        <div class="col l4 m6 s12 input-field">
-            @Html.TextBoxFor(o => o.ApellidoM, new { @class = "validate", @type = "text" })
-            <label for="Nombre">Apellido Materno</label>
-        </div>
-        <div class="col l4 m6 s12 input-field">
-            @Html.TextBoxFor(o => o.Rut, new { @class = "validate", @type = "text" })
-            <label for="Nombre">Rut</label>
-        </div>
-        <div class="col l4 m6 s12 input-field">
-            @Html.TextBoxFor(o => o.Cuenta, new { @class = "validate", @type = "text" })
-            <label for="Nombre">Cuenta</label>
-        </div>
-        <div>
-            <button type="submit" class="btn green accent-4" >Guardar</button>
-        </div>
-    </div>
-}
-<hr />
-<h4>Deudas <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
-<div class="row">
-    <div class="col s12">
-        <table id="tabla-deuda" class="centered bordered">
-            <thead>
-                <tr>
-                    <th style="padding-right:8px"><input type="checkbox" id="test0" /><label for="test0"></label></th>
-                    <th style="padding-right:8px">Periodo</th>
-                    <th style="padding-right:8px">Monto</th>
-                    <th style="padding-right:8px">Vence</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+<div class="container">
+	<div class="row">
+		<!-- Volver: Desktop -->
+		<div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: left">
+			<a class="btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
+		</div>
+		<!-- Título: Desktop -->
+		<div class="col s12 m4 l6 hide-on-med-and-down">
+			<h3>Mantención Cliente</h3>
+		</div>
+		<!-- Título: Mobile -->
+		<div class="col s12 m4 l6 hide-on-large-only">
+			<h4>Mantención Cliente</h4>
+		</div>
+		<!-- Volver: Mobile -->
+		<div class="col s6 m4 l3 hide-on-med-and-up" style="margin-bottom: 1em; text-align: left">
+			<a class="btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
+		</div>
+		<!-- Guardar: Mobile -->
+		<div class="col s6 m4 l3 hide-on-med-and-up" style="text-align: right">
+			<button type="submit" class="btn green accent-4">Guardar</button>
+		</div>
+		<!-- Guardar: Desktop -->
+		<div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: right">
+			<button type="submit" class="btn green accent-4">Guardar</button>
+		</div>
+	</div>
+	@using (Html.BeginForm("MantencionCliente", "Administrador", FormMethod.Post, new {
+		id = "form"
+	})) {
+		@Html.HiddenFor(o => o.Id)
+		<div class="row">
+			<div class="col l4 m6 s12 input-field">
+				@Html.TextBoxFor(o => o.Nombre, new { @class = "validate", @type = "text" })
+				<label for="Nombre">Nombre</label>
+			</div>
+			<div class="col l4 m6 s12 input-field">
+				@Html.TextBoxFor(o => o.ApellidoP, new { @class = "validate", @type = "text" })
+				<label for="ApellidoP">Apellido Paterno</label>
+			</div>
+			<div class="col l4 m6 s12 input-field">
+				@Html.TextBoxFor(o => o.ApellidoM, new { @class = "validate", @type = "text" })
+				<label for="Nombre">Apellido Materno</label>
+			</div>
+			<div class="col l4 m6 s12 input-field">
+				@Html.TextBoxFor(o => o.Rut, new { @class = "validate", @type = "text" })
+				<label for="Nombre">Rut</label>
+			</div>
+			<div class="col l4 m6 s12 input-field">
+				@Html.TextBoxFor(o => o.Cuenta, new { @class = "validate", @type = "text" })
+				<label for="Nombre">Cuenta</label>
+			</div>
+		</div>
+	}
+	<hr />
+	<h4>Deudas <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
+	<div class="row">
+		<div class="col s12">
+			<table id="tabla-deuda" class="centered bordered">
+				<thead>
+					<tr>
+						<th style="padding-right:8px"><input type="checkbox" id="test0" /><label for="test0"></label></th>
+						<th style="padding-right:8px">Periodo</th>
+						<th style="padding-right:8px">Monto</th>
+						<th style="padding-right:8px">Vence</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
 </div>
 
 <script>

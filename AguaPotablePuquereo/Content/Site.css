@@ -33,6 +33,10 @@ body {
 	text-align: center;
 }
 
+#info-desktop-admin {
+	text-align: center;
+}
+
 /* Administración: Login */
 #ir-al-inicio {
 	margin-bottom: 1em;
