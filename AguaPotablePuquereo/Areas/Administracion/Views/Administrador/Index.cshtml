@@ -1,9 +1,25 @@
 ﻿@{
 	ViewBag.Title = "Inicio";
 }
-
-<h4>Pagos sin registrar</h4>
-<div class="container row">
+<!-- Loader -->
+<div id="loader" class="container">
+	<h4>Cargando...</h4>
+	<div class="preloader-wrapper big active">
+		<div class="spinner-layer spinner-blue-only">
+			<div class="circle-clipper left">
+				<div class="circle"></div>
+			</div><div class="gap-patch">
+				<div class="circle"></div>
+			</div><div class="circle-clipper right">
+				<div class="circle"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Contenido -->
+<div id="content" style="display: none;">
+	<h4>Pagos sin registrar</h4>
+	<div class="container row">
 		<table id="tablaPagos" style="border:1px solid #d0d0d0" class="centered table bordered striped">
 			<thead>
 				<tr>
@@ -15,29 +31,39 @@
 				</tr>
 			</thead>
 		</table>
+	</div>
+	<h4>Clientes <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
+	<div class="container row">
+		<table id="tablaClientes" style="border:1px solid #d0d0d0" class="centered table bordered striped">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Rut</th>
+					<th>Cuenta</th>
+					<th>Total Deudas</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
 </div>
-<h4>Clientes <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
-<div class="container row">
-        <table id="tablaClientes" style="border:1px solid #d0d0d0" class="centered table bordered striped">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Rut</th>
-                    <th>Cuenta</th>
-                    <th>Total Deudas</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-        </table>
-</div>
-
 <script>
+	function pageLoading(status) {
+		if (status == 'true') {
+			$("#loader").css('display', 'block');
+			$("#content").css('display', 'none');
+		}
+		else {
+			$("#loader").css('display', 'none');
+			$("#content").css('display', 'block');
+		}
+	}
 	// Segunda tabla
     $('#tablaClientes').DataTable({
         bFilter: false,
         bInfo: false,
         bPaginate: false,
-        ordering: false,
+		ordering: false,
         "columns": [
             { data: "Nombre" },
             { data: "Rut" },
@@ -52,8 +78,12 @@
         "ajax": {
             "url": "@Url.Action("GetListaCliente")",
             "type": "POST",
-            "dataType": "json"
-        },
+			"dataType": "json",
+			"dataSrc": function (json) {
+				pageLoading("false");
+				return json.data;
+			}
+		},
     });
 
 	// Primera Tabla

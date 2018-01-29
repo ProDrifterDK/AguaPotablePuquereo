@@ -20,7 +20,7 @@
 		<nav class="top-nav light-blue darken-4">
 			<div class="nav-wrapper">
 				<!-- Título y links: Desktop -->
-				<a class="brand-logo center hide-on-med-and-down">Agua Potable Puquereo</a>
+				<a href="#" class="brand-logo center hide-on-med-and-down"><img src="~/Resources/Images/logo.png" style="max-height:58px" /></a>
 				<ul id="nav-mobile" class="blue accent-2 left hide-on-med-and-down">
 					@if (Request.Url.ToString().Contains("EditarAcercaDe")) {
 						<li><a href="@Url.Action("Index", "Administrador")">Inicio</a></li>
@@ -37,7 +37,7 @@
 					<li><a href="@Url.Action("Logout", "Login")">Salir</a></li>
 				</ul>
 				<!-- Título y links: Mobile -->
-				<a class="truncate brand-logo center hide-on-large-only">APR Puquereo</a>
+				<a href="#" class="brand-logo center hide-on-large-only"><img src="~/Resources/Images/logo.png" style="max-height:56px" /></a>
 				<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only sideNavOpen"><i class="material-icons">menu</i></a>
 				<ul class="side-nav hide-on-large-only" id="mobile-demo">
 					@if (Request.Url.ToString().Contains("EditarAcercaDe")) {
