@@ -1,23 +1,8 @@
 ﻿@{
 	ViewBag.Title = "Página Principal";
 }
-<!-- Loader -->
-<div id="loader" class="container valign-wrapper">
-	<h4>Cargando...</h4>
-	<div class="preloader-wrapper big active">
-		<div class="spinner-layer spinner-blue-only">
-			<div class="circle-clipper left">
-				<div class="circle"></div>
-			</div><div class="gap-patch">
-				<div class="circle"></div>
-			</div><div class="circle-clipper right">
-				<div class="circle"></div>
-			</div>
-		</div>
-	</div>
-</div>
 <!-- Contenido -->
-<div id="content" style="display: none;">
+<div id="content">
 	<!-- Introducción -->
 	<div id="intro" class="container">
 		<h3>Aquí usted puede ver y pagar sus deudas.</h3>
@@ -42,19 +27,6 @@
 </div>
 
 <script>
-	function pageLoading(status) {
-		if (status == 'true') {
-			$("#loader").css('display', 'block');
-			$("#content").css('display', 'none');
-		}
-		else {
-			$("#loader").css('display', 'none');
-			$("#content").css('display', 'block');
-		}
-	}
-
-	pageLoading(false);
-
     var rut = "";
     function Deudas() {
         rut = $('#rut-input').val();
