@@ -33,5 +33,6 @@ namespace AguaPotablePuquereo.Models.SQL
         public virtual DbSet<TBL_MES> TBL_MES { get; set; }
         public virtual DbSet<TBL_PAGOS> TBL_PAGOS { get; set; }
         public virtual DbSet<TBL_USUARIO> TBL_USUARIO { get; set; }
+        public virtual DbSet<TBL_PAGINAS_ADMINISTRABLES> TBL_PAGINAS_ADMINISTRABLES { get; set; }
     }
 }

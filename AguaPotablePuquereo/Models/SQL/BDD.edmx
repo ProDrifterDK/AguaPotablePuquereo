@@ -70,6 +70,13 @@
           <Property Name="MES_ID" Type="int" Nullable="false" />
           <Property Name="MES_NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="TBL_PAGINAS_ADMINISTRABLES">
+          <Key>
+            <PropertyRef Name="PADM_ID" />
+          </Key>
+          <Property Name="PADM_ID" Type="int" Nullable="false" />
+          <Property Name="PADM_HTML_TEXT" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="TBL_PAGOS">
           <Key>
             <PropertyRef Name="PAG_ID" />
@@ -166,6 +173,7 @@
           <EntitySet Name="TBL_ESTADO_CARRO" EntityType="Self.TBL_ESTADO_CARRO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_LOG" EntityType="Self.TBL_LOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_MES" EntityType="Self.TBL_MES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_PAGINAS_ADMINISTRABLES" EntityType="Self.TBL_PAGINAS_ADMINISTRABLES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_PAGOS" EntityType="Self.TBL_PAGOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_USUARIO" EntityType="Self.TBL_USUARIO" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO" Association="Self.FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO">
@@ -230,6 +238,7 @@
             <End Role="TBL_PAGOS" EntitySet="TBL_PAGOS" />
             <End Role="TBL_DEUDA" EntitySet="TBL_DEUDA" />
           </AssociationSet>
+          <EntitySet Name="TBL_PAGINAS_ADMINISTRABLES" EntityType="BDD_PRUEBAModel.TBL_PAGINAS_ADMINISTRABLES" />
         </EntityContainer>
         <EntityType Name="TBL_CARRO_COMPRA">
           <Key>
@@ -397,6 +406,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TBL_PAGINAS_ADMINISTRABLES">
+          <Key>
+            <PropertyRef Name="PADM_ID" />
+          </Key>
+          <Property Name="PADM_ID" Type="Int32" Nullable="false" />
+          <Property Name="PADM_HTML_TEXT" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -490,6 +506,14 @@
               <MappingFragment StoreEntitySet="TBL_USUARIO">
                 <ScalarProperty Name="USU_CONTRASEÑA" ColumnName="USU_CONTRASEÑA" />
                 <ScalarProperty Name="USU_USUARIO" ColumnName="USU_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_PAGINAS_ADMINISTRABLES">
+            <EntityTypeMapping TypeName="BDD_PRUEBAModel.TBL_PAGINAS_ADMINISTRABLES">
+              <MappingFragment StoreEntitySet="TBL_PAGINAS_ADMINISTRABLES">
+                <ScalarProperty Name="PADM_HTML_TEXT" ColumnName="PADM_HTML_TEXT" />
+                <ScalarProperty Name="PADM_ID" ColumnName="PADM_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

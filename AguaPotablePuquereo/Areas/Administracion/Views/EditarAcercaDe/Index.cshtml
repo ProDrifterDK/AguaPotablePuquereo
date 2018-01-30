@@ -1,10 +1,29 @@
-﻿@{
+﻿@model AguaPotablePuquereo.Models.SQL.TBL_PAGINAS_ADMINISTRABLES
+@{
 	ViewBag.Title = "Editar Acerca De";
 }
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 
 <div class="container">
 	<div class="row">
-		<p>TESTING</p>
+		<div class="col s12">
+            <form method="post">
+                @Html.HiddenFor(o=> o.PADM_ID)
+                @Html.TextAreaFor(o=>o.PADM_HTML_TEXT, new { id= "froala-editor" })
+                <input type="submit" class="btn" value="Guardar"/>
+            </form>
+        </div>
 	</div>
 </div>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>
+<script>
+    $(function () {
+        $('textarea#froala-editor').froalaEditor()
+    });
+</script>

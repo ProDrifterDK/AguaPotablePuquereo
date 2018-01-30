@@ -19,6 +19,7 @@
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_PAGOS_TBL_CLIENTE" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_PAGOS" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_PAGINAS_ADMINISTRABLES" Width="1.5" PointX="7.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
