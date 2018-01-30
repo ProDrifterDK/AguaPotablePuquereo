@@ -173,6 +173,7 @@
     <Compile Include="Areas\Administracion\AdministracionAreaRegistration.cs" />
     <Compile Include="Areas\Administracion\Base\BaseAdministrar.cs" />
     <Compile Include="Areas\Administracion\Controllers\AdministradorController.cs" />
+    <Compile Include="Areas\Administracion\Controllers\EditarAcercaDeController.cs" />
     <Compile Include="Areas\Administracion\Controllers\LoginController.cs" />
     <Compile Include="Areas\Administracion\Models\ModelCliente.cs" />
     <Compile Include="Base\BaseController.cs" />
@@ -234,6 +235,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jquery.dataTables.min.css" />
+    <Content Include="Resources\Images\gota.png" />
+    <Content Include="Resources\Images\logo.png" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Content\materialize.css" />
     <Content Include="Content\materialize.min.css" />
@@ -279,6 +282,7 @@
     <Content Include="certificates\597020000548\tbk.pem" />
     <Content Include="certificates\597020000584\597020000584.pfx" />
     <Content Include="certificates\597020000584\tbk.pem" />
+    <Content Include="Areas\Administracion\Views\EditarAcercaDe\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\SQL\BDD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

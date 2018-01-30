@@ -1,59 +1,101 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="~/Scripts/jquery-3.2.1.js"></script>
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    <script src="~/Scripts/materialize.js"></script>
-    <script src="~/Scripts/jquery.dataTables.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="~/Content/materialize.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="~/Scripts/Resyst.js"></script>
-    <title>@ViewBag.Title - Administración</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="~/Scripts/jquery-3.2.1.js"></script>
+	<script src="~/Scripts/modernizr-2.6.2.js"></script>
+	<script src="~/Scripts/materialize.js"></script>
+	<script src="~/Scripts/jquery.dataTables.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="~/Content/materialize.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+	<script src="~/Scripts/Resyst.js"></script>
+	<title>@ViewBag.Title - Administración</title>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="top-nav light-blue darken-4">
-            <div class="nav-wrapper">
-					<!-- Título y links: Desktop -->
-                <a class="brand-logo center hide-on-med-and-down">Agua Potable Puquereo</a>
-                <ul id="nav-mobile" class="left hide-on-med-and-down">
-                </ul>
-                <ul id="nav-mobile" class=" right hide-on-med-and-down">
-                    <li><a href=@Url.Action("Logout", "Login")>Salir</a></li>
-                </ul>
-                <!-- Título y links: Mobile -->
-                <a class="truncate brand-logo center hide-on-large-only">APR Puquereo</a>
-                <a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only sideNavOpen"><i class="material-icons">menu</i></a>
-                <ul class="side-nav hide-on-large-only" id="mobile-demo">
-                    <li><a href=@Url.Action("Logout", "Login")>Salir</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+	<!-- Header -->
+	<header>
+		<nav class="top-nav light-blue darken-4">
+			<div class="nav-wrapper">
+				<!-- Título y links: Desktop -->
+				<a href="#" class="brand-logo center hide-on-med-and-down"><img src="~/Resources/Images/logo.png" style="max-height:58px" /></a>
+				<ul id="nav-mobile" class="blue accent-2 left hide-on-med-and-down">
+					@if (Request.Url.ToString().Contains("EditarAcercaDe")) {
+						<li><a href="@Url.Action("Index", "Administrador")">Inicio</a></li>
+					}
+					else if (Request.Url.ToString().Contains("MantencionCliente")) {
 
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+					}
+					else {
+						<li><a href="@Url.Action("Index", "EditarAcercaDe")">Editar descripción de la página</a></li>
 
-    <script>
-        $(document).ready(function () {
-            $(".sideNavOpen").sideNav();
-        });
-        Number.prototype.formatMoney = function (c, d, t) {
-            var n = this,
-                c = isNaN(c = Math.abs(c)) ? 2 : c,
-                d = d == undefined ? "." : d,
-                t = t == undefined ? "," : t,
-                s = n < 0 ? "-" : "",
-                i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
-                j = (j = i.length) > 3 ? j % 3 : 0;
-            return '$' + s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-        };
-    </script>
+					}
+				</ul>
+				<ul id="nav-mobile" class="red darken-1 right hide-on-med-and-down">
+					<li><a href="@Url.Action("Logout", "Login")">Salir</a></li>
+				</ul>
+				<!-- Título y links: Mobile -->
+				<a href="#" class="brand-logo center hide-on-large-only"><img src="~/Resources/Images/logo.png" style="max-height:56px" /></a>
+				<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only sideNavOpen"><i class="material-icons">menu</i></a>
+				<ul class="side-nav hide-on-large-only" id="mobile-demo">
+					@if (Request.Url.ToString().Contains("EditarAcercaDe")) {
+						<li><a style="font-size: 18px; color: #448aff" href="@Url.Action("Index", "Administrador")">Inicio</a></li>
+					}
+					else if (Request.Url.ToString().Contains("MantencionCliente")) {
+
+					}
+					else {
+						<li><a style="color: #448aff" href="@Url.Action("Index", "EditarAcercaDe")">Editar descripción de la página</a></li>
+
+					}
+					<li><a href="@Url.Action("Logout", "Login")" style="font-size: 18px; color: #e53935">Salir</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<div id="main">
+		@RenderBody()
+	</div>
+	<!-- Footer -->
+	<footer class="page-footer blue darken-4">
+		<div class="container">
+			<div class="row">
+				<div id="info" class="show-on-medium-and-up col s12 m12 l12">
+					<!-- Información: Desktop -->
+					<div id="info-desktop-admin" class="hide-on-small-only">
+						<h5 class="white-text">Administración APR</h5>
+					</div>
+					<!-- Información: Mobile -->
+					<div id="info-mobile" class="hide-on-med-and-up">
+						<h5 class="white-text">Administración APR</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Copyright -->
+		<div class="center footer-copyright">
+			<div class="container">
+				Hecho por el equipo de <a target="_blank" href="http://resyst.loteriagg.com/" style="text-decoration: none">Resyst Softwares</a>.
+			</div>
+		</div>
+	</footer>
+
+	<script>
+		$(document).ready(function () {
+			$(".sideNavOpen").sideNav();
+		});
+		Number.prototype.formatMoney = function (c, d, t) {
+			var n = this,
+				c = isNaN(c = Math.abs(c)) ? 2 : c,
+				d = d == undefined ? "." : d,
+				t = t == undefined ? "," : t,
+				s = n < 0 ? "-" : "",
+				i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+				j = (j = i.length) > 3 ? j % 3 : 0;
+			return '$' + s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+		};
+	</script>
 </body>
 </html>

@@ -1,40 +1,69 @@
 ﻿@model AguaPotablePuquereo.Models.Sitio.Cliente
 
 @{
-    ViewBag.Title = "Deudas";
+	ViewBag.Title = "Deudas";
 }
-<!-- Header -->
-<div>
-    <h4>¡Bienvenido @Model.Completo!</h4>
+<!-- Loader -->
+<div id="loader" class="container">
+	<h4>Cargando...</h4>
+	<div class="preloader-wrapper big active">
+		<div class="spinner-layer spinner-blue-only">
+			<div class="circle-clipper left">
+				<div class="circle"></div>
+			</div><div class="gap-patch">
+				<div class="circle"></div>
+			</div><div class="circle-clipper right">
+				<div class="circle"></div>
+			</div>
+		</div>
+	</div>
 </div>
-<!-- Contenido generado automáticamente -->
-
-<div class="container ">
+<!-- Contenido -->
+<div id="content" style="display: none;">
+	<!-- Header -->
 	<div>
-		<table id="tabla-deuda" class="centered bordered">
-			<thead>
-				<tr>
-					<th style="padding-right:8px"><input type="checkbox" id="test0" /><label for="test0"></label></th>
-					<th style="padding-right:8px">Periodo</th>
-					<th style="padding-right:8px">Monto</th>
-					<th style="padding-right:8px">Vence</th>
-				</tr>
-			</thead>
-		</table>
+		<h4>¡Bienvenido @Model.Completo!</h4>
 	</div>
-	<div id="pagar-button">
-		<button class="btn green accent-4" onclick="Pagar()">Pagar</button>
-	</div>
-    <p style="display:none" id="mensaje">
+	<!-- Contenido generado automáticamente -->
 
-    </p>
+	<div class="container ">
+		<div>
+			<table id="tabla-deuda" class="centered table bordered striped">
+				<thead>
+					<tr>
+						<th style="padding-right:8px"><input type="checkbox" id="test0" /><label for="test0"></label></th>
+						<th style="padding-right:8px">Periodo</th>
+						<th style="padding-right:8px">Monto</th>
+						<th style="padding-right:8px">Vence</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div id="pagar-button">
+			<button class="z-depth-3 btn green accent-4" onclick="Pagar()">Pagar</button>
+		</div>
+		<p style="display:none" id="mensaje">
+
+		</p>
+	</div>
 </div>
 
 <form id="formWebPay" method="post" action="@ViewBag.Url">
-    <input id="token" type="hidden" name="token_ws" value="@ViewBag.Token" />
+	<input id="token" type="hidden" name="token_ws" value="@ViewBag.Token" />
 </form>
 
 <script>
+	function pageLoading(status) {
+		if (status == 'true') {
+			$("#loader").css('display', 'block');
+			$("#content").css('display', 'none');
+		}
+		else {
+			$("#loader").css('display', 'none');
+			$("#content").css('display', 'block');
+		}
+	}
+
     $(document).ready(function () {
         CargarGrilla();
         if ('@ViewBag.Mensaje' != '') {
@@ -43,7 +72,8 @@
 
         if ('@ViewBag.Error' == 'False') {
             $('#formWebPay').submit();
-        }
+		}
+		pageLoading(false);
     })
 
     function MostrarMensaje(mensaje, error) {

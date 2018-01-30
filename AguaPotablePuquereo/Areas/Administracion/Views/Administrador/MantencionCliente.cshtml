@@ -3,55 +3,142 @@
 @{
 	ViewBag.Title = "Mantención Cliente";
 }
-
-<h2>Mantención Cliente</h2>
-@using (Html.BeginForm("MantencionCliente", "Administrador", FormMethod.Post, new { id="form"}))
-{
-    @Html.HiddenFor(o=> o.Id)
-    <div class="row">
-        <div class="col l4 m6 s12 input-field">
-            @Html.TextBoxFor(o => o.Nombre, new { @class = "validate", @type = "text" })
-            <label for="Nombre">Nombre</label>
-        </div>
-        <div class="col l4 m6 s12 input-field">
-            @Html.TextBoxFor(o => o.ApellidoP, new { @class = "validate", @type = "text" })
-            <label for="ApellidoP">Apellido Paterno</label>
-        </div>
-        <div class="col l4 m6 s12 input-field">
-            @Html.TextBoxFor(o => o.ApellidoM, new { @class = "validate", @type = "text" })
-            <label for="Nombre">Apellido Materno</label>
-        </div>
-        <div class="col l4 m6 s12 input-field">
-            @Html.TextBoxFor(o => o.Rut, new { @class = "validate", @type = "text" })
-            <label for="Nombre">Rut</label>
-        </div>
-        <div class="col l4 m6 s12 input-field">
-            @Html.TextBoxFor(o => o.Cuenta, new { @class = "validate", @type = "text" })
-            <label for="Nombre">Cuenta</label>
-        </div>
-        <div>
-            <button type="submit" class="btn green accent-4" >Guardar</button>
-        </div>
-    </div>
-}
-<hr />
-<h4>Deudas <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
-<div class="row">
-    <div class="col s12">
-        <table id="tabla-deuda" class="centered bordered">
-            <thead>
-                <tr>
-                    <th style="padding-right:8px"><input type="checkbox" id="test0" /><label for="test0"></label></th>
-                    <th style="padding-right:8px">Periodo</th>
-                    <th style="padding-right:8px">Monto</th>
-                    <th style="padding-right:8px">Vence</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+<!-- Loader -->
+<div id="loader" class="container">
+	<h4>Cargando...</h4>
+	<div class="preloader-wrapper big active">
+		<div class="spinner-layer spinner-blue-only">
+			<div class="circle-clipper left">
+				<div class="circle"></div>
+			</div><div class="gap-patch">
+				<div class="circle"></div>
+			</div><div class="circle-clipper right">
+				<div class="circle"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="content" class="container" style="display: none;">
+	<div id="modal-placebo" class="modal">
+		<div class="container modal-content">
+			<div class="input-field">
+				<input id="monto" type="text">
+				<label for="first_name">Monto</label>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Guardar</a>
+		</div>
+	</div>
+	<div class="row">
+		<!-- Volver: Desktop -->
+		<div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: left">
+			<a class="z-depth-3 btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
+		</div>
+		<!-- Título: Desktop -->
+		<div class="col s12 m4 l6 hide-on-med-and-down">
+			<h3>Mantención Cliente</h3>
+		</div>
+		<!-- Título: Mobile -->
+		<div class="col s12 m4 l6 hide-on-large-only">
+			<h4>Mantención Cliente</h4>
+		</div>
+		<!-- Volver: Mobile -->
+		<div class="col s6 m4 l3 hide-on-med-and-up" style="margin-bottom: 1em; text-align: left">
+			<a class="z-depth-3 btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
+		</div>
+		<!-- Guardar: Mobile -->
+		<div class="col s6 m4 l3 hide-on-med-and-up" style="text-align: right">
+			<button type="submit" class="z-depth-3 btn green accent-4">Guardar</button>
+		</div>
+		<!-- Guardar: Desktop -->
+		<div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: right">
+			<button type="submit" class="z-depth-3 btn green accent-4">Guardar</button>
+		</div>
+	</div>
+	@using (Html.BeginForm("MantencionCliente", "Administrador", FormMethod.Post, new {
+		id = "form"
+	})) {
+		@Html.HiddenFor(o => o.Id)
+		<div class="row">
+			<div class="col l4 m6 s12 input-field">
+				@Html.TextBoxFor(o => o.Nombre, new { @type = "text" })
+				<label for="Nombre">Nombre</label>
+			</div>
+			<div class="col l4 m6 s12 input-field">
+				@Html.TextBoxFor(o => o.ApellidoP, new { @type = "text" })
+				<label for="ApellidoP">Apellido Paterno</label>
+			</div>
+			<div class="col l4 m6 s12 input-field">
+				@Html.TextBoxFor(o => o.ApellidoM, new { @type = "text" })
+				<label for="Nombre">Apellido Materno</label>
+			</div>
+			<div class="col l4 m6 s12 input-field">
+				@Html.TextBoxFor(o => o.Rut, new { @type = "text" })
+				<label for="Nombre">Rut</label>
+			</div>
+			<div class="col l4 m6 s12 input-field">
+				@Html.TextBoxFor(o => o.Cuenta, new { @type = "text" })
+				<label for="Nombre">Cuenta</label>
+			</div>
+			<div class="col l4 m6 s12 input-field">
+				@*Html.TextBoxFor(o => o.Multa, new { @type = "text" })*@
+				<!-- Placebo -->
+				<input id="placebo" type="text">
+				<label for="Nombre">Editar multa</label>
+			</div>
+		</div>
+	}
+	<hr />
+	<h4>Deudas impagas <a href="javascript:void()" onclick="Mantencion(0)"><i class="material-icons">add_box</i></a></h4>
+	<div class="row">
+		<div class="col s12">
+			<table id="tabla-deuda" class="centered table bordered striped">
+				<thead>
+					<tr>
+						<th style="padding-right:8px">Periodo</th>
+						<th style="padding-right:8px">Monto</th>
+						<th style="padding-right:8px">Vence</th>
+						<th style="padding-right:8px">Multa</th>
+						<th style="padding-right:8px">Total periodo</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+	<h4>Deudas pagadas</h4>
+	<div class="row">
+		<div class="col s12">
+			<table id="tabla-deudas-pagadas" class="centered table bordered striped">
+				<thead>
+					<tr>
+						<th style="padding-right:8px">Periodo</th>
+						<th style="padding-right:8px">Monto</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
 </div>
 
 <script>
+	$(document).ready(function () {
+		// the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+		$('.modal').modal();
+	});
+
+	function pageLoading(status) {
+		if (status == 'true') {
+			$("#loader").css('display', 'block');
+			$("#content").css('display', 'none');
+		}
+		else {
+			$("#loader").css('display', 'none');
+			$("#content").css('display', 'block');
+		}
+	}
+
     $('#form').submit(function (e) {
         var rut = $('#Rut').val();
         var d = Resyst.ValidarRut(rut);
@@ -60,7 +147,7 @@
 
             Resyst.Error("Rut inválido");
         }
-    })
+    });
 
     $('#tabla-deuda').DataTable({
         bFilter: false,
@@ -68,21 +155,43 @@
         bPaginate: false,
         ordering: false,
         "columns": [
-            {
-                'render': function (dat, type, full, meta) {
-                    return '<input type="checkbox" id="test' + full.Id + '" /><label for="test' + full.Id + '"></label>';
-                }
-            },
             { data: "Periodo" },
             { data: "Monto" },
-            { data: "Vence" },
+			{ data: "Vence" },
+			{
+				'render': function (dat, type, full, meta) {
+					return '<a class="waves-effect waves-light btn red darken-1 modal-trigger" href="#modal-placebo">Agregar</a>';
+				}
+			},
+        ],
+        "ajax": {
+            "url": "@Url.Action("JsonGetListaDeudas")?id=@Model.Id",
+            "type": "POST",
+			"dataType": "json",
+			"dataSrc": function (json) {
+				pageLoading("false");
+				return json.data;
+			}
+        },
+    });
+
+    @* SCRIPT DE LA SEGUNDA TABLA -> POR HACER
+
+    $('#tabla-deudas-pagadas').DataTable({
+        bFilter: false,
+        bInfo: false,
+        bPaginate: false,
+        ordering: false,
+        "columns": [
+            { data: "Periodo" },
+            { data: "Monto" },
         ],
         "ajax": {
             "url": "@Url.Action("JsonGetListaDeudas")?id=@Model.Id",
             "type": "POST",
             "dataType": "json"
         },
-    });
+    });*@
 
     $('#test0').change(function () {
         var checkboxes = $(this).closest('table').find(':checkbox');

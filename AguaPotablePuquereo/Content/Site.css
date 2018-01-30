@@ -33,6 +33,10 @@ body {
 	text-align: center;
 }
 
+#info-desktop-admin {
+	text-align: center;
+}
+
 /* Administración: Login */
 #ir-al-inicio {
 	margin-bottom: 1em;
@@ -41,4 +45,10 @@ body {
 /* Administración: Vista de usuario */
 #pagar-button {
 	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
+/* Loader */
+#loader {
+	padding-top: 15em;
 }
