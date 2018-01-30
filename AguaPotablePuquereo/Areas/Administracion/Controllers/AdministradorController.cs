@@ -102,6 +102,7 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
                     Cuenta = o.TBL_CLIENTE.CLI_CUENTA,
                     Periodo = o.TBL_MES.MES_NOMBRE + "/" + o.DEU_PERIODO_ANO,
                     Fecha = o.TBL_PAGOS.PAG_FECHA,
+                    Deuda = o.DEU_DEUDA,
                 });
 
                 return JsonExito("", data);
