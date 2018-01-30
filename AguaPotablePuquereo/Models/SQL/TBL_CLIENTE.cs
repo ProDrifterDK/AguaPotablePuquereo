@@ -17,8 +17,8 @@ namespace AguaPotablePuquereo.Models.SQL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TBL_CLIENTE()
         {
-            this.TBL_DEUDA = new HashSet<TBL_DEUDA>();
             this.TBL_PAGOS = new HashSet<TBL_PAGOS>();
+            this.TBL_DEUDA = new HashSet<TBL_DEUDA>();
         }
     
         public int CLI_ID { get; set; }
@@ -31,8 +31,8 @@ namespace AguaPotablePuquereo.Models.SQL
         public int CLI_CUENTA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_DEUDA> TBL_DEUDA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_PAGOS> TBL_PAGOS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_DEUDA> TBL_DEUDA { get; set; }
     }
 }
