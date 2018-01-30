@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AguaPotablePuquereo.Models.SQL;
+using System.Collections;
 
 namespace AguaPotablePuquereo.Base
 {
@@ -84,5 +85,20 @@ namespace AguaPotablePuquereo.Base
         }
 
         public string URLWEBPAY = "";
+
+        protected SelectList SelectMes(PuquerosBDD bdd)
+        {
+            ArrayList array = new ArrayList();
+
+            var variable = bdd.TBL_MES.ToList().Select(o => new
+            {
+                Id = o.MES_ID,
+                Nombre = o.MES_NOMBRE,
+            }).ToArray();
+
+            array.AddRange(variable);
+
+            return new SelectList(array, "Id", "Nombre");
+        }
     }
 }

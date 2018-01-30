@@ -1,10 +1,15 @@
 ﻿@{
 	ViewBag.Title = "Inicio";
 }
+<style>
+    .collection {
+        overflow: visible;
+    }
+</style>
 
 <h4>Pagos</h4>
 <div class="row">
-		<table id="tablaPagos" style="border:1px solid #d0d0d0" class="table bordered striped">
+		<table id="tablaPagos" style="border:1px solid #d0d0d0" class="table bordered striped centered col s12">
 			<thead>
 				<tr>
 					<th>Cliente</th>
@@ -18,20 +23,58 @@
 </div>
 <h4>Clientes <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
 <div class="row">
-        <table id="tablaClientes col s12" style="border:1px solid #d0d0d0" class="table bordered striped">
+        <table id="tablaClientes" style="border:1px solid #d0d0d0" class="table bordered striped centered col s12">
             <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Rut</th>
                     <th>Cuenta</th>
                     <th>Total Deudas</th>
-                    <th>Acciones</th>
+                    <th class="">Acciones</th>
                 </tr>
             </thead>
         </table>
 </div>
 
+<!-- Modal Structure -->
+<div id="modal1" class="modal collection">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12">
+                <h5 class="left">Agregar Deuda (<lablel id="Cliente" class="green-text"></lablel>)</h5>
+            </div>
+        </div>
+        <form id="formularioAgregarDeduda" method="post">
+            <div class="row">
+                <div class="input-field col s12 m4 " style="margin-top: 20px">
+                    <label class="active" for="monto">Monto</label>
+                    <input id="monto" type="number" class="validate" name="monto">
+                </div>
+                <div class="input-field col s12 m4" style="margin-top: 20px">
+                    <label class="active" for="mes">Mes</label>
+                    @Html.DropDownList("mes", (SelectList)ViewBag.SelectMes)
+                </div>
+                <div class="input-field col s12 m4" style="margin-top: 20px">
+                    <input id="ano" type="number" value="@DateTime.Now.Year" class="validate" name="ano">
+                    <label class="active" for="ano">Año</label>
+                </div>
+            </div>
+            <input type="hidden" id="cliid" name="cliente" />
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:AgregarDedudaFinal()" onclick="">Agregar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+    </div>
+</div>
+
+
 <script>
+    $(document).ready(function () {
+        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+        $('select').material_select();
+    });
     $('#tablaClientes').DataTable({
         bFilter: false,
         bInfo: false,
@@ -44,7 +87,9 @@
             { data: "TotalDeuda" },
             {
                 'render': function (dat, type, full, meta) {
-                    return '<a href="javascript:void()" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">mode_edit</i></a>';
+                    return '<a href="javascript:void()" title="Editar Cliente" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">edit</i></a> '+
+                        '<a href="javascript:void()" class="red-text modal-trigger" title="Eliminar Cliente" onclick="Eliminar(' + full.Id + ')"><i class="material-icons">clear</i></a> ' +
+                        '<a href="#modal1" title="Agregar deuda" onclick="AgregarDeuda(' + full.Id + ', \'' + full.Nombre + '\')"><i class="material-icons">attach_money</i></a>';
                 }
             },
         ],
@@ -55,7 +100,41 @@
         },
     });
 
+    function Eliminar(id) {
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("EliminarCliente")',
+            data: { id: id },
+            success: function (data) {
+                Resyst.Toast(data, 'tablaClientes');
+            },
+        });
+    }
 
+
+    function AgregarDeuda(id, nombre) {
+        $('#Cliente').html(nombre);
+        $('#cliid').val(id);
+        $('#modal1').modal('open');
+    }
+
+    function AgregarDedudaFinal() {
+        $('#formularioAgregarDeduda').submit();
+    }
+    $('#formularioAgregarDeduda').submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("AgregarDeuda")',
+            data: $('#formularioAgregarDeduda').serialize(),
+            success: function (data) {
+                Resyst.Toast(data, 'tablaClientes');
+                $("#formularioAgregarDeduda").trigger("reset");
+                $('#modal1').modal('close');
+            },
+        });
+    });
     $('#tablaPagos').DataTable({
         bFilter: false,
         bInfo: false,
@@ -68,7 +147,7 @@
             { data: "Periodo" },
             {
                 'render': function (dat, type, full, meta) {
-                    return '<a href="javascript:void()" onclick="Checkear(' + full.Id + ')"><i class="material-icons">mode_check</i></a>';
+                    return '<a href="javascript:void()" onclick="Checkear(' + full.Id + ')"><i class="material-icons">check</i></a>';
                 }
             },
         ],

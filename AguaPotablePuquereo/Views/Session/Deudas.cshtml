@@ -38,7 +38,7 @@
     $(document).ready(function () {
         CargarGrilla();
         if ('@ViewBag.Mensaje' != '') {
-            MostrarMensaje('@ViewBag.Mensaje');
+            MostrarMensaje('@ViewBag.Mensaje', '@ViewBag.Error');
         }
 
         if ('@ViewBag.Error' == 'False') {
@@ -46,11 +46,13 @@
         }
     })
 
-    function MostrarMensaje(mensaje) {
+    function MostrarMensaje(mensaje, error) {
         $('#mensaje').html('@ViewBag.Mensaje');
         $('#mensaje').css('display', 'block');
-
-        $('#mensaje').addClass('red');
+        if(error == 'True')
+            $('#mensaje').addClass('red');
+        else
+            $('#mensaje').addClass('green');
     }
 
     function CargarGrilla() {

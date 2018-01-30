@@ -9,14 +9,15 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
     public class AdministradorController : Base.BaseAdministrar
     {
         // GET: Administracion/Administrador
-#region Vistas
+        #region Vistas
 
         public ActionResult Index()
         {
+            ViewBag.SelectMes = SelectMes(BDD);
             return View();
         }
 
-#region Clientes
+        #region Clientes
         public ActionResult MantencionCliente(int id)
         {
             var modelo = BDD.TBL_CLIENTE.Where(o => o.CLI_ID == id).ToList().Select(o => new ModelCliente
@@ -44,7 +45,7 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
             cliente.CLI_CUENTA = model.Cuenta;
             cliente.CLI_COMPLETO = model.Nombre + " " + model.ApellidoP + " " + model.ApellidoM;
 
-            if(cliente.CLI_ID != 0)
+            if (cliente.CLI_ID != 0)
             {
                 BDD.TBL_CLIENTE.Attach(cliente);
                 BDD.Entry(cliente).State = System.Data.Entity.EntityState.Modified;
@@ -61,10 +62,9 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
 
             return RedirectToAction("Index");
         }
+        #endregion
 
-#endregion
-
-#endregion
+        #endregion
         //Json
 
         //Cliente
@@ -154,6 +154,72 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
             {
                 Logger(ex);
                 return JsonError("Ha habido un problema al cargar las deudas.");
+            }
+        }
+
+        public JsonResult EliminarCliente(int id)
+        {
+            try
+            {
+                var cliente = BDD.TBL_CLIENTE.FirstOrDefault(o => o.CLI_ID == id);
+
+                foreach (var item in cliente.TBL_DEUDA)
+                {
+                    if (item.PAG_ID != null)
+                    {
+                        var pago = BDD.TBL_PAGOS.FirstOrDefault(o => o.PAG_ID == item.PAG_ID);
+                        pago.PAG_VIGENCIA = false;
+
+                        BDD.TBL_PAGOS.Attach(pago);
+                        BDD.Entry(pago).State = System.Data.Entity.EntityState.Modified;
+
+                        BDD.SaveChanges();
+                    }
+                }
+
+                BDD.Database.ExecuteSqlCommand("DELETE FROM TBL_DEUDA WHERE CLI_ID = " + id);
+
+                BDD.TBL_CLIENTE.Remove(cliente);
+                BDD.Entry(cliente).State = System.Data.Entity.EntityState.Deleted;
+
+                BDD.SaveChanges();
+
+                return JsonExito("Cliente eliminado con éxito");
+            }
+            catch (Exception ex)
+            {
+                Logger(ex);
+                return JsonError("No se ha podido eliminar al cliente");
+            }
+        }
+
+        public JsonResult AgregarDeuda(int monto, int mes, int ano, int cliente)
+        {
+            try
+            {
+                var periodo = new DateTime();
+                periodo = periodo.AddYears(ano - periodo.Year);
+                periodo = periodo.AddMonths((mes + 1) - periodo.Month);
+                var deuda = new TBL_DEUDA
+                {
+                    DEU_DEUDA = monto,
+                    DEU_PERIODO_ANO = ano,
+                    MES_ID = mes,
+                    DEU_PERIODO_VENCE = periodo,
+                    CLI_ID = cliente,
+                };
+
+                BDD.TBL_DEUDA.Add(deuda);
+                BDD.Entry(deuda).State = System.Data.Entity.EntityState.Added;
+
+                BDD.SaveChanges();
+
+                return JsonExito("Deuda asignada correctamente");
+            }
+            catch (Exception ex)
+            {
+                Logger(ex);
+                return JsonError("No se pudo agregar la deuda, inténtelo mas tarde.");
             }
         }
     }

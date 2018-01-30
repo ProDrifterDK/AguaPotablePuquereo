@@ -148,8 +148,8 @@ namespace AguaPotablePuquereo.Controllers
                         {
                             item.PAG_ID = pago.PAG_ID;
 
-                            BDD.TBL_DEUDA.Add(item);
-                            BDD.Entry(item).State = System.Data.Entity.EntityState.Added;
+                            BDD.TBL_DEUDA.Attach(item);
+                            BDD.Entry(item).State = System.Data.Entity.EntityState.Modified;
                         }
                         try
                         {
@@ -169,9 +169,11 @@ namespace AguaPotablePuquereo.Controllers
 
                         BDD.SaveChanges();
 
+                        ViewBag.Mensaje = "Pago realizado con éxito.";
+
                         ViewBag.Error = false;
 
-                        return Redirect(result.urlRedirection + "?token=" + token);
+                        return Redirect(result.urlRedirection + "?token_ws=" + token);
                     }
                     else
                     {
