@@ -23,23 +23,24 @@
 </div>
 <!-- Contenido -->
 <div id="content" style="display: none;">
-	<h4>Pagos sin registrar</h4>
-	<div class="container row">
-		<table id="tablaPagos" style="border:1px solid #d0d0d0" class="centered table bordered striped">
-			<thead>
-				<tr>
-					<th>Cliente</th>
-					<th>Rut</th>
-					<th>Cuenta</th>
+    <h4>Pagos sin registrar</h4>
+    <div class="container row">
+        <table id="tablaPagos" style="border:1px solid #d0d0d0" class="centered table bordered striped">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Rut</th>
+                    <th>Cuenta</th>
                     <th>Deuda Pagada</th>
-					<th>Periodo</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-		</table>
+                    <th>Periodo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
 <h4>Clientes <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
-<div class="row">
+<div class="container row">
         <table id="tablaClientes" style="border:1px solid #d0d0d0" class="table bordered striped centered col s12">
             <thead>
                 <tr>
@@ -117,7 +118,7 @@
                 'render': function (dat, type, full, meta) {
                     return '<a href="javascript:void()" title="Editar Cliente" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">edit</i></a> '+
                         '<a href="javascript:void()" class="red-text modal-trigger" title="Eliminar Cliente" onclick="Eliminar(' + full.Id + ')"><i class="material-icons">clear</i></a> ' +
-                        '<a href="#modal1" title="Agregar deuda" onclick="AgregarDeuda(' + full.Id + ', \'' + full.Nombre + '\')"><i class="material-icons">attach_money</i></a>';
+                        '<a href="#modal1" class="green-text modal-trigger" title="Agregar deuda" onclick="AgregarDeuda(' + full.Id + ', \'' + full.Nombre + '\')"><i class="material-icons">attach_money</i></a>';
                 }
             },
         ],
