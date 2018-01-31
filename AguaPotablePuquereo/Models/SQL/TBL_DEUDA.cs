@@ -23,6 +23,7 @@ namespace AguaPotablePuquereo.Models.SQL
         public Nullable<int> PAG_ID { get; set; }
         public bool DEU_CHECK { get; set; }
         public Nullable<int> CAR_ID { get; set; }
+        public Nullable<int> DEU_MULTA { get; set; }
     
         public virtual TBL_CARRO_COMPRA TBL_CARRO_COMPRA { get; set; }
         public virtual TBL_CLIENTE TBL_CLIENTE { get; set; }
