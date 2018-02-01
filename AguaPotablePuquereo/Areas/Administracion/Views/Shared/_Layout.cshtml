@@ -17,11 +17,11 @@
 <body>
 	<!-- Header -->
 	<header>
-		<nav class="top-nav light-blue darken-4">
+		<nav class="top-nav grey darken-4">
 			<div class="nav-wrapper">
 				<!-- Título y links: Desktop -->
 				<a href="#" class="brand-logo center hide-on-med-and-down"><img src="~/Resources/Images/logo.png" style="max-height:58px" /></a>
-				<ul id="nav-mobile" class="blue accent-2 left hide-on-med-and-down">
+				<ul id="nav-mobile" class="blue-grey left hide-on-med-and-down">
 					@if (Request.Url.ToString().Contains("EditarAcercaDe")) {
 						<li><a href="@Url.Action("Index", "Administrador")">Inicio</a></li>
 					}
@@ -59,7 +59,7 @@
 		@RenderBody()
 	</div>
 	<!-- Footer -->
-	<footer class="page-footer blue darken-4">
+	<footer class="page-footer blue-grey darken-4">
 		<div class="container">
 			<div class="row">
 				<div id="info" class="show-on-medium-and-up col s12 m12 l12">

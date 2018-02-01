@@ -2,9 +2,9 @@
 	ViewBag.Title = "Inicio";
 }
 <style>
-    .collection {
-        overflow: visible;
-    }
+	.collection {
+		overflow: visible;
+	}
 </style>
 <!-- Loader -->
 <div id="loader" class="container">
@@ -23,69 +23,67 @@
 </div>
 <!-- Contenido -->
 <div id="content" style="display: none;">
-    <h4>Pagos sin registrar</h4>
-    <div class="container row">
-        <table id="tablaPagos" style="border:1px solid #d0d0d0" class="centered table bordered striped">
-            <thead>
-                <tr>
-                    <th>Cliente</th>
-                    <th>Rut</th>
-                    <th>Cuenta</th>
-                    <th>Deuda Pagada</th>
-                    <th>Periodo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+	<h4>Pagos sin registrar</h4>
+	<div class="container row">
+		<table id="tablaPagos" style="border:1px solid #d0d0d0" class="centered table bordered striped">
+			<thead>
+				<tr>
+					<th>Cliente</th>
+					<th>Rut</th>
+					<th>Cuenta</th>
+					<th>Deuda Pagada</th>
+					<th>Periodo</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<h4>Clientes <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
+	<div class="container row">
+		<table id="tablaClientes" style="border:1px solid #d0d0d0" class="table bordered striped centered col s12">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Rut</th>
+					<th>Cuenta</th>
+					<th>Total Deudas</th>
+					<th class="">Acciones</th>
+				</tr>
+			</thead>
+		</table>
+		<!-- Modal Structure -->
+		<div id="modal1" class="modal collection">
+			<div class="modal-content">
+				<div class="row">
+					<div class="col s12">
+						<h5 class="left">Agregar Deuda (<lablel id="Cliente" class="green-text"></lablel>)</h5>
+					</div>
+				</div>
+				<form id="formularioAgregarDeduda" method="post">
+					<div class="row">
+						<div class="input-field col s12 m4 " style="margin-top: 20px">
+							<label class="active" for="monto">Monto</label>
+							<input id="monto" type="number" name="monto">
+						</div>
+						<div class="input-field col s12 m4" style="margin-top: 20px">
+							<label class="active" for="mes">Mes</label>
+							@Html.DropDownList("mes", (SelectList) ViewBag.SelectMes)
+						</div>
+						<div class="input-field col s12 m4" style="margin-top: 20px">
+							<input id="ano" type="number" value="@DateTime.Now.Year" name="ano">
+							<label class="active" for="ano">Año</label>
+						</div>
+					</div>
+					<input type="hidden" id="cliid" name="cliente" />
+				</form>
+			</div>
+			<div class="modal-footer">
+				<a href="javascript:AgregarDedudaFinal()" class="modal-action modal-close waves-effect waves-green btn-flat" classonclick="">Agregar</a>
+				<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+			</div>
+		</div>
+	</div>
 </div>
-<h4>Clientes <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
-<div class="container row">
-        <table id="tablaClientes" style="border:1px solid #d0d0d0" class="table bordered striped centered col s12">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Rut</th>
-                    <th>Cuenta</th>
-                    <th>Total Deudas</th>
-                    <th class="">Acciones</th>
-                </tr>
-            </thead>
-        </table>
-</div>
-
-<!-- Modal Structure -->
-<div id="modal1" class="modal collection">
-    <div class="modal-content">
-        <div class="row">
-            <div class="col s12">
-                <h5 class="left">Agregar Deuda (<lablel id="Cliente" class="green-text"></lablel>)</h5>
-            </div>
-        </div>
-        <form id="formularioAgregarDeduda" method="post">
-            <div class="row">
-                <div class="input-field col s12 m4 " style="margin-top: 20px">
-                    <label class="active" for="monto">Monto</label>
-                    <input id="monto" type="number" class="validate" name="monto">
-                </div>
-                <div class="input-field col s12 m4" style="margin-top: 20px">
-                    <label class="active" for="mes">Mes</label>
-                    @Html.DropDownList("mes", (SelectList)ViewBag.SelectMes)
-                </div>
-                <div class="input-field col s12 m4" style="margin-top: 20px">
-                    <input id="ano" type="number" value="@DateTime.Now.Year" class="validate" name="ano">
-                    <label class="active" for="ano">Año</label>
-                </div>
-            </div>
-            <input type="hidden" id="cliid" name="cliente" />
-        </form>
-    </div>
-    <div class="modal-footer">
-        <a href="javascript:AgregarDedudaFinal()" onclick="">Agregar</a>
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
-    </div>
-</div>
-
 
 <script>
 	function pageLoading(status) {
@@ -188,7 +186,7 @@
         "ajax": {
             "url": "@Url.Action("GetListaDeudasPagadas")",
             "type": "POST",
-            "dataType": "json"
+			"dataType": "json"
         },
     });
 
