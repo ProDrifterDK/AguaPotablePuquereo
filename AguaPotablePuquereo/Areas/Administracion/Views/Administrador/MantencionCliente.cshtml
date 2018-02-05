@@ -123,6 +123,10 @@
 		$('.modal').modal();
 	});
 
+    function AbrirModal() {
+        $('#modal-placebo').modal('open');
+    }
+
 	function pageLoading(status) {
 		if (status == 'true') {
 			$("#loader").css('display', 'block');
@@ -157,15 +161,15 @@
                 'render': function (dat, type, full, meta) {
                     if (full.AplicaMulta) {
                         if (full.Multa != null)
-                            return '<a class="red-text darken-1 modal-trigger" href="#modal-placebo">' + full.Multa + '</a>';
+                            return '<p class="red-text darken-1">' + full.Multa + '</p>';
                     }
-                    return 'No Aplica'
+                    return '0'
 				}
 			},
             { data: "Total" },
             {
                 'render': function (dat, type, full, meta) {
-                    return '<a href="javascript:void()" title="Editar" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">edit</i></a> '
+                    return '<a class="modal-trigger" title="Editar" href="#modal-placebo"><i class="material-icons">edit</i></a> '
                 }
             },
         ],
