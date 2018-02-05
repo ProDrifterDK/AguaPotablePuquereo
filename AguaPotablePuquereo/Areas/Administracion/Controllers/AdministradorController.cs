@@ -136,17 +136,20 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
             }
         }
 
-        public JsonResult JsonGetListaDeudas(int Id)
+        public JsonResult JsonGetListaDeudas(int Id, bool pagadas = false)
         {
             try
             {
-                var data = BDD.TBL_DEUDA.Where(o => o.CLI_ID == Id).ToList().Select(o => new
+                var data = BDD.TBL_DEUDA.Where(o => o.CLI_ID == Id && pagadas == (o.PAG_ID != null)).ToList().Select(o => new
                 {
                     Periodo = o.TBL_MES.MES_NOMBRE + " " + o.DEU_PERIODO_ANO,
                     Monto = o.DEU_DEUDA,
                     Vence = o.DEU_PERIODO_VENCE.ToString("dd/MM/yyyy"),
                     CLiId = o.CLI_ID,
                     Id = o.DEU_ID,
+                    Total = (o.DEU_MULTA ?? 0) + o.DEU_DEUDA,
+                    Multa = o.DEU_MULTA,
+                    AplicaMulta = o.DEU_PERIODO_VENCE < DateTime.Now,
                 }).ToList();
 
                 return JsonExito("", data);

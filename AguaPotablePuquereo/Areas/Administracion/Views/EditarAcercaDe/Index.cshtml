@@ -13,6 +13,7 @@
             <form method="post">
                 @Html.HiddenFor(o=> o.PADM_ID)
                 @Html.TextAreaFor(o=>o.PADM_HTML_TEXT, new { id= "froala-editor" })
+                <br />
                 <input type="submit" class="btn" value="Guardar"/>
             </form>
         </div>
@@ -23,6 +24,15 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>
 <script>
+    $(document).ready(function () {
+        if ('@ViewBag.Exito' == 'True'){
+            Resyst.Exito('Exito');
+        }
+        else if ('@ViewBag.Exito' == 'False') {
+            Resyst.Error('Hubo un error, culpa del vicente!');
+        }
+    })
+
     $(function () {
         $('textarea#froala-editor').froalaEditor()
     });

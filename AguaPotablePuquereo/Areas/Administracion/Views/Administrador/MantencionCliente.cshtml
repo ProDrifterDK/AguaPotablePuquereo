@@ -159,13 +159,51 @@
             { data: "Monto" },
 			{ data: "Vence" },
 			{
-				'render': function (dat, type, full, meta) {
-					return '<a class="waves-effect waves-light btn red darken-1 modal-trigger" href="#modal-placebo">Agregar</a>';
+                'render': function (dat, type, full, meta) {
+                    if (full.AplicaMulta) {
+                        if (full.Multa != null)
+                            return '<a class="red-text btn darken-1 modal-trigger" href="#modal-placebo">' + full.Multa + '</a>';
+                        return '<a class="red-text btn darken-1 modal-trigger" href="#modal-placebo">Agregar</a>';
+                    }
+                    return 'No Aplica'
 				}
 			},
+            { data: "Total" },
         ],
         "ajax": {
             "url": "@Url.Action("JsonGetListaDeudas")?id=@Model.Id",
+            "type": "POST",
+			"dataType": "json",
+			"dataSrc": function (json) {
+				pageLoading("false");
+				return json.data;
+			}
+        },
+    });
+
+    $('#tabla-deudas-pagadas').DataTable({
+        bFilter: false,
+        bInfo: false,
+        bPaginate: false,
+        ordering: false,
+        "columns": [
+            { data: "Periodo" },
+            { data: "Monto" },
+			//{ data: "Vence" },
+			//{
+   //             'render': function (dat, type, full, meta) {
+   //                 if (full.AplicaMulta) {
+   //                     if (full.Multa != null)
+   //                         return '<a class="red darken-1 modal-trigger" href="#modal-placebo">' + full.Multa + '</a>';
+   //                     return '<a class="red darken-1 modal-trigger" href="#modal-placebo">Agregar</a>';
+   //                 }
+   //                 return 'No Aplica'
+			//	}
+			//},
+   //         { data: "Total" },
+        ],
+        "ajax": {
+            "url": "@Url.Action("JsonGetListaDeudas")?id=@Model.Id&pagadas=true",
             "type": "POST",
 			"dataType": "json",
 			"dataSrc": function (json) {

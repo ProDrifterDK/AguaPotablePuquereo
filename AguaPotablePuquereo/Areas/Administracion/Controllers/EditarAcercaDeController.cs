@@ -21,15 +21,26 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
         [HttpPost]
         public ActionResult Index(AguaPotablePuquereo.Models.SQL.TBL_PAGINAS_ADMINISTRABLES model)
         {
-            var padm = BDD.TBL_PAGINAS_ADMINISTRABLES.FirstOrDefault(o => o.PADM_ID == model.PADM_ID);
+            try
+            {
+                var padm = BDD.TBL_PAGINAS_ADMINISTRABLES.FirstOrDefault(o => o.PADM_ID == model.PADM_ID);
 
-            padm.PADM_HTML_TEXT = model.PADM_HTML_TEXT;
+                padm.PADM_HTML_TEXT = model.PADM_HTML_TEXT;
 
-            BDD.TBL_PAGINAS_ADMINISTRABLES.Attach(padm);
-            BDD.Entry(padm).State = System.Data.Entity.EntityState.Modified;
+                BDD.TBL_PAGINAS_ADMINISTRABLES.Attach(padm);
+                BDD.Entry(padm).State = System.Data.Entity.EntityState.Modified;
 
-            BDD.SaveChanges();
+                BDD.SaveChanges();
 
+                ViewBag.Exito = true;
+
+                return View(model);
+            }
+            catch(Exception ex)
+            {
+                ViewBag.Exito = false;
+                Logger(ex);
+            }
             return View(model);
         }
     }
