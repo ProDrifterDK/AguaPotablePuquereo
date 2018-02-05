@@ -82,12 +82,6 @@
 				@Html.TextBoxFor(o => o.Cuenta, new { @type = "text" })
 				<label for="Nombre">Cuenta</label>
 			</div>
-			<div class="col l4 m6 s12 input-field">
-				@*Html.TextBoxFor(o => o.Multa, new { @type = "text" })*@
-				<!-- Placebo -->
-				<input id="placebo" type="text">
-				<label for="Nombre">Editar multa</label>
-			</div>
 		</div>
 	}
 	<hr />
@@ -102,6 +96,7 @@
 						<th style="padding-right:8px">Vence</th>
 						<th style="padding-right:8px">Multa</th>
 						<th style="padding-right:8px">Total periodo</th>
+                        <th style="padding-right:8px">Acciones</th>
 					</tr>
 				</thead>
 			</table>
@@ -162,13 +157,17 @@
                 'render': function (dat, type, full, meta) {
                     if (full.AplicaMulta) {
                         if (full.Multa != null)
-                            return '<a class="red-text btn darken-1 modal-trigger" href="#modal-placebo">' + full.Multa + '</a>';
-                        return '<a class="red-text btn darken-1 modal-trigger" href="#modal-placebo">Agregar</a>';
+                            return '<a class="red-text darken-1 modal-trigger" href="#modal-placebo">' + full.Multa + '</a>';
                     }
                     return 'No Aplica'
 				}
 			},
             { data: "Total" },
+            {
+                'render': function (dat, type, full, meta) {
+                    return '<a href="javascript:void()" title="Editar" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">edit</i></a> '
+                }
+            },
         ],
         "ajax": {
             "url": "@Url.Action("JsonGetListaDeudas")?id=@Model.Id",
