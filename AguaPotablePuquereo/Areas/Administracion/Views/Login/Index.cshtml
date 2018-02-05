@@ -10,8 +10,23 @@
 	<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
 	<title>Login - Agua Potable Puquereo</title>
 }
-
-<div class="container">
+<!-- Loader -->
+<div id="loader" class="container">
+	<h4>Cargando...</h4>
+	<div class="preloader-wrapper big active">
+		<div class="spinner-layer spinner-blue-only">
+			<div class="circle-clipper left">
+				<div class="circle"></div>
+			</div><div class="gap-patch">
+				<div class="circle"></div>
+			</div><div class="circle-clipper right">
+				<div class="circle"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Contenido -->
+<div class="container" id="content" style="display: none;">
 	<div class="row" style="margin-left:0; margin-right:0; margin-top: 50px">
 		<!--<div class="z-depth-3 col s12 m8 l4 offset-l4 offset-m2">-->
 		<div id="blank-space" class="hide-on-small-only col s12 m2 l3">
@@ -52,6 +67,17 @@
 </div>
 
 <script>
+	function pageLoading(status) {
+		if (status == 'true') {
+			$("#loader").css('display', 'block');
+			$("#content").css('display', 'none');
+		}
+		else {
+			$("#loader").css('display', 'none');
+			$("#content").css('display', 'block');
+		}
+	}
+	pageLoading("false");
     $('#formulario').submit(function (e) {
         e.preventDefault();
         $.ajax({
@@ -59,9 +85,11 @@
             url: '@Url.Action("Index")',
             data: $('#formulario').serialize(),
             success: function (data) {
-                if (data.exito) {
+				if (data.exito) {
+					pageLoading("true");
                     location.href = "@Url.Action("Index","Administrador")";
-                } else {
+				} else {
+					pageLoading("false");
                     if (data.mensaje) {
                         Materialize.toast(data.mensaje, 3000);
                     }
