@@ -24,12 +24,12 @@
 			<div class="nav-wrapper">
 				@if (Request.Url.ToString().Contains("Deuda")) {
 					<!-- Título y links: Desktop -->
-					<a href="#" class="brand-logo center hide-on-med-and-down"><img src="~/Resources/Images/logo.png" style="max-height:58px" /></a>
+					<a href="#" class="brand-logo center hide-on-med-and-down"><img src="~/Resources/Images/logo-small.png"/></a>
 					<ul id="nav-mobile" class=" right hide-on-med-and-down">
-						<li><a href=@Url.Action("Index", "Home")>Salir</a></li>
+						<li><a id="boton" href=@Url.Action("Index", "Home")>Salir</a></li>
 					</ul>
 					<!-- Título y links: Mobile -->
-					<a href="#" class="brand-logo center hide-on-large-only"><img src="~/Resources/Images/logo.png" style="max-height:56px" /></a>
+					<a href="#" class="brand-logo center hide-on-large-only"><img src="~/Resources/Images/logo-small.png"/></a>
 					<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
 					<ul class="side-nav hide-on-large-only" id="mobile-demo">
 						<li><a href=@Url.Action("Index", "Home")>Salir</a></li>
@@ -37,26 +37,26 @@
 				}
 				else {
 					<!-- Título y links: Desktop -->
-					<a href="#" class="brand-logo center hide-on-med-and-down"><img src="~/Resources/Images/logo.png" style="max-height:58px" /></a>
+					<a href="#" class="brand-logo center hide-on-med-and-down"><img src="~/Resources/Images/logo-small.png"/></a>
 					<ul id="nav-mobile" class=" right hide-on-med-and-down">
-						<li><a href=@Url.Action("Index", "Home") >Inicio</a></li>
-						<li><a href=@Url.Action("About", "Home") >Acerca de Nosotros</a></li>
-						<li><a href=@Url.Action("Login", "Administracion") >Administración</a></li>
+						<li><a id="boton" href=@Url.Action("Index", "Home") >Inicio</a></li>
+						<li><a id="boton" href=@Url.Action("About", "Home") >Acerca de</a></li>
+						<li><a id="boton" href=@Url.Action("Login", "Administracion") >Administración</a></li>
 					</ul>
 					<!-- Título y links: Mobile -->
-					<a href="#" class="brand-logo center hide-on-large-only"><img src="~/Resources/Images/logo.png" style="max-height:56px" /></a>
+					<a href="#" class="brand-logo center hide-on-large-only"><img src="~/Resources/Images/logo-small.png"/></a>
 					<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
 					<ul class="side-nav hide-on-large-only" id="mobile-demo">
-						<li><a href=@Url.Action("Index", "Home") style="font-size: 18px">Inicio</a></li>
-						<li><a href=@Url.Action("About", "Home") style="font-size: 18px">Acerca de Nosotros</a></li>
-						<li><a href=@Url.Action("Login", "Administracion") style="font-size: 18px">Administración</a></li>
+						<li><a id="boton-mobile" href=@Url.Action("Index", "Home")>Inicio</a></li>
+						<li><a id="boton-mobile" href=@Url.Action("About", "Home")>Acerca de</a></li>
+						<li><a id="boton-mobile" href=@Url.Action("Login", "Administracion")>Administración</a></li>
 					</ul>
 				}
 			</div>
 		</nav>
 	</header>
 	<!-- Cuerpo -->
-	<div id="main" class="z-depth-5 grey lighten-4">
+	<div id="main-principal">
 		@RenderBody()
 	</div>
 	<!-- Footer -->

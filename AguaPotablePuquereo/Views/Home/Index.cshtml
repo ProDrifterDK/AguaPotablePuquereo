@@ -3,30 +3,43 @@
 }
 <!-- Contenido -->
 <div id="content">
-	<!-- Introducción -->
-	<div id="intro" class="container">
-		<h3>Aquí usted puede ver y pagar sus deudas.</h3>
-		<h5>Para comenzar, ingrese su RUT <b>sin puntos y con guión</b> o su N° de cuenta y luego haga click en <i>Ingresar</i>.</h5>
+	<div class="parallax-container">
+		<div class="parallax hide-on-med-and-down"><img class="responsive-img" src="~/Resources/Images/placebo1.jpg"></div>
+		<div class="parallax hide-on-large-only"><img src="~/Resources/Images/placebo1-responsive.png"></div>
 	</div>
-	<!-- Ingreso de RUT -->
-	<div class="container row">
-		<div id="blank-space" class="hide-on-small-only col s12 m2 l4">
-			&nbsp;
+	<div class="section white">
+		<!-- Introducción -->
+		<div id="intro" class="container">
+			<h3>Aquí usted puede ver y pagar sus deudas.</h3>
+			<h5>Para comenzar, ingrese su RUT <b>sin puntos y con guión</b> o su N° de cuenta y luego haga click en <i>Ingresar</i>.</h5>
 		</div>
-		<div class="card z-depth-3 col s12 m8 l4">
-			<div class="input-field" onkeypress="return HacerEnter(event)" style="margin-top: 20px">
-				<input id="rut-input" type="text">
-				<label class="active" for="rut-label">Ingrese su RUT o N° de cuenta</label>
-				<a id="ingresar-button" class="z-depth-3 waves-effect waves-light btn green accent-4" href="#" onclick="Deudas()">Ingresar</a>
+		<!-- Ingreso de RUT -->
+		<div class="container row">
+			<div id="blank-space" class="hide-on-small-only col s12 m2 l4">
+				&nbsp;
+			</div>
+			<div class="card z-depth-3 col s12 m8 l4">
+				<div class="input-field" onkeypress="return HacerEnter(event)" style="margin-top: 20px">
+					<input id="rut-input" type="text">
+					<label class="active" for="rut-label">Ingrese su RUT o N° de cuenta</label>
+					<a id="ingresar-button" class="z-depth-3 waves-effect waves-light btn green accent-4" href="#" onclick="Deudas()">Ingresar</a>
+				</div>
+			</div>
+			<div id="blank-space" class="hide-on-small-only col s12 m2 l4">
+				&nbsp;
 			</div>
 		</div>
-		<div id="blank-space" class="hide-on-small-only col s12 m2 l4">
-			&nbsp;
-		</div>
+	</div>
+	<div class="parallax-container">
+		<div class="parallax hide-on-med-and-down"><img class="responsive-img" src="~/Resources/Images/placebo2.jpg"></div>
+		<div class="parallax hide-on-large-only"><img src="~/Resources/Images/placebo2-responsive.png"></div>
 	</div>
 </div>
-
 <script>
+	$(document).ready(function () {
+		$('.parallax').parallax();
+	});
+
     var rut = "";
     function Deudas() {
         rut = $('#rut-input').val();

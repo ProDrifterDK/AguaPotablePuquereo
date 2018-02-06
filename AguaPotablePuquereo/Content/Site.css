@@ -11,6 +11,45 @@ body {
 	margin: 16px;
 }
 
+#main-principal {
+	flex: 1 0 auto;
+}
+
+/* Navbar */
+nav {
+	height: 128px;
+	line-height: 128px;
+}
+
+	nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+		height: 128px;
+		line-height: 128px;
+	}
+
+	nav .button-collapse i {
+		height: 128px;
+		line-height: 128px;
+	}
+
+@media only screen and (min-width: 601px) {
+	nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+		height: 128px;
+		line-height: 128px;
+	}
+}
+
+.brand-logo {
+	margin-top: 6px;
+}
+
+#boton {
+	font-size: 20px;
+}
+
+#boton-mobile {
+	font-size: 18px;
+}
+
 /* Index */
 #ingresar-button {
 	margin-bottom: 1.5em;
