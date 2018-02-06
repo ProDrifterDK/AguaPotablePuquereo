@@ -38,7 +38,42 @@
 			</thead>
 		</table>
 	</div>
-	<h4>Clientes <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
+	<div class="container row">
+		<!-- Título Clientes: Desktop -->
+		<div class="col s12 m3 l3 hide-on-small-only">
+			<h4>
+				Clientes
+				<a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a>
+			</h4>
+		</div>
+		<!-- Título Clientes: Mobile-->
+		<div class="col s12 hide-on-med-and-up">
+			<h4>Clientes</h4>
+		</div>
+		<div class="col s12 hide-on-med-and-up">
+			<a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a>
+		</div>
+		<!-- Campo de búsqueda: Mobile -->
+		<div class="input-field col s12 m6 l6 hide-on-small-only">
+			<i class="material-icons prefix">search</i>
+			<input id="icon_prefix" type="text">
+			<label class="active" for="rut-label">Nombre, RUT o N° de cliente</label>
+		</div>
+		<!-- Campo de búsqueda: Mobile -->
+		<div class="input-field col s12 hide-on-med-and-up">
+			<i class="material-icons prefix">search</i>
+			<input id="icon_prefix" type="text">
+			<label class="active" for="rut-label">Nombre, RUT o N° de cliente</label>
+		</div>
+		<!-- Botón de buscar: Desktop -->
+		<div class="col s12 m3 l3 hide-on-small-only" style="margin-top: 20px;">
+			<a id="buscar-button" class="z-depth-3 waves-effect waves-light btn green accent-4" href="#">Buscar</a>
+		</div>
+		<!-- Botón de buscar: Mobile -->
+		<div class="col s12 hide-on-med-and-up">
+			<a id="buscar-button" class="z-depth-3 waves-effect waves-light btn green accent-4" href="#">Buscar</a>
+		</div>
+	</div>
 	<div class="container row">
 		<table id="tablaClientes" style="border:1px solid #d0d0d0" class="table bordered striped centered col s12">
 			<thead>
