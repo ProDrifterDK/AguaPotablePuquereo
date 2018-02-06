@@ -32,6 +32,11 @@ namespace AguaPotablePuquereo.Base
             return Json(new { exito = false, mensaje = mensaje });
         }
 
+        protected JsonResult JsonSolo(object data)
+        {
+            return Json(data);
+        }
+
         protected void Logger(Exception ex)
         {
             var Log = new TBL_LOG
@@ -100,5 +105,6 @@ namespace AguaPotablePuquereo.Base
 
             return new SelectList(array, "Id", "Nombre");
         }
+
     }
 }

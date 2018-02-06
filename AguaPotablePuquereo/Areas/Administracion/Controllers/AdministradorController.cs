@@ -226,5 +226,23 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
                 return JsonError("No se pudo agregar la deuda, inténtelo mas tarde.");
             }
         }
+
+        public JsonResult JsonObtenerDatosDeuda(int id)
+        {
+            if(id == 0)
+                return JsonError("Deuda no asignada");
+
+            var data = BDD.TBL_DEUDA.Where(o => o.DEU_ID == id).ToList().Select(o => new
+            {
+                Monto = o.DEU_DEUDA,
+                Ano = o.DEU_PERIODO_ANO,
+                Mes = o.MES_ID,
+                Multa = o.DEU_MULTA,
+                RequierMulta = o.DEU_PERIODO_VENCE > DateTime.Now,
+                Id = o.DEU_ID,
+            }).First();
+
+            return JsonSolo(data);
+        }
     }
 }

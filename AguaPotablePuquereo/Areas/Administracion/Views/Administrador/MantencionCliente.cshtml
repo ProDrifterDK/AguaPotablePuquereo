@@ -19,18 +19,6 @@
 	</div>
 </div>
 <div id="content" class="container" style="display: none;">
-	<div id="modal-placebo" class="modal">
-		<div class="container modal-content">
-			<div class="input-field">
-				<input id="monto" type="text">
-				<label for="first_name">Monto</label>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Guardar</a>
-		</div>
-	</div>
 	<div class="row">
 		<!-- Volver: Desktop -->
 		<div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: left">
@@ -122,6 +110,42 @@
 	</div>
 </div>
 
+
+<div id="modalDeuda" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12">
+                <h5 class="left"><lablel id="titulo" class="green-text"></lablel></h5>
+            </div>
+        </div>
+        <form id="formularioAgregarDeduda" method="post">
+            <div class="row">
+                <div class="input-field col s12 m4 " style="margin-top: 20px">
+                    <label class="active" for="monto">Monto</label>
+                    <input id="monto" type="number" name="monto">
+                </div>
+                <div class="input-field col s12 m4" style="margin-top: 20px">
+                    <label class="active" for="mes">Mes</label>
+                    @Html.DropDownList("mes", (SelectList)ViewBag.SelectMes)
+                </div>
+                <div class="input-field col s12 m4" style="margin-top: 20px">
+                    <input id="ano" type="number" value="@DateTime.Now.Year" name="ano">
+                    <label class="active" for="ano">Año</label>
+                </div>
+                <div class="input-field col s12 m4" style="margin-top: 20px">
+                    <input id="multa" type="number" value="" name="multa">
+                    <label class="active" for="multa">Multa</label>
+                </div>
+            </div>
+            <input type="hidden" id="cliid" name="cliente" />
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:AgregarDedudaFinal()" class="modal-action modal-close waves-effect waves-green btn-flat" classonclick="">Agregar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+    </div>
+</div>
+
 <script>
 	$(document).ready(function () {
 		// the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
@@ -159,16 +183,14 @@
             { data: "Monto" },
 			{ data: "Vence" },
 			{
-                'render': function (dat, type, full, meta) {
-                    if (full.AplicaMulta) {
-                        if (full.Multa != null)
-                            return '<a class="red-text btn darken-1 modal-trigger" href="#modal-placebo">' + full.Multa + '</a>';
-                        return '<a class="red-text btn darken-1 modal-trigger" href="#modal-placebo">Agregar</a>';
-                    }
-                    return 'No Aplica'
-				}
+                data : "Multa"
 			},
             { data: "Total" },
+            {
+                'render': function (dat, type, full, meta) {
+                    return '<a href="javascript:void()" title="Editar Deuda" onclick="MantncionDeuda(' + full.Id + ')"><i class="material-icons">edit</i></a>';
+				}
+			},
         ],
         "ajax": {
             "url": "@Url.Action("JsonGetListaDeudas")?id=@Model.Id",
@@ -239,5 +261,33 @@
             checkboxes.prop('checked', false);
         }
     });
+
+    function MantncionDeuda(id) {
+        if (id == 0) {
+            $('#titulo').html('Agregar Deuda');
+        }
+        else {
+            $('#titulo').html('Editar Deuda');
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("JsonObtenerDatosDeuda")',
+                data: { id: id },
+                success: function (data) {
+                    CargarModal(data);
+                }
+            })
+        }
+
+        
+
+        $('#modalDeuda').modal('open');
+    }
+
+    function CargarModal(data) {
+        $('#monto').val(data.Monto);
+        $('#ano').val(data.Ano);
+        $('#mes').val(data.Mes);
+        $('#multa').val(data.Multa);
+    }
 </script>
 
