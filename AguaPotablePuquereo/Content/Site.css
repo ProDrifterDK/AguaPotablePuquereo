@@ -3,16 +3,17 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	text-align: center;
 }
 
 #main {
 	flex: 1 0 auto;
 	margin: 16px;
+	text-align: center;
 }
 
 #main-principal {
 	flex: 1 0 auto;
+	text-align: center;
 }
 
 /* Navbar */
@@ -40,6 +41,7 @@ nav {
 
 .brand-logo {
 	margin-top: 6px;
+	margin-left: 15px;
 }
 
 #boton {
@@ -50,9 +52,18 @@ nav {
 	font-size: 18px;
 }
 
+.side-nav {
+	text-align: center;
+}
+
 /* Index */
 #ingresar-button {
 	margin-bottom: 1.5em;
+}
+
+/* Parallax */
+.parallax-container {
+	height: 250px;
 }
 
 /* Footer */
@@ -76,7 +87,16 @@ nav {
 	text-align: center;
 }
 
+/* Content */
+#content {
+	text-align: center;
+}
+
 /* Administración: Login */
+#login-form {
+	text-align: center;
+}
+
 #ir-al-inicio {
 	margin-bottom: 1em;
 }
@@ -90,4 +110,5 @@ nav {
 /* Loader */
 #loader {
 	padding-top: 15em;
+	text-align: center;
 }
