@@ -20,7 +20,7 @@
 		<nav>
 			<div class="nav-wrapper grey darken-4"">
 				<!-- Título y links: Desktop -->
-				<a href="#" class="brand-logo center hide-on-med-and-down"><img src="/Resources/Images/logo2-small.png"/></a>
+				<a class="brand-logo center hide-on-med-and-down"><img src="/Resources/Images/logo2-small.png"/></a>
 				<ul id="nav-mobile" class="blue darken-3 left hide-on-med-and-down">
 					@if (Request.Url.ToString().Contains("EditarAcercaDe")) {
 						<li><a id="boton" href="@Url.Action("Index", "Administrador")">Inicio</a></li>
@@ -37,7 +37,7 @@
 					<li><a id="boton" href="@Url.Action("Logout", "Login")">Salir</a></li>
 				</ul>
 				<!-- Título y links: Mobile -->
-				<a href="#" class="brand-logo center hide-on-large-only"><img src="/Resources/Images/logo2-small.png"/></a>
+				<a class="brand-logo center hide-on-large-only"><img src="/Resources/Images/logo2-small.png"/></a>
 				<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only sideNavOpen"><i class="material-icons">menu</i></a>
 				<ul class="side-nav hide-on-large-only" id="mobile-demo">
 					@if (Request.Url.ToString().Contains("EditarAcercaDe")) {

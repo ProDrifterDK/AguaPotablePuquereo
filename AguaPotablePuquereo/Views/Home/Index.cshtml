@@ -4,7 +4,7 @@
 <!-- Contenido -->
 <div id="content">
 	<div class="parallax-container">
-		<div class="parallax hide-on-med-and-down"><img class="responsive-img" src="~/Resources/Images/placebo1.jpg"></div>
+		<div class="parallax hide-on-med-and-down"><img class="responsive-img" src="~/Resources/Images/placebo1-responsive.png"></div>
 		<div class="parallax hide-on-large-only"><img src="~/Resources/Images/placebo1-responsive.png"></div>
 	</div>
 	<div class="section white">
@@ -20,7 +20,8 @@
 			</div>
 			<div class="card z-depth-3 col s12 m8 l4">
 				<div class="input-field" onkeypress="return HacerEnter(event)" style="margin-top: 20px">
-					<input id="rut-input" type="text">
+                    <i class="material-icons prefix">person</i>
+					<input id="icon_prefix" type="text">
 					<label class="active" for="rut-label">Ingrese su RUT o N° de cuenta</label>
 					<a id="ingresar-button" class="z-depth-3 waves-effect waves-light btn green accent-4" href="#" onclick="Deudas()">Ingresar</a>
 				</div>
@@ -31,7 +32,7 @@
 		</div>
 	</div>
 	<div class="parallax-container">
-		<div class="parallax hide-on-med-and-down"><img class="responsive-img" src="~/Resources/Images/placebo2.jpg"></div>
+		<div class="parallax hide-on-med-and-down"><img class="responsive-img" src="~/Resources/Images/placebo2-responsive.png"></div>
 		<div class="parallax hide-on-large-only"><img src="~/Resources/Images/placebo2-responsive.png"></div>
 	</div>
 </div>
@@ -42,7 +43,7 @@
 
     var rut = "";
     function Deudas() {
-        rut = $('#rut-input').val();
+        rut = $('#icon_prefix').val();
         $.ajax({
             type: 'post',
             url: '@Url.Action("JsonValidarRut")',

@@ -24,12 +24,12 @@
 			<div class="nav-wrapper grey darken-4">
 				@if (Request.Url.ToString().Contains("Deuda")) {
 					<!-- Título y links: Desktop -->
-					<a href="#" class="brand-logo hide-on-med-and-down"><img src="~/Resources/Images/logo2-small.png"/></a>
+					<a class="brand-logo hide-on-med-and-down"><img src="~/Resources/Images/logo2-small.png"/></a>
 					<ul id="nav-mobile" class=" right hide-on-med-and-down">
 						<li><a id="boton" href=@Url.Action("Index", "Home")>Salir</a></li>
 					</ul>
 					<!-- Título y links: Mobile -->
-					<a href="#" class="brand-logo hide-on-large-only"><img src="~/Resources/Images/logo2-small.png"/></a>
+					<a class="brand-logo hide-on-large-only"><img src="~/Resources/Images/logo2-small.png"/></a>
 					<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
 					<ul class="side-nav hide-on-large-only" id="mobile-demo">
 						<li>
@@ -45,14 +45,14 @@
 				}
 				else {
 					<!-- Título y links: Desktop -->
-					<a href="#" class="brand-logo hide-on-med-and-down"><img src="~/Resources/Images/logo2-small.png"/></a>
+					<a class="brand-logo hide-on-med-and-down"><img src="~/Resources/Images/logo2-small.png"/></a>
 					<ul id="nav-mobile" class=" right hide-on-med-and-down">
 						<li><a id="boton" href=@Url.Action("Index", "Home") >Inicio</a></li>
 						<li><a id="boton" href=@Url.Action("About", "Home") >Acerca de</a></li>
 						<li><a id="boton" href=@Url.Action("Login", "Administracion") >Administración</a></li>
 					</ul>
 					<!-- Título y links: Mobile -->
-					<a href="#" class="brand-logo hide-on-large-only"><img src="~/Resources/Images/logo2-small.png"/></a>
+					<a class="brand-logo hide-on-large-only"><img src="~/Resources/Images/logo2-small.png"/></a>
 					<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
 					<ul class="side-nav hide-on-large-only" id="mobile-demo">
 						<li>
