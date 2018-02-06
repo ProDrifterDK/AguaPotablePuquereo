@@ -3,17 +3,67 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	text-align: center;
 }
 
 #main {
 	flex: 1 0 auto;
 	margin: 16px;
+	text-align: center;
+}
+
+#main-principal {
+	flex: 1 0 auto;
+	text-align: center;
+}
+
+/* Navbar */
+nav {
+	height: 128px;
+	line-height: 128px;
+}
+
+	nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+		height: 128px;
+		line-height: 128px;
+	}
+
+	nav .button-collapse i {
+		height: 128px;
+		line-height: 128px;
+	}
+
+@media only screen and (min-width: 601px) {
+	nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+		height: 128px;
+		line-height: 128px;
+	}
+}
+
+.brand-logo {
+	margin-top: 6px;
+	margin-left: 15px;
+}
+
+#boton {
+	font-size: 20px;
+}
+
+#boton-mobile {
+	font-size: 18px;
+}
+
+.side-nav {
+	text-align: center;
 }
 
 /* Index */
 #ingresar-button {
 	margin-bottom: 1.5em;
+}
+
+/* Parallax */
+.parallax-container {
+	height: 150px;
 }
 
 /* Footer */
@@ -37,7 +87,16 @@ body {
 	text-align: center;
 }
 
+/* Content */
+#content {
+	text-align: center;
+}
+
 /* Administración: Login */
+#login-form {
+	text-align: center;
+}
+
 #ir-al-inicio {
 	margin-bottom: 1em;
 }
@@ -51,4 +110,5 @@ body {
 /* Loader */
 #loader {
 	padding-top: 15em;
+	text-align: center;
 }

@@ -7,14 +7,14 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 
-<div class="container">
+<div class="container" style="text-align: initial;">
 	<div class="row">
 		<div class="col s12">
             <form method="post">
                 @Html.HiddenFor(o=> o.PADM_ID)
                 @Html.TextAreaFor(o=>o.PADM_HTML_TEXT, new { id= "froala-editor" })
                 <br />
-                <input type="submit" class="btn" value="Guardar"/>
+                <input type="submit" class="z-depth-3 btn green accent-4" value="Guardar"/>
             </form>
         </div>
 	</div>
@@ -25,11 +25,11 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>
 <script>
     $(document).ready(function () {
-        if ('@ViewBag.Exito' == 'True'){
-            Resyst.Exito('Exito');
+		if ('@ViewBag.Exito' == 'True') {
+            Resyst.Exito('Se han guardado sus cambios con éxito');
         }
         else if ('@ViewBag.Exito' == 'False') {
-            Resyst.Error('Hubo un error, culpa del vicente!');
+            Resyst.Error('Ha ocurrido un error al guardar');
         }
     })
 

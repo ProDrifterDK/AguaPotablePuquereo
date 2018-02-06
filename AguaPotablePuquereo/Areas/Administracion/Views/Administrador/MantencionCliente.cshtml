@@ -70,12 +70,6 @@
 				@Html.TextBoxFor(o => o.Cuenta, new { @type = "text" })
 				<label for="Nombre">Cuenta</label>
 			</div>
-			<div class="col l4 m6 s12 input-field">
-				@*Html.TextBoxFor(o => o.Multa, new { @type = "text" })*@
-				<!-- Placebo -->
-				<input id="placebo" type="text">
-				<label for="Nombre">Editar multa</label>
-			</div>
 		</div>
 	}
 	<hr />
@@ -90,6 +84,7 @@
 						<th style="padding-right:8px">Vence</th>
 						<th style="padding-right:8px">Multa</th>
 						<th style="padding-right:8px">Total periodo</th>
+                        <th style="padding-right:8px">Acciones</th>
 					</tr>
 				</thead>
 			</table>

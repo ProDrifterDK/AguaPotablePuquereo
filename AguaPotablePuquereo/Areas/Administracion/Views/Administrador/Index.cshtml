@@ -38,7 +38,25 @@
 			</thead>
 		</table>
 	</div>
-	<h4>Clientes <a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a></h4>
+	<div class="container row">
+		<!-- Título Clientes -->
+		<h4>
+			Clientes
+			<a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a>
+		</h4>
+	</div>
+	<div class="container row">
+		<!-- Campo de búsqueda -->
+		<div class="input-field col s12 m10 l10">
+			<i class="material-icons prefix">search</i>
+			<input id="icon_prefix" type="text">
+			<label class="active" for="rut-label">Nombre, RUT o N° de cliente</label>
+		</div>
+		<!-- Botón de buscar -->
+		<div class="col s12 m2 l2" style="margin-top: 20px;">
+			<a id="buscar-button" class="z-depth-3 waves-effect waves-light btn green accent-4" href="#">Buscar</a>
+		</div>
+	</div>
 	<div class="container row">
 		<table id="tablaClientes" style="border:1px solid #d0d0d0" class="table bordered striped centered col s12">
 			<thead>
@@ -114,9 +132,9 @@
             { data: "TotalDeuda" },
             {
                 'render': function (dat, type, full, meta) {
-                    return '<a href="javascript:void()" title="Editar Cliente" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">edit</i></a> '+
+					return '<div style="padding-right: 18px"><a href="javascript:void()" title="Editar Cliente" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">edit</i></a> '+
                         '<a href="javascript:void()" class="red-text modal-trigger" title="Eliminar Cliente" onclick="Eliminar(' + full.Id + ')"><i class="material-icons">clear</i></a> ' +
-                        '<a href="#modal1" class="green-text modal-trigger" title="Agregar deuda" onclick="AgregarDeuda(' + full.Id + ', \'' + full.Nombre + '\')"><i class="material-icons">attach_money</i></a>';
+                        '<a href="#modal1" class="green-text modal-trigger" title="Agregar deuda" onclick="AgregarDeuda(' + full.Id + ', \'' + full.Nombre + '\')"><i class="material-icons">attach_money</i></a></div>';
                 }
             },
         ],
@@ -179,7 +197,7 @@
             { data: "Periodo" },
             {
 				'render': function (dat, type, full, meta) {
-					return '<div style="padding-left: 20px"><a href="javascript:void()" onclick="Checkear(' + full.Id + ')"><i class="material-icons" style="color: green">check</i></a></div>';
+					return '<div style="padding-right: 20px"><a href="javascript:void()" onclick="Checkear(' + full.Id + ')"><i class="material-icons" style="color: green">check</i></a></div>';
                 }
             },
         ],
