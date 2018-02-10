@@ -3,7 +3,11 @@
 @{
 	ViewBag.Title = "Mantención Cliente";
 }
-<!-- Loader -->
+<style>
+    .collection {
+        overflow: visible;
+    }
+</style><!-- Loader -->
 <div id="loader" class="container">
 	<h4>Cargando...</h4>
 	<div class="preloader-wrapper big active">
@@ -73,7 +77,7 @@
 		</div>
 	}
 	<hr />
-	<h4>Deudas impagas <a href="javascript:void()" onclick="Mantencion(0)"><i class="material-icons">add_box</i></a></h4>
+	<h4>Deudas impagas <a href="javascript:void(0)" onclick="Mantencion(0)"><i class="material-icons">add_box</i></a></h4>
 	<div class="row">
 		<div class="col s12">
 			<table id="tabla-deuda" class="centered table bordered striped">
@@ -106,7 +110,7 @@
 </div>
 
 
-<div id="modalDeuda" class="modal">
+<div id="modalDeuda" class="modal collection">
     <div class="modal-content">
         <div class="row">
             <div class="col s12">
@@ -121,7 +125,7 @@
                 </div>
                 <div class="input-field col s12 m4" style="margin-top: 20px">
                     <label class="active" for="mes">Mes</label>
-                    @Html.DropDownList("mes", (SelectList)ViewBag.SelectMes)
+                    @Html.DropDownList("mes", (SelectList)ViewBag.SelectMes, new { })
                 </div>
                 <div class="input-field col s12 m4" style="margin-top: 20px">
                     <input id="ano" type="number" value="@DateTime.Now.Year" name="ano">
@@ -144,7 +148,8 @@
 <script>
 	$(document).ready(function () {
 		// the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-		$('.modal').modal();
+        $('.modal').modal();
+        $('select').material_select();
 	});
 
 	function pageLoading(status) {
@@ -183,7 +188,7 @@
             { data: "Total" },
             {
                 'render': function (dat, type, full, meta) {
-                    return '<a href="javascript:void()" title="Editar Deuda" onclick="MantncionDeuda(' + full.Id + ')"><i class="material-icons">edit</i></a>';
+                    return '<a href="javascript:void(0)" title="Editar Deuda" onclick="MantncionDeuda(' + full.Id + ')"><i class="material-icons">edit</i></a>';
 				}
 			},
         ],
@@ -279,10 +284,10 @@
     }
 
     function CargarModal(data) {
-        $('#monto').val(data.Monto);
-        $('#ano').val(data.Ano);
-        $('#mes').val(data.Mes);
-        $('#multa').val(data.Multa);
+        $('#monto').val(data.Monto).change();
+        $('#ano').val(data.Ano).change();
+        $('#mes').val(data.Mes).change();
+        $('#multa').val(data.Multa).change();
     }
 </script>
 

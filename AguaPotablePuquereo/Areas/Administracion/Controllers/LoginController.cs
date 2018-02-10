@@ -25,6 +25,7 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
             }
             catch (Exception ex)
             {
+                Logger(ex);
                 return JsonError(ex.Message);
             }
         }

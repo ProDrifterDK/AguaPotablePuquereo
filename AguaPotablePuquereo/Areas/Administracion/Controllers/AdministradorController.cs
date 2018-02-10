@@ -20,6 +20,8 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
         #region Clientes
         public ActionResult MantencionCliente(int id)
         {
+            ViewBag.SelectMes = SelectMes(BDD);
+
             var modelo = BDD.TBL_CLIENTE.Where(o => o.CLI_ID == id).ToList().Select(o => new ModelCliente
             {
                 Id = o.CLI_ID,
@@ -78,7 +80,7 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
                     Nombre = o.CLI_COMPLETO,
                     Rut = o.CLI_RUT,
                     Cuenta = o.CLI_CUENTA,
-                    TotalDeuda = o.TBL_DEUDA.Where(p => p.PAG_ID == null).Select(p => p.DEU_DEUDA).Sum(),
+                    TotalDeuda = o.TBL_DEUDA.Where(p => p.PAG_ID == null).Select(p => p.DEU_DEUDA).Sum().ToString("C0"),
                 }).ToList();
 
                 return JsonExito("", data);
@@ -102,7 +104,7 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
                     Cuenta = o.TBL_CLIENTE.CLI_CUENTA,
                     Periodo = o.TBL_MES.MES_NOMBRE + "/" + o.DEU_PERIODO_ANO,
                     Fecha = o.TBL_PAGOS.PAG_FECHA,
-                    Deuda = o.DEU_DEUDA,
+                    Deuda = o.DEU_DEUDA.ToString("C0"),
                 });
 
                 return JsonExito("", data);
@@ -143,7 +145,7 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
                 var data = BDD.TBL_DEUDA.Where(o => o.CLI_ID == Id && pagadas == (o.PAG_ID != null)).ToList().Select(o => new
                 {
                     Periodo = o.TBL_MES.MES_NOMBRE + " " + o.DEU_PERIODO_ANO,
-                    Monto = o.DEU_DEUDA,
+                    Monto = o.DEU_DEUDA.ToString("C0"),
                     Vence = o.DEU_PERIODO_VENCE.ToString("dd/MM/yyyy"),
                     CLiId = o.CLI_ID,
                     Id = o.DEU_ID,
@@ -234,7 +236,7 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
 
             var data = BDD.TBL_DEUDA.Where(o => o.DEU_ID == id).ToList().Select(o => new
             {
-                Monto = o.DEU_DEUDA,
+                Monto = o.DEU_DEUDA.ToString("C0"),
                 Ano = o.DEU_PERIODO_ANO,
                 Mes = o.MES_ID,
                 Multa = o.DEU_MULTA,

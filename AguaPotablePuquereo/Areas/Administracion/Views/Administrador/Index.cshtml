@@ -2,9 +2,9 @@
 	ViewBag.Title = "Inicio";
 }
 <style>
-	.collection {
-		overflow: visible;
-	}
+    .collection {
+        overflow: visible;
+    }
 </style>
 <!-- Loader -->
 <div id="loader" class="container">
@@ -44,18 +44,6 @@
 			Clientes
 			<a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a>
 		</h4>
-	</div>
-	<div class="container row">
-		<!-- Campo de búsqueda -->
-		<div class="input-field col s12 m10 l10">
-			<i class="material-icons prefix">search</i>
-			<input id="icon_prefix" type="text">
-			<label class="active" for="rut-label">Nombre, RUT o N° de cliente</label>
-		</div>
-		<!-- Botón de buscar -->
-		<div class="col s12 m2 l2" style="margin-top: 20px;">
-			<a id="buscar-button" class="z-depth-3 waves-effect waves-light btn green accent-4" href="#">Buscar</a>
-		</div>
 	</div>
 	<div class="container row">
 		<table id="tablaClientes" style="border:1px solid #d0d0d0" class="table bordered striped centered col s12">
@@ -121,7 +109,7 @@
         $('select').material_select();
     });
     $('#tablaClientes').DataTable({
-        bFilter: false,
+        bFilter: true,
         bInfo: false,
         bPaginate: false,
 		ordering: false,
