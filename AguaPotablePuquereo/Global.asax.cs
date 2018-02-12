@@ -24,7 +24,7 @@ namespace AguaPotablePuquereo {
             var exception = Server.GetLastError();
             var httpException = exception as HttpException;
             //if (httpException == null) return;
-            Log("<global asax>" + exception.Message + "</global asax>");
+            Log(exception);
             var routeData = new RouteData();
             routeData.Values.Add("controller", "Home");
             routeData.Values.Add("action", "Index");
@@ -39,15 +39,15 @@ namespace AguaPotablePuquereo {
             errorController.Execute(new RequestContext(new HttpContextWrapper(Context), routeData));
         }
 
-        private void Log(string texto)
+        private void Log(Exception ex)
         {
             using (var BDD = new PuquerosBDD())
             {
                 var Log = new TBL_LOG
                 {
                     LOG_FECHA = DateTime.Now,
-                    LOG_ERROR = texto,
-                    LOG_INNER = "",
+                    LOG_ERROR = ex.Message,
+                    LOG_INNER = ex.InnerException.Message,
                 };
 
                 BDD.TBL_LOG.Add(Log);
