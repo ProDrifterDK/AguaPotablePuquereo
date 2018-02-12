@@ -14,6 +14,10 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
 
         public ActionResult Index()
         {
+            if (UsuarioLogged == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             ViewBag.SelectMes = SelectMes(BDD);
             return View();
         }
@@ -21,6 +25,10 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
         #region Clientes
         public ActionResult MantencionCliente(int id)
         {
+            if (UsuarioLogged == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             ViewBag.SelectMes = SelectMes(BDD);
 
             var modelo = BDD.TBL_CLIENTE.Where(o => o.CLI_ID == id).ToList().Select(o => new ModelCliente
