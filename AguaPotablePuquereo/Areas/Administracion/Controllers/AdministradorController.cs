@@ -1,6 +1,7 @@
 ﻿using AguaPotablePuquereo.Areas.Administracion.Models;
 using AguaPotablePuquereo.Models.SQL;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -199,33 +200,76 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
             }
         }
 
-        public JsonResult AgregarDeuda(int monto, int mes, int ano, int cliente)
+        [HttpPost]
+        public JsonResult AgregarDeuda(int monto, int mes, int ano, int cliente, string vence, int? id = 0, int? multa = 0)
         {
             try
             {
-                var periodo = new DateTime();
-                periodo = periodo.AddYears(ano - periodo.Year);
-                periodo = periodo.AddMonths((mes + 1) - periodo.Month);
-                var deuda = new TBL_DEUDA
+                if(id == 0)
                 {
-                    DEU_DEUDA = monto,
-                    DEU_PERIODO_ANO = ano,
-                    MES_ID = mes,
-                    DEU_PERIODO_VENCE = periodo,
-                    CLI_ID = cliente,
-                };
+                    var deuda = new TBL_DEUDA
+                    {
+                        DEU_DEUDA = monto,
+                        DEU_PERIODO_ANO = ano,
+                        MES_ID = mes,
+                        DEU_PERIODO_VENCE = DateTime.ParseExact(vence, "dd-MM-yyyy", CultureInfo.InvariantCulture),
+                        CLI_ID = cliente,
+                    };
 
-                BDD.TBL_DEUDA.Add(deuda);
-                BDD.Entry(deuda).State = System.Data.Entity.EntityState.Added;
+                    BDD.TBL_DEUDA.Add(deuda);
+                    BDD.Entry(deuda).State = System.Data.Entity.EntityState.Added;
 
-                BDD.SaveChanges();
+                    BDD.SaveChanges();
 
-                return JsonExito("Deuda asignada correctamente");
+                    return JsonExito("Deuda asignada correctamente");
+                }
+                else
+                {
+                    var deuda = BDD.TBL_DEUDA.FirstOrDefault(o => o.DEU_ID == id);
+
+                    deuda.DEU_DEUDA = monto;
+                    deuda.DEU_PERIODO_ANO = ano;
+                    deuda.MES_ID = mes;
+                    deuda.DEU_PERIODO_VENCE = DateTime.ParseExact(vence, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    deuda.CLI_ID = cliente;
+                    
+                    if(multa > 0)
+                    {
+                        deuda.DEU_MULTA = multa;
+                    }
+
+                    BDD.TBL_DEUDA.Attach(deuda);
+                    BDD.Entry(deuda).State = System.Data.Entity.EntityState.Modified;
+
+                    BDD.SaveChanges();
+
+                    return JsonExito("Deuda modficada correctamente");
+                }
             }
             catch (Exception ex)
             {
                 Logger(ex);
-                return JsonError("No se pudo agregar la deuda, inténtelo mas tarde.");
+                return JsonError("No se pudo agregar/modificar la deuda, inténtelo mas tarde.");
+            }
+        }
+
+        [HttpPost]
+        public JsonResult EliminarDeuda(int id) {
+            try
+            {
+                var deuda = BDD.TBL_DEUDA.FirstOrDefault(o => o.DEU_ID == id);
+
+                BDD.TBL_DEUDA.Remove(deuda);
+                BDD.Entry(deuda).State = System.Data.Entity.EntityState.Deleted;
+
+                BDD.SaveChanges();
+
+                return JsonExito("Deuda eliminada con éxito");
+            }
+            catch (Exception ex)
+            {
+                Logger(ex);
+                return JsonError("Deuda no se ha podido eliminar");
             }
         }
 
@@ -236,11 +280,12 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
 
             var data = BDD.TBL_DEUDA.Where(o => o.DEU_ID == id).ToList().Select(o => new
             {
-                Monto = o.DEU_DEUDA.ToString("C0"),
+                Monto = o.DEU_DEUDA,
                 Ano = o.DEU_PERIODO_ANO,
                 Mes = o.MES_ID,
                 Multa = o.DEU_MULTA,
-                RequierMulta = o.DEU_PERIODO_VENCE > DateTime.Now,
+                Vence = o.DEU_PERIODO_VENCE.ToString("dd-MM-yyyy"),
+                RequierMulta = o.DEU_PERIODO_VENCE < DateTime.Now,
                 Id = o.DEU_ID,
             }).First();
 

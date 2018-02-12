@@ -23,8 +23,8 @@
 </div>
 <!-- Contenido -->
 <div id="content" style="display: none;">
-	<h4>Pagos sin registrar</h4>
 	<div class="container row">
+        <h4>Pagos sin registrar</h4>
 		<table id="tablaPagos" style="border:1px solid #d0d0d0" class="centered table bordered striped">
 			<thead>
 				<tr>
@@ -38,14 +38,13 @@
 			</thead>
 		</table>
 	</div>
+    <br />
 	<div class="container row">
 		<!-- Título Clientes -->
 		<h4>
 			Clientes
 			<a href="javascript:void()" onclick="Mantncion(0)"><i class="material-icons">add_box</i></a>
 		</h4>
-	</div>
-	<div class="container row">
 		<table id="tablaClientes" style="border:1px solid #d0d0d0" class="table bordered striped centered col s12">
 			<thead>
 				<tr>
@@ -79,8 +78,13 @@
 							<input id="ano" type="number" value="@DateTime.Now.Year" name="ano">
 							<label class="active" for="ano">Año</label>
 						</div>
+                        <div class="input-field col s12 m4" style="margin-top: 20px">
+                            <input id="vence" type="text" class="datepicker" value="@DateTime.Now.AddMonths(1).ToString("dd-MM-yyyy")" name="vence">
+                            <label class="active" for="vence">Vence</label>
+                        </div>
 					</div>
-					<input type="hidden" id="cliid" name="cliente" />
+                    <input type="hidden" id="cliid" name="cliente" />
+					<input type="hidden" id="id" name="id" />
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -107,6 +111,18 @@
         // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
         $('select').material_select();
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: false, // Close upon selecting a date,
+            onStart: function () {
+                $('.picker').appendTo('body');
+            },
+            format: "dd-mm-yyyy",
+        }).change();
     });
     $('#tablaClientes').DataTable({
         bFilter: true,

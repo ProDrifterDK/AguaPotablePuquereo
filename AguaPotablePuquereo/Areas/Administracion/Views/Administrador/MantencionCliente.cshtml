@@ -23,62 +23,66 @@
 	</div>
 </div>
 <div id="content" class="container" style="display: none;">
-	<div class="row">
-		<!-- Volver: Desktop -->
-		<div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: left">
-			<a class="z-depth-3 btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
-		</div>
-		<!-- Título: Desktop -->
-		<div class="col s12 m4 l6 hide-on-med-and-down">
-			<h3>Mantención Cliente</h3>
-		</div>
-		<!-- Título: Mobile -->
-		<div class="col s12 m4 l6 hide-on-large-only">
-			<h4>Mantención Cliente</h4>
-		</div>
-		<!-- Volver: Mobile -->
-		<div class="col s6 m4 l3 hide-on-med-and-up" style="margin-bottom: 1em; text-align: left">
-			<a class="z-depth-3 btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
-		</div>
-		<!-- Guardar: Mobile -->
-		<div class="col s6 m4 l3 hide-on-med-and-up" style="text-align: right">
-			<button type="submit" class="z-depth-3 btn green accent-4">Guardar</button>
-		</div>
-		<!-- Guardar: Desktop -->
-		<div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: right">
-			<button type="submit" class="z-depth-3 btn green accent-4">Guardar</button>
-		</div>
-	</div>
-	@using (Html.BeginForm("MantencionCliente", "Administrador", FormMethod.Post, new {
-		id = "form"
-	})) {
-		@Html.HiddenFor(o => o.Id)
-		<div class="row">
-			<div class="col l4 m6 s12 input-field">
-				@Html.TextBoxFor(o => o.Nombre, new { @type = "text" })
-				<label for="Nombre">Nombre</label>
-			</div>
-			<div class="col l4 m6 s12 input-field">
-				@Html.TextBoxFor(o => o.ApellidoP, new { @type = "text" })
-				<label for="ApellidoP">Apellido Paterno</label>
-			</div>
-			<div class="col l4 m6 s12 input-field">
-				@Html.TextBoxFor(o => o.ApellidoM, new { @type = "text" })
-				<label for="Nombre">Apellido Materno</label>
-			</div>
-			<div class="col l4 m6 s12 input-field">
-				@Html.TextBoxFor(o => o.Rut, new { @type = "text" })
-				<label for="Nombre">Rut</label>
-			</div>
-			<div class="col l4 m6 s12 input-field">
-				@Html.TextBoxFor(o => o.Cuenta, new { @type = "text" })
-				<label for="Nombre">Cuenta</label>
-			</div>
-		</div>
-	}
+    @using (Html.BeginForm("MantencionCliente", "Administrador", FormMethod.Post, new
+    {
+        id = "form"
+    }))
+    {
+	    <div class="row">
+		    <!-- Volver: Desktop -->
+                <div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: left">
+                    <a class="z-depth-3 btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
+                </div>
+                <!-- Título: Desktop -->
+                <div class="col s12 m4 l6 hide-on-med-and-down">
+                    <h3>Mantención Cliente</h3>
+                </div>
+                <!-- Título: Mobile -->
+                <div class="col s12 m4 l6 hide-on-large-only">
+                    <h4>Mantención Cliente</h4>
+                </div>
+                <!-- Volver: Mobile -->
+                <div class="col s6 m4 l3 hide-on-med-and-up" style="margin-bottom: 1em; text-align: left">
+                    <a class="z-depth-3 btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
+                </div>
+                <!-- Guardar: Mobile -->
+                <div class="col s6 m4 l3 hide-on-med-and-up" style="text-align: right">
+                    <button type="submit" class="z-depth-3 btn green accent-4">Guardar</button>
+                </div>
+                <!-- Guardar: Desktop -->
+                <div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: right">
+                    <button type="submit" class="z-depth-3 btn green accent-4">Guardar</button>
+                </div>
+	    </div>
+		    @Html.HiddenFor(o => o.Id)
+		    <div class="row">
+			    <div class="col l4 m6 s12 input-field">
+				    @Html.TextBoxFor(o => o.Nombre, new { @type = "text" })
+				    <label for="Nombre">Nombre</label>
+			    </div>
+			    <div class="col l4 m6 s12 input-field">
+				    @Html.TextBoxFor(o => o.ApellidoP, new { @type = "text" })
+				    <label for="ApellidoP">Apellido Paterno</label>
+			    </div>
+			    <div class="col l4 m6 s12 input-field">
+				    @Html.TextBoxFor(o => o.ApellidoM, new { @type = "text" })
+				    <label for="Nombre">Apellido Materno</label>
+			    </div>
+			    <div class="col l4 m6 s12 input-field">
+				    @Html.TextBoxFor(o => o.Rut, new { @type = "text" })
+				    <label for="Nombre">Rut</label>
+			    </div>
+			    <div class="col l4 m6 s12 input-field">
+				    @Html.TextBoxFor(o => o.Cuenta, new { @type = "text" })
+				    <label for="Nombre">Cuenta</label>
+			    </div>
+		    </div>
+    }
 	<hr />
-	<h4>Deudas impagas <a href="javascript:void(0)" onclick="Mantencion(0)"><i class="material-icons">add_box</i></a></h4>
+    <br />
+
 	<div class="row">
+        <h4>Deudas impagas <a href="javascript:void(0)" onclick="MantncionDeuda(0)"><i class="material-icons">add_box</i></a></h4>
 		<div class="col s12">
 			<table id="tabla-deuda" class="centered table bordered striped">
 				<thead>
@@ -94,8 +98,10 @@
 			</table>
 		</div>
 	</div>
-	<h4>Deudas pagadas</h4>
+    <hr />
+    <br />
 	<div class="row">
+        <h4>Deudas pagadas</h4>
 		<div class="col s12">
 			<table id="tabla-deudas-pagadas" class="centered table bordered striped">
 				<thead>
@@ -132,11 +138,16 @@
                     <label class="active" for="ano">Año</label>
                 </div>
                 <div class="input-field col s12 m4" style="margin-top: 20px">
+                    <input id="vence" type="text" class="datepicker" value="@DateTime.Now.AddMonths(1).ToString("dd-MM-yyyy")" name="vence">
+                    <label class="active" for="vence">Vence</label>
+                </div>
+                <div class="input-field col s12 m4 RequierMulta" style="margin-top: 20px">
                     <input id="multa" type="number" value="" name="multa">
                     <label class="active" for="multa">Multa</label>
                 </div>
             </div>
-            <input type="hidden" id="cliid" name="cliente" />
+            <input type="hidden" value="@Model.Id" id="cliid" name="cliente" />
+            <input type="hidden" value="" id="id" name="id" />
         </form>
     </div>
     <div class="modal-footer">
@@ -150,7 +161,19 @@
 		// the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
         $('select').material_select();
-	});
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: false, // Close upon selecting a date,
+            onStart: function() {
+                $('.picker').appendTo('body');
+            },
+            format: "dd-mm-yyyy",
+        }).change();
+    });
 
 	function pageLoading(status) {
 		if (status == 'true') {
@@ -188,7 +211,8 @@
             { data: "Total" },
             {
                 'render': function (dat, type, full, meta) {
-                    return '<a href="javascript:void(0)" title="Editar Deuda" onclick="MantncionDeuda(' + full.Id + ')"><i class="material-icons">edit</i></a>';
+                    return '<a href="javascript:void(0)" title="Editar Deuda" onclick="MantncionDeuda(' + full.Id + ')"><i class="material-icons">edit</i></a>' +
+                        '<a href="javascript:void(0)" title="Eliminar Deuda" class="red-text" onclick="EliminarDeuda(' + full.Id + ')"><i class="material-icons">close</i></a>';
 				}
 			},
         ],
@@ -265,6 +289,8 @@
     function MantncionDeuda(id) {
         if (id == 0) {
             $('#titulo').html('Agregar Deuda');
+            $('.RequierMulta').hide();
+            $('#modalDeuda').modal('open');
         }
         else {
             $('#titulo').html('Editar Deuda');
@@ -274,20 +300,54 @@
                 data: { id: id },
                 success: function (data) {
                     CargarModal(data);
+                    $('#modalDeuda').modal('open');
                 }
             })
         }
-
-        
-
-        $('#modalDeuda').modal('open');
     }
 
     function CargarModal(data) {
+        if (!data.RequierMulta || data.Id == 0) {
+            $('.RequierMulta').hide();
+        } else {
+            $('.RequierMulta').show();
+        }
         $('#monto').val(data.Monto).change();
         $('#ano').val(data.Ano).change();
         $('#mes').val(data.Mes).change();
         $('#multa').val(data.Multa).change();
+        $('#vence').val(data.Vence).change();
+        $("#id").val(data.Id).change();
+        $('select').material_select();
+    }
+
+    function AgregarDedudaFinal() {
+
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("AgregarDeuda")',
+            data: $('#formularioAgregarDeduda').serialize(),
+            success: function (d) {
+                Resyst.Toast(d, "tabla-deuda")
+            },
+            error: function (d) {
+                Resyst.Error("Hubo un error, asegurese de llenar todos los campos obligatorios e intentelo nuevamente.");
+            }
+        });
+    }
+    function EliminarDeuda(id) {
+
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("EliminarDeuda")',
+            data: { id: id },
+            success: function (d) {
+                Resyst.Toast(d, "tabla-deuda")
+            },
+            error: function (d) {
+                Resyst.Error("Hubo un error, asegurese de llenar todos los campos obligatorios e intentelo nuevamente.");
+            }
+        });
     }
 </script>
 
