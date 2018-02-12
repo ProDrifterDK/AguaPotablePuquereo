@@ -1,86 +1,89 @@
 ﻿@model AguaPotablePuquereo.Areas.Administracion.Models.ModelCliente
 
 @{
-	ViewBag.Title = "Mantención Cliente";
+    ViewBag.Title = "Mantención Cliente";
 }
 <style>
     .collection {
         overflow: visible;
     }
 </style><!-- Loader -->
-<div id="loader" class="container">
-	<h4>Cargando...</h4>
-	<div class="preloader-wrapper big active">
-		<div class="spinner-layer spinner-blue-only">
-			<div class="circle-clipper left">
-				<div class="circle"></div>
-			</div><div class="gap-patch">
-				<div class="circle"></div>
-			</div><div class="circle-clipper right">
-				<div class="circle"></div>
-			</div>
-		</div>
-	</div>
-</div>
-<div id="content" class="container" style="display: none;">
+@if (Model.Id != 0)
+{
+    <div id="loader" class="container">
+        <h4>Cargando...</h4>
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div id="content" class="container" @if (Model.Id != 0) { <text> style="display: none;" </text> }>
     @using (Html.BeginForm("MantencionCliente", "Administrador", FormMethod.Post, new
     {
         id = "form"
     }))
     {
-	    <div class="row">
-		    <!-- Volver: Desktop -->
-                <div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: left">
-                    <a class="z-depth-3 btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
-                </div>
-                <!-- Título: Desktop -->
-                <div class="col s12 m4 l6 hide-on-med-and-down">
-                    <h3>Mantención Cliente</h3>
-                </div>
-                <!-- Título: Mobile -->
-                <div class="col s12 m4 l6 hide-on-large-only">
-                    <h4>Mantención Cliente</h4>
-                </div>
-                <!-- Volver: Mobile -->
-                <div class="col s6 m4 l3 hide-on-med-and-up" style="margin-bottom: 1em; text-align: left">
-                    <a class="z-depth-3 btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
-                </div>
-                <!-- Guardar: Mobile -->
-                <div class="col s6 m4 l3 hide-on-med-and-up" style="text-align: right">
-                    <button type="submit" class="z-depth-3 btn green accent-4">Guardar</button>
-                </div>
-                <!-- Guardar: Desktop -->
-                <div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: right">
-                    <button type="submit" class="z-depth-3 btn green accent-4">Guardar</button>
-                </div>
-	    </div>
-		    @Html.HiddenFor(o => o.Id)
-		    <div class="row">
-			    <div class="col l4 m6 s12 input-field">
-				    @Html.TextBoxFor(o => o.Nombre, new { @type = "text" })
-				    <label for="Nombre">Nombre</label>
-			    </div>
-			    <div class="col l4 m6 s12 input-field">
-				    @Html.TextBoxFor(o => o.ApellidoP, new { @type = "text" })
-				    <label for="ApellidoP">Apellido Paterno</label>
-			    </div>
-			    <div class="col l4 m6 s12 input-field">
-				    @Html.TextBoxFor(o => o.ApellidoM, new { @type = "text" })
-				    <label for="Nombre">Apellido Materno</label>
-			    </div>
-			    <div class="col l4 m6 s12 input-field">
-				    @Html.TextBoxFor(o => o.Rut, new { @type = "text" })
-				    <label for="Nombre">Rut</label>
-			    </div>
-			    <div class="col l4 m6 s12 input-field">
-				    @Html.TextBoxFor(o => o.Cuenta, new { @type = "text" })
-				    <label for="Nombre">Cuenta</label>
-			    </div>
-		    </div>
+        <div class="row">
+            <!-- Volver: Desktop -->
+            <div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: left">
+                <a class="z-depth-3 btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
+            </div>
+            <!-- Título: Desktop -->
+            <div class="col s12 m4 l6 hide-on-med-and-down">
+                <h3>Mantención Cliente</h3>
+            </div>
+            <!-- Título: Mobile -->
+            <div class="col s12 m4 l6 hide-on-large-only">
+                <h4>Mantención Cliente</h4>
+            </div>
+            <!-- Volver: Mobile -->
+            <div class="col s6 m4 l3 hide-on-med-and-up" style="margin-bottom: 1em; text-align: left">
+                <a class="z-depth-3 btn orange darken-1" href="@Url.Action("Index", "Administrador")">Volver</a>
+            </div>
+            <!-- Guardar: Mobile -->
+            <div class="col s6 m4 l3 hide-on-med-and-up" style="text-align: right">
+                <button type="submit" class="z-depth-3 btn green accent-4">Guardar</button>
+            </div>
+            <!-- Guardar: Desktop -->
+            <div class="col s12 m4 l3 hide-on-small-only" style="margin-top: 2em; text-align: right">
+                <button type="submit" class="z-depth-3 btn green accent-4">Guardar</button>
+            </div>
+        </div>
+        @Html.HiddenFor(o => o.Id)
+        <div class="row">
+            <div class="col l4 m6 s12 input-field">
+                @Html.TextBoxFor(o => o.Nombre, new { @type = "text" })
+                <label for="Nombre">Nombre</label>
+            </div>
+            <div class="col l4 m6 s12 input-field">
+                @Html.TextBoxFor(o => o.ApellidoP, new { @type = "text" })
+                <label for="ApellidoP">Apellido Paterno</label>
+            </div>
+            <div class="col l4 m6 s12 input-field">
+                @Html.TextBoxFor(o => o.ApellidoM, new { @type = "text" })
+                <label for="Nombre">Apellido Materno</label>
+            </div>
+            <div class="col l4 m6 s12 input-field">
+                @Html.TextBoxFor(o => o.Rut, new { @type = "text" })
+                <label for="Nombre">Rut</label>
+            </div>
+            <div class="col l4 m6 s12 input-field">
+                @Html.TextBoxFor(o => o.Cuenta, new { @type = "text" })
+                <label for="Nombre">Cuenta</label>
+            </div>
+        </div>
     }
-	<hr />
+    <hr />
     <br />
-    @if(Model.Id > 0)
+    @if (Model.Id > 0)
     {
         <div class="row">
             <h4>Deudas impagas <a href="javascript:void(0)" onclick="MantncionDeuda(0)"><i class="material-icons">add_box</i></a></h4>
@@ -101,19 +104,19 @@
         </div>
         <hr />
         <br />
-	    <div class="row">
+        <div class="row">
             <h4>Deudas pagadas</h4>
-		    <div class="col s12">
-			    <table id="tabla-deudas-pagadas" class="centered table bordered striped">
-				    <thead>
-					    <tr>
-						    <th style="padding-right:8px">Periodo</th>
-						    <th style="padding-right:8px">Monto</th>
-					    </tr>
-				    </thead>
-			    </table>
-		    </div>
-	    </div>
+            <div class="col s12">
+                <table id="tabla-deudas-pagadas" class="centered table bordered striped">
+                    <thead>
+                        <tr>
+                            <th style="padding-right:8px">Periodo</th>
+                            <th style="padding-right:8px">Monto</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
         <div id="modalDeuda" class="modal collection">
             <div class="modal-content">
                 <div class="row">
