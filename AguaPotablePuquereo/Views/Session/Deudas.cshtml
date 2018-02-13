@@ -34,7 +34,8 @@
 						<th style="padding-right:8px"><input type="checkbox" id="test0" /><label for="test0"></label></th>
 						<th style="padding-right:8px">Periodo</th>
 						<th style="padding-right:8px">Monto</th>
-						<th style="padding-right:8px">Vence</th>
+                        <th style="padding-right:8px">Vence</th>
+						<th style="padding-right:8px">Multa</th>
 					</tr>
 				</thead>
 			</table>
@@ -100,6 +101,7 @@
                 { data: "Periodo" },
                 { data: "Monto" },
                 { data: "Vence" },
+                { data: "Multa" },
             ],
             "ajax": {
                 "url": "@Url.Action("JsonGetListaDeudas")?CliId=@Model.CliID",

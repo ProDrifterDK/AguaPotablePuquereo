@@ -158,8 +158,8 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
                     Vence = o.DEU_PERIODO_VENCE.ToString("dd/MM/yyyy"),
                     CLiId = o.CLI_ID,
                     Id = o.DEU_ID,
-                    Total = (o.DEU_MULTA ?? 0) + o.DEU_DEUDA,
-                    Multa = o.DEU_MULTA,
+                    Total = ((o.DEU_MULTA ?? 0) + o.DEU_DEUDA).ToString("C0"),
+                    Multa = o.DEU_MULTA?.ToString("C0"),
                     AplicaMulta = o.DEU_PERIODO_VENCE < DateTime.Now,
                 }).ToList();
 

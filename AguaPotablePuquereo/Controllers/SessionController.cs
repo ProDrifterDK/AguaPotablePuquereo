@@ -215,6 +215,7 @@ namespace AguaPotablePuquereo.Controllers
                     Monto = o.DEU_DEUDA.ToString("C0"),
                     Vence = o.DEU_PERIODO_VENCE.ToString("dd/MM/yyyy"),
                     CLiId = o.CLI_ID,
+                    Multa = o.DEU_MULTA?.ToString("C0"),
                     Id = o.DEU_ID,
                 }).ToList();
 
