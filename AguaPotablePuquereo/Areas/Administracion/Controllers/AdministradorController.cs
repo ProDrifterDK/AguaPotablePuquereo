@@ -192,6 +192,7 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
                     }
                 }
 
+                BDD.Database.ExecuteSqlCommand("DELETE FROM TBL_PAGOS WHERE CLI_ID = " + id);
                 BDD.Database.ExecuteSqlCommand("DELETE FROM TBL_DEUDA WHERE CLI_ID = " + id);
 
                 BDD.TBL_CLIENTE.Remove(cliente);

@@ -95,6 +95,23 @@
 	</div>
 </div>
 
+
+<div id="modal2" class="modal collection" style="width:30em">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12">
+                <h5 class="center">¿Está seguro de eliminar al cliente <span id="nombreCliente"></span>?</h5>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer center" style="text-align:center; padding-left:20px; padding-right:20px">
+        <a href="javascript:void(0)" class="modal-action modal-close waves-effect left waves-green btn green accent-4">Cancelar</a>
+        <a id="botonEliminar" href="javascript:void('0')" class="modal-action right modal-close waves-effect waves-green btn orange darken-1" classonclick="">Eliminar</a>
+    </div>
+</div>
+
+
+
 <script>
 	function pageLoading(status) {
 		if (status == 'true') {
@@ -136,8 +153,8 @@
             { data: "TotalDeuda" },
             {
                 'render': function (dat, type, full, meta) {
-					return '<div style="padding-right: 18px"><a href="javascript:void()" title="Editar Cliente" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">edit</i></a> '+
-                        '<a href="javascript:void()" class="red-text modal-trigger" title="Eliminar Cliente" onclick="Eliminar(' + full.Id + ')"><i class="material-icons">clear</i></a> ' +
+					return '<div style="padding-right: 18px"><a href="javascript:void(0)" title="Editar Cliente" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">edit</i></a> '+
+                        '<a href="javascript:void(\'0\')" class="red-text" title="Eliminar Cliente" onclick="Eliminar(' + full.Id + ', \'' + full.Nombre + '\')"><i class="material-icons">clear</i></a> ' +
                         '<a href="#modal1" class="green-text modal-trigger" title="Agregar deuda" onclick="AgregarDeuda(' + full.Id + ', \'' + full.Nombre + '\')"><i class="material-icons">attach_money</i></a></div>';
                 }
             },
@@ -153,15 +170,25 @@
 		},
     });
 
-    function Eliminar(id) {
-        $.ajax({
-            type: 'post',
-            url: '@Url.Action("EliminarCliente")',
-            data: { id: id },
-            success: function (data) {
-                Resyst.Toast(data, 'tablaClientes');
-            },
-        });
+    function Eliminar(id, nombre) {
+        $('#modal2').modal('open');
+        $('span#nombreCliente').html(nombre);
+        $('#botonEliminar').click(function (e) {
+            e.preventDefault();
+            if (!id)
+            {
+                Resyst.Error("Cliente no encontrado.");
+                return;
+            }
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("EliminarCliente")',
+                data: { id: id },
+                success: function (data) {
+                    Resyst.Toast(data, 'tablaClientes');
+                },
+            });
+        })
     }
 
 
@@ -213,6 +240,7 @@
     });
 
     function Checkear(id) {
+
         $.ajax({
             type: 'post',
             url: '@Url.Action("AsignarVisto")',
