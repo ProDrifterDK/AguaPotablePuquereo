@@ -175,8 +175,7 @@
         $('span#nombreCliente').html(nombre);
         $('#botonEliminar').click(function (e) {
             e.preventDefault();
-            if (!id)
-            {
+            if (!id) {
                 Resyst.Error("Cliente no encontrado.");
                 return;
             }
@@ -188,7 +187,8 @@
                     Resyst.Toast(data, 'tablaClientes');
                 },
             });
-        })
+            $(this).unbind(e);
+        });
     }
 
 
