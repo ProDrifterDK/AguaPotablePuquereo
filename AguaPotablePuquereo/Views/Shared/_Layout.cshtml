@@ -49,11 +49,12 @@
 				else {
 					<!-- Título y links: Desktop -->
 					<a class="brand-logo hide-on-med-and-down"><img src="~/Resources/Images/logo2-small-navbar.png"/></a>
-					<ul id="nav-mobile" class=" right hide-on-med-and-down">
-						<li><a id="boton" href=@Url.Action("Index", "Home") >Inicio</a></li>
-						<li><a id="boton" href=@Url.Action("About", "Home") >Acerca de</a></li>
-						<li><a id="boton" href=@Url.Action("Login", "Administracion") >Administración</a></li>
-					</ul>
+                    <ul id="nav-mobile" class=" right hide-on-med-and-down">
+                        <li><a id="boton" href=@Url.Action("Index", "Home")>Inicio</a></li>
+                        <li><a id="boton" href=@Url.Action("Payment", "Home")>Pagar</a></li>
+                        <li><a id="boton" href=@Url.Action("About", "Home")>Acerca de</a></li>
+                        <li><a id="boton" href=@Url.Action("Login", "Administracion")>Administración</a></li>
+                    </ul>
 					<!-- Título y links: Mobile -->
 					<a class="brand-logo hide-on-large-only"><img src="~/Resources/Images/logo2-small-navbar.png"/></a>
 					<a data-activates="mobile-demo" href="#" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>

@@ -14,5 +14,10 @@ namespace AguaPotablePuquereo.Controllers {
             ViewBag.Html = BDD.TBL_PAGINAS_ADMINISTRABLES.FirstOrDefault(o => o.PADM_ID == 1).PADM_HTML_TEXT;
 			return View();
 		}
-	}
+
+        public ActionResult Payment()
+        {
+            return View();
+        }
+    }
 }
