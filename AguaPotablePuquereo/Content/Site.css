@@ -57,6 +57,19 @@ nav {
 }
 
 /* Index */
+#background-image {
+	background-image: url(/Resources/Images/villarica.png);
+	padding-bottom: 722px;
+}
+#background-image-med {
+	background-image: url(/Resources/Images/villarica-medium.png);
+	padding-bottom: 722px;
+}
+#background-image-sm {
+	background-image: url(/Resources/Images/villarica-small.png);
+	padding-bottom: 722px;
+}
+
 #ingresar-button {
 	margin-bottom: 1.5em;
 }

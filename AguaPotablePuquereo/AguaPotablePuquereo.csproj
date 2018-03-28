@@ -263,6 +263,9 @@
     <Content Include="Resources\Images\sort_both.png" />
     <Content Include="Resources\Images\sort_desc.png" />
     <Content Include="Resources\Images\sort_desc_disabled.png" />
+    <Content Include="Resources\Images\villarica-medium.png" />
+    <Content Include="Resources\Images\villarica-small.png" />
+    <Content Include="Resources\Images\villarica.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.min.js" />
