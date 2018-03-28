@@ -58,8 +58,9 @@ nav {
 
 /* Index */
 #background-image {
-	background-image: url(/Resources/Images/villarica.png);
-	padding-bottom: 722px;
+    background-image: url(/Resources/Images/Volcan.jpg);
+    padding-bottom: 800px;
+    background-repeat: no-repeat;
 }
 #background-image-med {
 	background-image: url(/Resources/Images/villarica-medium.png);
@@ -78,6 +79,8 @@ nav {
 .parallax-container {
 	height: 190px;
 }
+
+
 
 /* Footer */
 #info {

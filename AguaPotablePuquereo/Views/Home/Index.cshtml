@@ -1,7 +1,26 @@
 ﻿@{
-	ViewBag.Title = "Página Principal";
+    ViewBag.Title = "Página Principal";
 }
 <!-- Contenido -->
-<div class="hide-on-small-only hide-on-med-only" id="background-image"></div>
-<div class="hide-on-small-only hide-on-large-only" id="background-image-med"></div>
-<div class="hide-on-med-only hide-on-large-only" id="background-image-sm"></div>
+<div class="slider">
+    <ul class="slides">
+        <li>
+            <img src="~/Resources/Images/Volcan.jpg"> 
+            <div class="caption center-align">
+                <h3>This is our big Tagline!</h3>
+                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+            </div>
+        </li>
+    </ul>
+</div>
+
+        @*<div class="hide-on-small-only hide-on-med-only" id="background-image"></div>
+            <div class="hide-on-small-only hide-on-large-only" id="background-image-med"></div>
+            <div class="hide-on-med-only hide-on-large-only" id="background-image-sm"></div>*@
+
+        <script>
+
+            $(document).ready(function () {
+                $('.slider').slider();          
+            });
+        </script>
