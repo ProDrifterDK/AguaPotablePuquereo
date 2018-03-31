@@ -117,6 +117,25 @@
                 </table>
             </div>
         </div>
+        <hr />
+        <br />
+        <div class="row">
+            <h4>Deudas Anuladas </h4>
+            <div class="col s12">
+                <table id="tabla-deudaAnulada" class="centered table bordered striped">
+                    <thead>
+                        <tr>
+                            <th style="padding-right:8px">Periodo</th>
+                            <th style="padding-right:8px">Monto</th>
+                            <th style="padding-right:8px">Vence</th>
+                            <th style="padding-right:8px">Multa</th>
+                            <th style="padding-right:8px">Total periodo</th>
+                            <th style="padding-right:8px">Acciones</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
         <div id="modalDeuda" class="modal collection">
             <div class="modal-content">
                 <div class="row">
@@ -163,7 +182,7 @@
     <div class="modal-content">
         <div class="row">
             <div class="col s12">
-                <h5 class="center">¿Está seguro de eliminar la deuda?</h5>
+                <h5 class="center">¿Está seguro de anular la deuda?</h5>
             </div>
         </div>
     </div>
@@ -245,6 +264,36 @@
         },
     });
 
+    $('#tabla-deudaAnulada').DataTable({
+        bFilter: true,
+        bInfo: false,
+        bPaginate: false,
+        ordering: true,
+        "columns": [
+            { data: "Periodo" },
+            { data: "Monto" },
+			{ data: "Vence" },
+			{
+                data : "Multa"
+			},
+            { data: "Total" },
+            {
+                'render': function (dat, type, full, meta) {
+                    return '<a href="javascript:void(0)" title="Restablecer" onclick="RestablecerDeuda(' + full.Id + ')"><i class="material-icons">check</i></a>';
+				}
+			},
+        ],
+        "ajax": {
+            "url": "@Url.Action("JsonObtenerListaDeudasAnuladas")?idCliente=@Model.Id",
+            "type": "POST",
+			"dataType": "json",
+			"dataSrc": function (json) {
+				pageLoading("false");
+				return json.data;
+			}
+        },
+    });
+
     $('#tabla-deudas-pagadas').DataTable({
         bFilter: true,
         bInfo: false,
@@ -276,6 +325,18 @@
 			}
         },
     });
+
+    function RestablecerDeuda(deuId) {
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("RestablecerDeuda")',
+            data: { deuId },
+            success: function (data) {
+                Resyst.Toast(data, "tabla-deudaAnulada");
+                Resyst.Reload("tabla-deuda");
+            }
+        });
+    }
 
     @* SCRIPT DE LA SEGUNDA TABLA -> POR HACER
 
@@ -361,10 +422,11 @@
 
             $.ajax({
                 type: 'post',
-                url: '@Url.Action("EliminarDeuda")',
-                data: { id: id },
+                url: '@Url.Action("AnularDeuda")',
+                data: { deuId: id },
                 success: function (d) {
                     Resyst.Toast(d, "tabla-deuda")
+                    Resyst.Reload("tabla-deudaAnulada");
                 },
                 error: function (d) {
                     Resyst.Error("Hubo un error, asegurese de llenar todos los campos obligatorios e intentelo nuevamente.");

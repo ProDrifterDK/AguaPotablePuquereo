@@ -209,7 +209,7 @@ namespace AguaPotablePuquereo.Controllers
         {
             try
             {
-                var data = BDD.TBL_DEUDA.Where(o => o.CLI_ID == CliId && o.PAG_ID == null).ToList().Select(o => new
+                var data = BDD.TBL_DEUDA.Where(o => o.CLI_ID == CliId && o.PAG_ID == null && o.DEU_VIGENCIA).ToList().Select(o => new
                 {
                     Periodo = o.TBL_MES.MES_NOMBRE + " " +o.DEU_PERIODO_ANO,
                     Monto = o.DEU_DEUDA.ToString("C0"),

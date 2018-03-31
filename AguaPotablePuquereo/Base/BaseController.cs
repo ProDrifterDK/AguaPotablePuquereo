@@ -29,7 +29,7 @@ namespace AguaPotablePuquereo.Base
 
         protected JsonResult JsonError(string mensaje = "")
         {
-            return Json(new { exito = false, mensaje = mensaje });
+            return Json(new { exito = false, mensaje = mensaje, data = "" });
         }
 
         protected JsonResult JsonSolo(object data)

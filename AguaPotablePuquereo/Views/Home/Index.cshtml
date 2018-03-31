@@ -1,16 +1,17 @@
 ﻿@{
     ViewBag.Title = "Página Principal";
 }
+<style>
+    body {
+        background: no-repeat center top;
+        background-image: url('../../Resources/Images/Volcan.jpg');
+        -webkit-background-size: cover;
+    }
+</style>
+
 <!-- Contenido -->
-<div class="slider">
-    <ul class="slides">
-        <li>
-            <img src="~/Resources/Images/Volcan.jpg"> 
-            <div class="caption center-align">
-                <h3 style="text-shadow: 2px 2px #000000;">Asociación de agua potable de Puquereo</h3>
-            </div>
-        </li>
-    </ul>
+<div class="caption center-align">
+    <h3 class="white-text" style="text-shadow: 2px 2px #000000;">Asociación de agua potable de Puquereo</h3>
 </div>
 
         @*<div class="hide-on-small-only hide-on-med-only" id="background-image"></div>
@@ -20,6 +21,9 @@
         <script>
 
             $(document).ready(function () {
-                $('.slider').slider();          
+                $('.slider').slider({
+                    height: 590,
+                    indicators : false,
+                });          
             });
         </script>

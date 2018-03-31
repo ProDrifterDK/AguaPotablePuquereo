@@ -15,7 +15,7 @@
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_CARRO_COMPRA_TBL_ESTADO_CARRO" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_PAGOS_TBL_CLIENTE" />
         <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_PAGINAS_ADMINISTRABLES" Width="1.5" PointX="7.375" PointY="5.75" />
-        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_DEUDA" Width="1.5" PointX="5.25" PointY="8.5" />
+        <EntityTypeShape EntityType="BDD_PRUEBAModel.TBL_DEUDA" Width="1.5" PointX="5.25" PointY="8.375" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CARRO_COMPRA" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_CLIENTE" />
         <AssociationConnector Association="BDD_PRUEBAModel.FK_TBL_DEUDA_TBL_MES" />

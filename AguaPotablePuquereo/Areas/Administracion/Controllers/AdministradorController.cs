@@ -151,7 +151,7 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
         {
             try
             {
-                var data = BDD.TBL_DEUDA.Where(o => o.CLI_ID == Id && pagadas == (o.PAG_ID != null)).ToList().Select(o => new
+                var data = BDD.TBL_DEUDA.Where(o => o.CLI_ID == Id && pagadas == (o.PAG_ID != null) && o.DEU_VIGENCIA).ToList().Select(o => new
                 {
                     Periodo = o.TBL_MES.MES_NOMBRE + " " + o.DEU_PERIODO_ANO,
                     Monto = o.DEU_DEUDA.ToString("C0"),
@@ -299,6 +299,71 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
             }).First();
 
             return JsonSolo(data);
+        }
+
+        public JsonResult JsonObtenerListaDeudasAnuladas(int idCliente)//Para que Alan no llore
+        {
+            try
+            {
+                var data = BDD.TBL_DEUDA.Where(o => !o.DEU_VIGENCIA && o.CLI_ID == idCliente).ToList().Select(o => new
+                {
+                    Periodo = o.TBL_MES.MES_NOMBRE + " " + o.DEU_PERIODO_ANO,
+                    Monto = o.DEU_DEUDA.ToString("C0"),
+                    Vence = o.DEU_PERIODO_VENCE.ToString("dd/MM/yyyy"),
+                    CLiId = o.CLI_ID,
+                    Id = o.DEU_ID,
+                    Total = ((o.DEU_MULTA ?? 0) + o.DEU_DEUDA).ToString("C0"),
+                    Multa = o.DEU_MULTA?.ToString("C0"),
+                    AplicaMulta = o.DEU_PERIODO_VENCE < DateTime.Now,
+                }).ToList();
+
+                return JsonExito(data: data);
+            }
+            catch (Exception ex)
+            {
+                Logger(ex);
+                return JsonError();
+            }
+        } 
+
+        public JsonResult AnularDeuda(int deuId)
+        {
+            try
+            {
+                var deuda = BDD.TBL_DEUDA.FirstOrDefault(o => o.DEU_ID == deuId);
+
+                deuda.DEU_VIGENCIA = false;
+                BDD.Entry(deuda).State = System.Data.Entity.EntityState.Modified;
+
+                BDD.SaveChanges();
+
+                return JsonExito("Deuda aunlada con éxito");
+            }
+            catch (Exception ex)
+            {
+                Logger(ex);
+                return JsonError("Deuda no se ha podido anular");
+            }
+        }
+
+        public JsonResult RestablecerDeuda(int deuId)
+        {
+            try
+            {
+                var deuda = BDD.TBL_DEUDA.FirstOrDefault(o => o.DEU_ID == deuId);
+
+                deuda.DEU_VIGENCIA = true;
+                BDD.Entry(deuda).State = System.Data.Entity.EntityState.Modified;
+
+                BDD.SaveChanges();
+
+                return JsonExito("Deuda restablecida con éxito");
+            }
+            catch (Exception ex)
+            {
+                Logger(ex);
+                return JsonError("Deuda no se ha podido restablecerz");
+            }
         }
     }
 }
