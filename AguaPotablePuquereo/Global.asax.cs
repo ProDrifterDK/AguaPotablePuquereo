@@ -47,7 +47,7 @@ namespace AguaPotablePuquereo {
                 {
                     LOG_FECHA = DateTime.Now,
                     LOG_ERROR = ex.Message,
-                    LOG_INNER = ex.InnerException.Message,
+                    LOG_INNER = ex.InnerException?.Message ?? "",
                 };
 
                 BDD.TBL_LOG.Add(Log);

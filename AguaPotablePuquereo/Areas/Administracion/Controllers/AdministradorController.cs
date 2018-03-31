@@ -365,5 +365,41 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
                 return JsonError("Deuda no se ha podido restablecerz");
             }
         }
+
+        public JsonResult PagarDeuda(int deuId)
+        {
+            try
+            {
+                var deuda = BDD.TBL_DEUDA.FirstOrDefault(o => o.DEU_ID == deuId);
+
+                var pago = new TBL_PAGOS
+                {
+                    CLI_ID = deuda.CLI_ID ?? 0,
+                    PAG_FECHA = DateTime.Now,
+                    PAG_MONTO = deuda.DEU_DEUDA + deuda.DEU_MULTA ?? 0,
+                    PAG_VIGENCIA = true,
+                };
+
+                BDD.TBL_PAGOS.Add(pago);
+                BDD.Entry(pago).State = System.Data.Entity.EntityState.Added;
+
+                BDD.SaveChanges();
+
+                deuda.DEU_CHECK = true;
+                deuda.PAG_ID = pago.PAG_ID;
+
+                BDD.TBL_DEUDA.Attach(deuda);
+                BDD.Entry(deuda).State = System.Data.Entity.EntityState.Modified;
+
+                BDD.SaveChanges();
+
+                return JsonExito("Deuda pagada con éxito.");
+            }
+            catch (Exception ex)
+            {
+                Logger(ex);
+                return JsonError("No se ha podido pagar la deuda.");
+            }
+        }
     }
 }
