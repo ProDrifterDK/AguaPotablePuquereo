@@ -223,6 +223,7 @@ namespace AguaPotablePuquereo.Areas.Administracion.Controllers
                         MES_ID = mes,
                         DEU_PERIODO_VENCE = DateTime.ParseExact(vence, "dd-MM-yyyy", CultureInfo.InvariantCulture),
                         CLI_ID = cliente,
+                        DEU_VIGENCIA = true
                     };
 
                     BDD.TBL_DEUDA.Add(deuda);
