@@ -12,7 +12,7 @@
 		<div class="col s12">
             <form method="post">
                 @Html.HiddenFor(o=> o.PADM_ID)
-                @Html.TextAreaFor(o=>o.PADM_HTML_TEXT, new { id= "froala-editor" })
+                @Html.TextAreaFor(o=>o.PADM_HTML_TEXT, null)
                 <br />
                 <input type="submit" class="z-depth-3 btn green accent-4" value="Guardar"/>
             </form>
@@ -31,9 +31,41 @@
         else if ('@ViewBag.Exito' == 'False') {
             Resyst.Error('Ha ocurrido un error al guardar');
         }
+
+        fncEditor()
     })
 
-    $(function () {
-        $('textarea#froala-editor').froalaEditor()
-    });
+
+    function fncEditor() {
+
+        tinymce.init({
+            selector: "#PADM_HTML_TEXT",
+            theme: "modern",
+            height: 300,
+            plugins: [
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "save table contextmenu directionality emoticons template paste textcolor"
+            ],
+            relative_urls: false,
+            remove_script_host: false,
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+            style_formats: [
+                { title: 'Normal', block: 'p' },
+                { title: 'Texto rojo', inline: 'span', styles: { color: '#ff0000' } },
+                { title: 'Titulo', block: 'h1' },
+                { title: 'Subtitulo', block: 'h2' },
+                { title: 'Subtitulo 2', block: 'h3' },
+            ]
+        });
+
+
+    }
+    function fncSubmith() {
+        var texto = tinyMCE.activeEditor.getContent();
+        var retorno = escape(texto);
+        $("#Plantilla").val(retorno);
+        $("#btnSubmit").click();
+
+    }
 </script>

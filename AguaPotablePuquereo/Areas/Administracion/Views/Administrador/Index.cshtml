@@ -96,7 +96,6 @@
 	</div>
 </div>
 
-
 <div id="modal2" class="modal collection" style="width:30em">
     <div class="modal-content">
         <div class="row">
@@ -156,7 +155,7 @@
                 'render': function (dat, type, full, meta) {
 					return '<div style="padding-right: 18px"><a href="javascript:void(0)" title="Editar Cliente" onclick="Mantncion(' + full.Id + ')"><i class="material-icons">edit</i></a> '+
                         '<a href="javascript:void(\'0\')" class="red-text" title="Eliminar Cliente" onclick="Eliminar(' + full.Id + ', \'' + full.Nombre + '\')"><i class="material-icons">clear</i></a> ' +
-                        '<a href="#modal1" class="green-text modal-trigger" title="Agregar deuda" onclick="AgregarDeuda(' + full.Id + ', \'' + full.Nombre + '\')"><i class="material-icons">attach_money</i></a></div>';
+                        '<a href="#modal1" class="green-text modal-trigger" title="Agregar deuda" onclick="AgregarDeuda(' + full.Id + ', &#34' + full.Nombre + '&#34)"><i class="material-icons">attach_money</i></a></div>';
                 }
             },
         ],
@@ -193,7 +192,7 @@
     }
 
 
-    function AgregarDeuda(id, nombre) {
+    function AgregarDeuda(id, nombre = "") {
         $('#Cliente').html(nombre);
         $('#cliid').val(id);
         $('#modal1').modal('open');
