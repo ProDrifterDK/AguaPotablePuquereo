@@ -40,115 +40,116 @@
 				</thead>
 			</table>
 		</div>
-		<div id="pagar-button">
-			<button class="z-depth-3 btn green accent-4" onclick="Pagar()">Pagar</button>
-		</div>
-		<p style="display:none" id="mensaje">
+        <div id="pagar-button">
+            <!--<button class="z-depth-3 btn green accent-4" onclick="Pagar()">Pagar</button>-->
+            <h5>Próximamente, pagos de cuentas por este medio.</h5>
+        </div>
+            <p style="display:none" id="mensaje">
 
-		</p>
-	</div>
-</div>
+            </p>
+        </div>
+    </div>
 
-<form id="formWebPay" method="post" action="@ViewBag.Url">
-	<input id="token" type="hidden" name="token_ws" value="@ViewBag.Token" />
-</form>
+    <form id="formWebPay" method="post" action="@ViewBag.Url">
+        <input id="token" type="hidden" name="token_ws" value="@ViewBag.Token" />
+    </form>
 
-<script>
-	function pageLoading(status) {
-		if (status == 'true') {
-			$("#loader").css('display', 'block');
-			$("#content").css('display', 'none');
-		}
-		else {
-			$("#loader").css('display', 'none');
-			$("#content").css('display', 'block');
-		}
-	}
-
-    $(document).ready(function () {
-        CargarGrilla();
-        if ('@ViewBag.Mensaje' != '') {
-            MostrarMensaje('@ViewBag.Mensaje', '@ViewBag.Error');
+    <script>
+        function pageLoading(status) {
+            if (status == 'true') {
+                $("#loader").css('display', 'block');
+                $("#content").css('display', 'none');
+            }
+            else {
+                $("#loader").css('display', 'none');
+                $("#content").css('display', 'block');
+            }
         }
 
-        if ('@ViewBag.Error' == 'False') {
-            $('#formWebPay').submit();
-		}
-		pageLoading(false);
-    })
+        $(document).ready(function () {
+            CargarGrilla();
+            if ('@ViewBag.Mensaje' != '') {
+                MostrarMensaje('@ViewBag.Mensaje', '@ViewBag.Error');
+            }
 
-    function MostrarMensaje(mensaje, error) {
-        $('#mensaje').html('@ViewBag.Mensaje');
-        $('#mensaje').css('display', 'block');
-        if(error == 'True')
-            $('#mensaje').addClass('red');
-        else
-            $('#mensaje').addClass('green');
-    }
+            if ('@ViewBag.Error' == 'False') {
+                $('#formWebPay').submit();
+            }
+            pageLoading(false);
+        })
 
-    function CargarGrilla() {
-        $('#tabla-deuda').DataTable({
-            bFilter: true,
-            bInfo: false,
-            bPaginate: false,
-            ordering: true,
-            "columns": [
-                {
-                    'render': function (dat, type, full, meta) {
-                        return '<input type="checkbox" id="test' + full.Id + '" /><label for="test' + full.Id + '"></label>';
+        function MostrarMensaje(mensaje, error) {
+            $('#mensaje').html('@ViewBag.Mensaje');
+            $('#mensaje').css('display', 'block');
+            if(error == 'True')
+                $('#mensaje').addClass('red');
+            else
+                $('#mensaje').addClass('green');
+        }
+
+        function CargarGrilla() {
+            $('#tabla-deuda').DataTable({
+                bFilter: true,
+                bInfo: false,
+                bPaginate: false,
+                ordering: true,
+                "columns": [
+                    {
+                        'render': function (dat, type, full, meta) {
+                            return '<input type="checkbox" id="test' + full.Id + '" /><label for="test' + full.Id + '"></label>';
+                        }
+                    },
+                    { data: "Periodo" },
+                    { data: "Monto" },
+                    { data: "Vence" },
+                    { data: "Multa" },
+                ],
+                "ajax": {
+                    "url": "@Url.Action("JsonGetListaDeudas")?CliId=@Model.CliID",
+                    "type": "POST",
+                    "dataType": "json"
+                },
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    $(nRow).attr("id", "tr" + aData.Id);
+                    return nRow;
+                },
+            });
+        }
+
+        $('#test0').change(function () {
+            var checkboxes = $(this).closest('table').find(':checkbox');
+            if ($(this).is(':checked')) {
+                checkboxes.prop('checked', true);
+            } else {
+                checkboxes.prop('checked', false);
+            }
+        });
+
+        function Pagar() {
+            var checked = [];
+            var inputs = $('#tabla-deuda tbody tr td input:checked');
+            inputs.each(function (i, data) {
+                var padre = $(data).parent().parent();
+                var id = $(padre).attr('id');
+                var num = id.replace(/^\D+/g, '');
+                checked.push(num);
+            });
+
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("GetToken")',
+                data: { Deudas: checked, rut: '@Model.Rut' },
+                success: function (data) {
+                    if (data.exito) {
+                        $('#token').val(data.data.result.token);
+                        $('#formWebPay').attr('action', data.data.result.url);
+                        $('#formWebPay').submit();
+                    } else {
+                        if (data.mensaje) {
+                            Resyst.Error(data.mensaje);
+                        }
                     }
                 },
-                { data: "Periodo" },
-                { data: "Monto" },
-                { data: "Vence" },
-                { data: "Multa" },
-            ],
-            "ajax": {
-                "url": "@Url.Action("JsonGetListaDeudas")?CliId=@Model.CliID",
-                "type": "POST",
-                "dataType": "json"
-            },
-            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                $(nRow).attr("id", "tr" + aData.Id);
-                return nRow;
-            },
-        });
-    }
-
-    $('#test0').change(function () {
-        var checkboxes = $(this).closest('table').find(':checkbox');
-        if ($(this).is(':checked')) {
-            checkboxes.prop('checked', true);
-        } else {
-            checkboxes.prop('checked', false);
+            })
         }
-    });
-
-    function Pagar() {
-        var checked = [];
-        var inputs = $('#tabla-deuda tbody tr td input:checked');
-        inputs.each(function (i, data) {
-            var padre = $(data).parent().parent();
-            var id = $(padre).attr('id');
-            var num = id.replace(/^\D+/g, '');
-            checked.push(num);
-        });
-
-        $.ajax({
-            type: 'post',
-            url: '@Url.Action("GetToken")',
-            data: { Deudas: checked, rut: '@Model.Rut' },
-            success: function (data) {
-                if (data.exito) {
-                    $('#token').val(data.data.result.token);
-                    $('#formWebPay').attr('action', data.data.result.url);
-                    $('#formWebPay').submit();
-                } else {
-                    if (data.mensaje) {
-                        Resyst.Error(data.mensaje);
-                    }
-                }
-            },
-        })
-    }
-</script>
+    </script>
